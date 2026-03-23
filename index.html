@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circa Panama Real Estate | Buy, Sell, Invest &amp; Relocate</title>
+  <meta name="description" content="Expert real estate services in Panama. Specializing in Playa Venao, Coco del Mar, and Boquete. Bilingual service, local expertise, and discreet off-market access.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://circapanama.com/">
+  <meta name="theme-color" content="#2563EB">
+  <meta property="og:title" content="Circa Panama Real Estate | Buy, Sell, Invest &amp; Relocate">
+  <meta property="og:description" content="Your complete Panama partner. Personalized guidance for buying, selling, investing, and relocating with confidence.">
+  <meta property="og:image" content="https://circapanama.com/images/hero-playa-venao.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://circapanama.com/">
+  <meta property="og:site_name" content="Circa Panama Real Estate">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Circa Panama Real Estate | Buy, Sell, Invest &amp; Relocate">
+  <meta name="twitter:description" content="Expert real estate services in Panama. Buy, sell, invest, and relocate with confidence.">
+  <meta name="twitter:image" content="https://circapanama.com/images/hero-playa-venao.jpg">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #2563EB;
+      --accent-rgb: 37,99,235;
+      --dark: #1E293B;
+      --dark-rgb: 30,41,59;
+      --navy: #F1F5F9;
+      --light: #FFFFFF;
+      --light-rgb: 255,255,255;
+      --gray: #64748B;
+      --white: #0F172A;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: auto; }
+    body {
+      font-family: var(--font-body);
+      background: #FFFFFF;
+      color: #1E293B;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); letter-spacing: -0.02em; }
+    h2 { font-size: clamp(2rem, 4.5vw, 3.8rem); letter-spacing: -0.01em; }
+    h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    section { position: relative; z-index: 2; }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 44px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.5s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(var(--accent-rgb),0.3);
+    }
+    .btn-outline {
+      display: inline-block;
+      padding: 16px 44px;
+      border: 1.5px solid rgba(37,99,235,0.3);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .btn-outline:hover { background: rgba(37,99,235,0.06); border-color: var(--accent); }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: var(--accent);
+      width: 0%; z-index: 99999;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    /* ===== THREE.JS CANVAS ===== */
+    #threeCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ===== LOADER ===== */
+    .loader {
+      position: fixed; inset: 0; z-index: 100000;
+      background: #FFFFFF;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 2.5rem;
+    }
+    .loader.dismiss { animation: loaderWipe 0.8s cubic-bezier(0.77,0,0.175,1) forwards; }
+    @keyframes loaderWipe {
+      to { clip-path: inset(0 0 100% 0); }
+    }
+    .loader-letters { display: flex; gap: clamp(0.6rem,2vw,1.5rem); }
+    .loader-letter {
+      font-family: var(--font-display);
+      font-size: clamp(3rem,8vw,6rem);
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      opacity: 0; transform: translateY(50px);
+    }
+    .loader-bar { width: 180px; height: 1px; background: rgba(0,0,0,0.08); overflow: hidden; }
+    .loader-fill { height: 100%; width: 0%; background: var(--accent); transition: width 0.3s ease; }
+    .loader-tagline {
+      font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gray); opacity: 0;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;
+      padding: 1.5rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      padding: 1rem 5vw;
+      border-bottom: 1px solid rgba(37,99,235,0.1);
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gray); transition: color 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      padding: 10px 28px; background: var(--accent);
+      color: #fff !important; border-radius: 50px;
+      font-weight: 700; font-size: 0.75rem !important;
+    }
+    .nav-cta:hover { opacity: 0.9; }
+    /* Mobile hamburger */
+    .nav-hamburger {
+      display: none; width: 28px; height: 20px;
+      flex-direction: column; justify-content: space-between;
+      cursor: pointer; z-index: 10001;
+    }
+    .nav-hamburger span {
+      display: block; width: 100%; height: 2px;
+      background: var(--white); transition: all 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+    .mobile-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .mobile-overlay.open { opacity: 1; pointer-events: all; }
+    .mobile-overlay a {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: #1E293B; transition: color 0.3s ease;
+    }
+    .mobile-overlay a:hover { color: var(--accent); }
+    .mobile-overlay .btn { margin-top: 1rem; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ===== HERO VIDEO ===== */
+    .hero-zoom { height: 280vh; }
+    .hero-zoom-sticky {
+      position: sticky; top: 0; height: 100vh;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-video-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+    .hero-zoom-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform-origin: 50% 40%;
+      will-change: transform;
+    }
+    .hero-zoom-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.45) 100%);
+      z-index: 1;
+    }
+    .hero-intro {
+      position: absolute; z-index: 3;
+      text-align: center; max-width: 850px; padding: 0 5vw;
+    }
+    .hero-intro h1 { color: #fff; text-shadow: 0 4px 80px rgba(0,0,0,0.5); margin-bottom: 1.5rem; }
+    .hero-intro p {
+      color: rgba(255,255,255,0.85); font-size: clamp(1rem,1.5vw,1.15rem);
+      max-width: 50ch; margin: 0 auto 2rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .hero-intro .hero-pillars {
+      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .hero-pillar {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: #fff; font-weight: 700;
+      padding: 6px 16px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50px;
+      backdrop-filter: blur(4px);
+      background: rgba(255,255,255,0.08);
+    }
+    .hero-scroll-hint {
+      position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; color: rgba(255,255,255,0.6);
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    }
+    .hero-scroll-hint::after {
+      content: ''; width: 1px; height: 40px;
+      background: rgba(255,255,255,0.3);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.2; transform: scaleY(0.4); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+    .hero-zoom-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: rgba(15,23,42,0.85);
+      opacity: 0;
+    }
+    .hero-zoom-reveal {
+      position: absolute; opacity: 0; transform: scale(0.85);
+      z-index: 4; color: #fff;
+      max-width: 750px; padding: 2.5rem 3rem;
+      display: flex; align-items: center; gap: 2.5rem;
+    }
+    .hero-reveal-portrait {
+      flex-shrink: 0; width: 150px; height: 150px;
+      border-radius: 50%; overflow: hidden;
+      border: 3px solid rgba(255,255,255,0.5);
+      box-shadow: 0 10px 60px rgba(0,0,0,0.5), 0 0 0 8px rgba(255,255,255,0.08);
+    }
+    .hero-reveal-portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-reveal-text { text-align: left; }
+    .hero-reveal-text .hero-reveal-name {
+      font-family: var(--font-display); font-size: 1.1rem;
+      color: #fff; margin-bottom: 0.2rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .hero-reveal-text .hero-reveal-role {
+      font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.8);
+      margin-bottom: 1rem; font-weight: 600;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    .hero-zoom-reveal h2 { color: #fff; margin-bottom: 0.8rem; font-size: clamp(1.4rem,3vw,2rem); text-align: left; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+    .hero-zoom-reveal p { color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.6; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    .hero-zoom-reveal .btn { margin-top: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+
+    @media (max-width: 640px) {
+      .hero-zoom-reveal { flex-direction: column; text-align: center; gap: 1.5rem; }
+      .hero-reveal-text { text-align: center; }
+      .hero-zoom-reveal h2 { text-align: center; }
+      .hero-reveal-portrait { width: 110px; height: 110px; }
+    }
+
+    /* ===== MICHAEL FLOATING BUBBLE ===== */
+    .michael-bubble {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99998;
+      display: flex; align-items: flex-end; gap: 0;
+      opacity: 0; transform: translateY(40px);
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .michael-bubble.visible {
+      opacity: 1; transform: translateY(0);
+      pointer-events: all;
+    }
+    .michael-speech {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.12);
+      border-radius: 16px 16px 4px 16px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      max-width: 220px;
+      margin-bottom: 12px;
+      margin-right: -8px;
+      position: relative;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+    }
+    .michael-speech:hover {
+      box-shadow: 0 12px 40px rgba(37,99,235,0.15);
+    }
+    .michael-speech p {
+      font-size: 0.85rem; color: var(--dark);
+      line-height: 1.5; margin: 0;
+      font-weight: 500;
+    }
+    .michael-speech .michael-speech-name {
+      font-size: 0.65rem; color: var(--accent);
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 4px;
+    }
+    .michael-speech .michael-speech-cta {
+      display: inline-block; margin-top: 8px;
+      font-size: 0.7rem; color: var(--accent);
+      font-weight: 700; letter-spacing: 0.05em;
+    }
+    .michael-canvas-wrap {
+      width: 100px; height: 100px;
+      border-radius: 50%; overflow: hidden;
+      border: 3px solid var(--accent);
+      box-shadow: 0 6px 24px rgba(37,99,235,0.2);
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    .michael-canvas-wrap:hover { transform: scale(1.05); }
+    .michael-canvas-wrap canvas {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .michael-bubble-close {
+      position: absolute; top: -6px; right: -6px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #fff; border: 1px solid rgba(0,0,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; color: var(--gray);
+      cursor: pointer; line-height: 1;
+      transition: background 0.2s ease;
+      z-index: 2;
+    }
+    .michael-bubble-close:hover { background: #f1f5f9; }
+    /* Team member card in top right */
+    .team-bubble {
+      position: fixed; top: 100px; right: 48px; z-index: 99997;
+      width: 200px;
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+      opacity: 0; transform: translateY(20px) scale(0.9);
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .team-bubble.visible {
+      opacity: 1; transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+    .team-bubble-avatar {
+      width: 100%; height: 200px; overflow: hidden;
+    }
+    .team-bubble-avatar img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .team-bubble:hover .team-bubble-avatar img { transform: scale(1.05); }
+    .team-bubble-label {
+      padding: 14px 16px;
+    }
+    .team-bubble-label .tb-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 700; color: var(--dark);
+      line-height: 1.3;
+    }
+    .team-bubble-label .tb-role {
+      font-size: 0.65rem; color: var(--accent);
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; margin-top: 2px;
+    }
+    .team-bubble-cta {
+      padding: 0 16px 14px;
+    }
+    .team-bubble-cta p {
+      font-size: 0.7rem; color: var(--gray); line-height: 1.4; margin-bottom: 8px;
+    }
+    .team-bubble-cta a {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.65rem; font-weight: 700; color: #25D366;
+      letter-spacing: 0.03em;
+      transition: opacity 0.3s ease;
+    }
+    .team-bubble-cta a:hover { opacity: 0.7; }
+    @media (max-width: 768px) {
+      .team-bubble { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      .michael-bubble { bottom: 16px; right: 16px; }
+      .michael-speech { max-width: 180px; padding: 10px 14px; }
+      .michael-canvas-wrap { width: 70px; height: 70px; }
+    }
+
+    /* ===== SECTION FLOW (smooth transitions between sections) ===== */
+    .section-glow {
+      position: relative; z-index: 2;
+      height: 80px;
+      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+    }
+    .section-glow::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 35%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
+    }
+
+    /* Gradient bridge: tinted to white */
+    .dark-to-light {
+      position: relative; z-index: 3;
+      height: 120px;
+      background: linear-gradient(180deg, #F1F5F9 0%, #FFFFFF 100%);
+    }
+    /* Gradient bridge: white to tinted */
+    .light-to-dark {
+      position: relative; z-index: 3;
+      height: 120px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+    }
+
+    /* ===== STATS ===== */
+    .stats-section {
+      padding: 6rem 5vw;
+      background: #F8FAFC;
+      position: relative;
+    }
+    .stats-section::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 50%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.12), transparent);
+    }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem;
+      max-width: 1000px; margin: 0 auto; text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem,5vw,3.5rem);
+      color: var(--accent); display: block; line-height: 1.1;
+    }
+    .stat-label {
+      display: block; margin-top: 0.5rem;
+      font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--gray);
+    }
+    @media (max-width: 768px) { .stats-row { grid-template-columns: repeat(2,1fr); gap: 3rem; } }
+
+    /* ===== COVERAGE / STORYTELLING ===== */
+    .coverage { height: 350vh; background: #FFFFFF; }
+    .coverage-sticky {
+      position: sticky; top: 0; height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .coverage-visual { position: relative; }
+    .coverage-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0;
+      transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .coverage-img.active { opacity: 1; }
+    .coverage-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(270deg, transparent 60%, #FFFFFF 100%);
+      z-index: 1;
+    }
+    .coverage-text {
+      display: flex; align-items: center; justify-content: center;
+      padding: 5vw; position: relative; background: #FFFFFF;
+    }
+    .coverage-step {
+      position: absolute; opacity: 0; transform: translateY(40px);
+      transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+      max-width: 460px;
+    }
+    .coverage-step.active { opacity: 1; transform: translateY(0); }
+    .coverage-step h2 { color: var(--dark); margin-bottom: 1rem; }
+    .coverage-step p { color: var(--gray); font-size: 1rem; line-height: 1.7; }
+    .coverage-tag {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem; font-weight: 700;
+    }
+    .coverage-nav {
+      position: fixed; right: 12px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 12px; z-index: 99995;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .coverage-nav.visible { opacity: 1; pointer-events: all; }
+    .cov-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 1.5px solid var(--gray); background: transparent;
+      cursor: pointer; transition: all 0.3s ease; padding: 0;
+    }
+    .cov-dot.active { background: var(--accent); border-color: var(--accent); transform: scale(1.4); }
+
+    /* Skip section button — below nav dots on right edge */
+    .skip-section {
+      position: fixed; right: 4px; top: calc(50% + 60px); z-index: 99996;
+      display: flex; align-items: center; gap: 4px;
+      background: transparent; border: none;
+      cursor: pointer;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+      font-size: 0.55rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 6px;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+    .skip-section.visible {
+      opacity: 1; pointer-events: all;
+    }
+    .skip-section:hover { color: var(--dark); }
+    .skip-arrow {
+      font-size: 0.7rem; color: var(--accent);
+      transition: color 0.3s ease;
+      writing-mode: horizontal-tb;
+    }
+    .skip-section:hover .skip-arrow { color: var(--dark); }
+
+    .coverage-progress { position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: rgba(0,0,0,0.06); z-index: 5; }
+    .coverage-progress-fill { height: 100%; width: 0%; background: var(--accent); }
+    @media (max-width: 768px) {
+      .coverage-sticky { grid-template-columns: 1fr; }
+      .coverage-visual { height: 40vh; }
+      .coverage-text { min-height: 60vh; }
+      .coverage-nav { flex-direction: row; bottom: 1.5rem; right: 50%; transform: translateX(50%); top: auto; position: fixed; }
+    }
+
+    /* ===== FINANCIAL ADVANTAGE ===== */
+    .advantage-section {
+      background: var(--light);
+      padding: 6rem 5vw;
+      position: relative; z-index: 2;
+    }
+    .advantage-header { text-align: center; margin-bottom: 5rem; }
+    .advantage-header h2 { color: var(--dark); }
+    .advantage-header p { color: #6b7280; max-width: 50ch; margin: 1.5rem auto 0; font-size: 1.05rem; }
+    .advantage-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 2rem; max-width: 1100px; margin: 0 auto;
+    }
+    .adv-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      opacity: 0; transform: translateY(30px);
+    }
+    .adv-value {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem,5vw,3.5rem);
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .adv-value span { color: var(--accent); }
+    .adv-label {
+      font-size: 0.85rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--dark); margin-bottom: 0.5rem;
+    }
+    .adv-compare {
+      font-size: 0.8rem; color: #9ca3af;
+      margin-bottom: 1.5rem; font-style: italic;
+    }
+    .adv-card p { color: #6b7280; font-size: 0.9rem; line-height: 1.6; }
+    .advantage-note {
+      text-align: center; margin-top: 3rem;
+      font-size: 0.8rem; color: #9ca3af;
+      max-width: 55ch; margin-left: auto; margin-right: auto;
+    }
+    @media (max-width: 1024px) { .advantage-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 640px) { .advantage-grid { grid-template-columns: 1fr; } }
+
+    /* ===== LOCATIONS HORIZONTAL SCROLL ===== */
+    .locations-intro {
+      text-align: center; padding: 8rem 5vw 4rem;
+      background: #FFFFFF;
+    }
+    .locations-intro h2 { color: var(--dark); }
+    .locations-intro p { color: var(--gray); max-width: 50ch; margin: 1.5rem auto 0; font-size: 1rem; }
+    .h-scroll-wrapper { overflow: hidden; background: #F8FAFC; }
+    .h-scroll-track {
+      display: flex; flex-wrap: nowrap;
+      width: max-content; will-change: transform;
+    }
+    .h-panel {
+      width: 80vw; height: 100vh; flex-shrink: 0;
+      position: relative; overflow: hidden;
+    }
+    .h-panel img { width: 100%; height: 100%; object-fit: cover; transition: transform 8s ease; }
+    .h-panel:hover img { transform: scale(1.05); }
+    .h-panel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(transparent 40%, rgba(13,27,42,0.9));
+      z-index: 1;
+    }
+    .h-panel-content {
+      position: absolute; bottom: 6rem; left: 4rem;
+      z-index: 2; color: #fff; max-width: 500px;
+    }
+    .h-panel-content h2 { color: #fff; font-size: clamp(2rem,4vw,3rem); margin-bottom: 0.75rem; }
+    .h-panel-content p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6; }
+    .h-panel-tag {
+      display: inline-block; margin-top: 1.5rem;
+      padding: 8px 20px; border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50px; font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #fff;
+    }
+    @media (max-width: 768px) {
+      .h-panel { width: 90vw; }
+      .h-panel-content { left: 2rem; bottom: 4rem; right: 2rem; }
+    }
+
+    /* ===== TESTIMONIAL ===== */
+    .testimonial-wrapper {
+      background: #F8FAFC;
+      position: relative;
+    }
+    .testimonial-wrapper::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 30%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
+    }
+    .testimonial-section {
+      padding: 10rem 5vw; text-align: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .testimonial-quote {
+      font-family: var(--font-display); font-style: italic;
+      font-size: clamp(1.4rem,2.8vw,2.2rem);
+      line-height: 1.5; color: var(--dark);
+      margin-bottom: 3rem;
+      opacity: 0; transform: translateY(30px);
+    }
+    .testimonial-author {
+      font-size: 0.8rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gray);
+      opacity: 0; transform: translateY(20px);
+    }
+    .testimonial-author strong { color: var(--accent); display: block; margin-bottom: 0.25rem; font-weight: 600; }
+
+    /* ===== TEAM ===== */
+    .team-section {
+      padding: 8rem 5vw;
+      background: #FFFFFF;
+      position: relative;
+    }
+    .team-section::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
+    }
+    .team-header { text-align: center; margin-bottom: 4rem; }
+    .team-header h2 { color: var(--dark); }
+    .team-header p { color: var(--gray); max-width: 45ch; margin: 1.5rem auto 0; font-size: 1rem; }
+
+    /* Featured founder card */
+    .team-featured {
+      display: flex; align-items: center; gap: 4rem;
+      max-width: 900px; margin: 0 auto 5rem;
+      padding: 3rem; border-radius: 20px;
+      background: #F8FAFC;
+      border: 1px solid rgba(37,99,235,0.08);
+      opacity: 0; transform: translateY(40px);
+    }
+    .team-featured-photo {
+      flex-shrink: 0; width: 220px; height: 220px;
+      border-radius: 16px; overflow: hidden;
+      border: 2px solid rgba(37,99,235,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+    .team-featured-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .team-featured:hover .team-featured-photo img { transform: scale(1.05); }
+    .team-featured-info { flex: 1; }
+    .team-featured-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--dark); margin-bottom: 0.3rem;
+    }
+    .team-featured-title {
+      font-size: 0.75rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+      font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .team-featured-tagline {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 1rem; color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+    .team-featured-bio {
+      font-size: 0.9rem; color: var(--gray);
+      line-height: 1.7; margin-bottom: 1rem;
+    }
+    .team-featured-areas {
+      display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.2rem;
+    }
+    .team-featured-areas span {
+      font-size: 0.65rem; padding: 5px 14px;
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 20px; color: var(--accent);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      font-weight: 600;
+    }
+    .team-divider {
+      display: flex; align-items: center; gap: 1.5rem;
+      max-width: 900px; margin: 0 auto 3rem;
+    }
+    .team-divider::before, .team-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(37,99,235,0.1);
+    }
+    .team-divider span {
+      font-size: 0.7rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gray);
+      font-weight: 600; white-space: nowrap;
+    }
+
+    /* Supporting team grid */
+    .team-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2rem; max-width: 900px; margin: 0 auto;
+    }
+    .team-card {
+      text-align: center;
+      opacity: 0; transform: translateY(30px);
+    }
+    .team-photo-wrap {
+      width: 120px; height: 120px; margin: 0 auto 1.2rem;
+      border-radius: 50%; overflow: hidden;
+      border: 2px solid rgba(37,99,235,0.12);
+      transition: border-color 0.5s ease;
+    }
+    .team-card:hover .team-photo-wrap { border-color: var(--accent); }
+    .team-photo-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: grayscale(30%);
+      transition: filter 0.5s ease, transform 0.5s ease;
+    }
+    .team-card:hover .team-photo-wrap img { filter: grayscale(0%); transform: scale(1.05); }
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem; color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+    .team-role {
+      font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.6rem; font-weight: 700;
+    }
+    .team-bio { font-size: 0.75rem; color: var(--gray); line-height: 1.5; }
+    .team-contact {
+      display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.8rem;
+    }
+    .team-contact a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 50%;
+      font-size: 0.8rem; transition: all 0.3s ease;
+    }
+    .team-contact .tc-whatsapp {
+      background: rgba(37,211,102,0.1); color: #25D366;
+    }
+    .team-contact .tc-whatsapp:hover {
+      background: #25D366; color: #fff;
+    }
+    .team-contact .tc-email {
+      background: rgba(37,99,235,0.08); color: var(--accent);
+    }
+    .team-contact .tc-email:hover {
+      background: var(--accent); color: #fff;
+    }
+    .team-featured-contact {
+      display: flex; gap: 0.75rem; margin-top: 1.2rem;
+    }
+    .team-featured-contact a {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 8px 18px; border-radius: 50px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: all 0.3s ease;
+    }
+    .team-featured-contact .tfc-whatsapp {
+      background: rgba(37,211,102,0.1); color: #25D366;
+      border: 1px solid rgba(37,211,102,0.2);
+    }
+    .team-featured-contact .tfc-whatsapp:hover {
+      background: #25D366; color: #fff;
+    }
+    .team-featured-contact .tfc-email {
+      background: rgba(37,99,235,0.08); color: var(--accent);
+      border: 1px solid rgba(37,99,235,0.15);
+    }
+    .team-featured-contact .tfc-email:hover {
+      background: var(--accent); color: #fff;
+    }
+    @media (max-width: 768px) {
+      .team-featured { flex-direction: column; text-align: center; gap: 2rem; padding: 2rem; }
+      .team-featured-photo { width: 180px; height: 180px; margin: 0 auto; }
+      .team-featured-areas { justify-content: center; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      text-align: center; padding: 10rem 5vw 6rem;
+      background: #F8FAFC;
+      position: relative;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 30%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
+    }
+    .cta-section h2 { color: var(--dark); margin-bottom: 1.5rem; }
+    .cta-section p { color: var(--gray); max-width: 50ch; margin: 0 auto 3rem; font-size: 1.05rem; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .footer-bar {
+      background: #FFFFFF;
+      border-top: 1px solid rgba(37,99,235,0.08);
+      padding: 2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bar .nav-logo { font-size: 1.2rem; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.75rem; color: var(--gray); letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 0.7rem; color: rgba(0,0,0,0.3);
+      width: 100%; text-align: center; margin-top: 1rem;
+    }
+
+    /* ===== WATERMARK ===== */
+    /* Skip to content */
+    .skip-to-content {
+      position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+      z-index: 100000; padding: 12px 24px;
+      background: var(--accent); color: #fff; border-radius: 0 0 8px 8px;
+      font-weight: 700; font-size: 0.85rem; transition: top 0.3s ease;
+    }
+    .skip-to-content:focus { top: 0; }
+
+    /* Back to top */
+    .back-to-top {
+      position: fixed; bottom: 24px; left: 24px; z-index: 99990;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--accent); color: #fff; border: none;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; cursor: pointer;
+      opacity: 0; transform: translateY(20px); pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 16px rgba(var(--accent-rgb),0.3);
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .back-to-top:hover { transform: translateY(-2px); }
+  </style>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Circa Panama Real Estate",
+    "description": "Circa Panama Real Estate is a full-service real estate firm based in Panama, specializing in property buying, selling, investment advisory, and relocation services for international clients. Founded by Michael Rudasveski, Circa offers bilingual end-to-end guidance across Panama City, Playa Venao, Coco del Mar, Casco Viejo, and Boquete.",
+    "url": "https://circapanama.com",
+    "logo": "https://circapanama.com/images/circa-logo.png",
+    "image": "https://circapanama.com/images/hero-playa-venao.jpg",
+    "email": "info@circapanama.com",
+    "areaServed": [
+      { "@type": "City", "name": "Panama City", "addressCountry": "PA" },
+      { "@type": "Place", "name": "Playa Venao", "addressCountry": "PA" },
+      { "@type": "Place", "name": "Coco del Mar", "addressCountry": "PA" },
+      { "@type": "Place", "name": "Casco Viejo", "addressCountry": "PA" },
+      { "@type": "Place", "name": "Boquete", "addressCountry": "PA" }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Panama City",
+      "addressCountry": "PA"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Michael Rudasveski",
+      "jobTitle": "Founder & CEO",
+      "description": "Real estate expert and community builder with deep knowledge of Panama's property market since 2015."
+    },
+    "employee": [
+      { "@type": "Person", "name": "Margarita", "jobTitle": "Legal Director" },
+      { "@type": "Person", "name": "Sabrina", "jobTitle": "Financial Advisor" },
+      { "@type": "Person", "name": "Gal", "jobTitle": "Relocation Manager" },
+      { "@type": "Person", "name": "Juackin", "jobTitle": "Property Specialist" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Real Estate Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property Buying & Selling", "description": "Discover and maximize property value in Panama with strategic management and an extensive local network." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Investment Advisory", "description": "Curated investment opportunities including joint ventures, local developments, and exclusive off-market real estate projects." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Relocation Services", "description": "Complete relocation support including visa processing, shipping, schools, healthcare, and community integration." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Legal Support", "description": "Trusted legal partners for title searches, contracts, residency applications, and corporate structuring." } }
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "200",
+      "bestRating": "5"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "RealEstateAgent",
+      "name": "Circa Panama Real Estate"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Michael & Sarah Thompson"
+    },
+    "reviewBody": "We were terrified of buying property abroad. Circa didn't just find us a home, they handled our tax restructuring, visa applications, banking, and even enrolled our kids in school. Six months in, we're saving $40,000 a year in taxes alone. Panama is home.",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can foreigners buy property in Panama?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, foreigners have the same property ownership rights as Panamanian citizens. There are no restrictions on foreign property ownership in Panama, making it one of the most accessible markets in Latin America for international buyers." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Friendly Nations Visa?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Friendly Nations Visa is a fast-track residency program for citizens of 50+ countries including the US, Canada, UK, and most EU nations. It allows you to obtain permanent residency in Panama through economic or professional ties to the country." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Panama's tax system benefit property investors?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Panama uses a territorial tax system, meaning foreign-sourced income is not taxed. There is no capital gains tax on primary residence sales, and the Pensionado program offers retirees significant discounts on healthcare, dining, travel, and entertainment." }
+      },
+      {
+        "@type": "Question",
+        "name": "What areas in Panama are best for real estate investment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Top areas include Playa Venao for beachfront lifestyle and surf culture, Coco del Mar for modern urban waterfront living, Casco Viejo for historic charm and boutique appeal, and Boquete for mountain retreats and expat communities. Each offers unique investment profiles with rental yields averaging 7%+ annually." }
+      },
+      {
+        "@type": "Question",
+        "name": "What services does Circa Panama provide beyond property sales?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Circa Panama is a full-service real estate partner covering buying, selling, investment advisory, legal support (title searches, contracts, residency), and complete relocation services (visa processing, banking setup, school enrollment, healthcare, and community integration)." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <canvas id="threeCanvas"></canvas>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-letters" id="loaderLetters">
+      <span class="loader-letter">C</span>
+      <span class="loader-letter">I</span>
+      <span class="loader-letter">R</span>
+      <span class="loader-letter">C</span>
+      <span class="loader-letter">A</span>
+    </div>
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+    <div class="loader-tagline" id="loaderTagline">Closing the Circle Between Lifestyle, Investment &amp; Community</div>
+  </div>
+
+  <!-- NAV -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <header>
+  <nav class="nav" id="mainNav">
+    <a href="#" class="nav-logo"><img src="images/circa-logo.png" alt="Circa Panama Real Estate"></a>
+    <div class="nav-links">
+      <a href="#coverage">Services</a>
+      <a href="#advantage">Why Panama</a>
+      <a href="#locations">Locations</a>
+      <a href="#team">Team</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Book a Call</a>
+    </div>
+    <div class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="mobile-overlay" id="mobileOverlay">
+    <a href="#coverage" class="mobile-nav-link">Services</a>
+    <a href="#advantage" class="mobile-nav-link">Why Panama</a>
+    <a href="#locations" class="mobile-nav-link">Locations</a>
+    <a href="#team" class="mobile-nav-link">Team</a>
+    <a href="#faq" class="mobile-nav-link">FAQ</a>
+    <a href="#contact" class="btn mobile-nav-link">Book a Call</a>
+  </div>
+  </header>
+
+  <main id="main-content">
+  <!-- HERO ZOOM -->
+  <section class="hero-zoom" id="heroZoom">
+    <div class="hero-zoom-sticky">
+      <video class="hero-video-bg" id="heroVideoBg"
+             src="images/hero-bg.mp4"
+             poster="images/hero-playa-venao.jpg"
+             autoplay muted loop playsinline preload="auto"></video>
+      <img class="hero-zoom-img" id="heroZoomImg"
+           src="images/hero-playa-venao.jpg"
+           alt="Playa Venao Panama beachfront"
+           style="opacity:0; pointer-events:none;">
+      <div class="hero-zoom-gradient"></div>
+      <div class="hero-zoom-overlay" id="heroZoomOverlay"></div>
+      <div class="hero-intro" id="heroIntro">
+        <span class="eyebrow">Circa Panama Real Estate</span>
+        <h1 id="heroTitle">Your Complete Panama Partner</h1>
+        <div class="hero-pillars">
+          <span class="hero-pillar">Buy / Sell</span>
+          <span class="hero-pillar">Invest</span>
+          <span class="hero-pillar">Relocate</span>
+          <span class="hero-pillar">VIP / Off Market Access</span>
+        </div>
+        <p>Personalized guidance, access to on and off market opportunities. We pair local knowledge with investors so you can buy, sell, invest, and relocate with confidence.</p>
+      </div>
+      <div class="hero-zoom-reveal" id="heroZoomReveal">
+        <div class="hero-reveal-portrait">
+          <img src="images/michael.jpeg" alt="Michael Rudasveski">
+        </div>
+        <div class="hero-reveal-text">
+          <div class="hero-reveal-name">Michael Rudasveski</div>
+          <div class="hero-reveal-role">Founder &amp; CEO, Circa Panama</div>
+          <h2>I'll Guide You Through Every Step</h2>
+          <p>Property, legal, financial, relocation. I built Circa so you'd never have to navigate Panama alone.</p>
+          <a href="#contact" class="btn">Book a Call With Michael</a>
+        </div>
+      </div>
+      <div class="hero-scroll-hint" id="heroScrollHint">Scroll to explore</div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats" class="stats-section">
+    <div class="stats-row">
+      <div class="stat">
+        <span class="stat-number" data-target="15" data-suffix="+ Years">15+ Years</span>
+        <span class="stat-label">Market Experience</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" data-target="200" data-suffix="+">200+</span>
+        <span class="stat-label">Properties Closed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" data-target="98" data-suffix="%">98%</span>
+        <span class="stat-label">Client Satisfaction</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" data-target="500" data-prefix="$" data-suffix="M+">$500M+</span>
+        <span class="stat-label">Transaction Volume</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE STORYTELLING -->
+  <section class="coverage" id="coverage">
+    <div class="coverage-sticky">
+      <div class="coverage-text">
+        <div class="coverage-step active" data-step="0">
+          <div class="coverage-tag">01 &mdash; Buy / Sell</div>
+          <h2>Discover &amp; Maximize Value</h2>
+          <p>Discover your new investment property in Panama. Maximize your property's value with strategic management and our extensive network. We work hand in hand with trusted local developers to offer the best options in the market.</p>
+        </div>
+        <div class="coverage-step" data-step="1">
+          <div class="coverage-tag">02 &mdash; Invest</div>
+          <h2>Curated Opportunities</h2>
+          <p>Curated investment opportunities. Joint ventures, local developments, and exclusive real estate projects. Our discreet investor network gives you access to deals that never hit the public market.</p>
+        </div>
+        <div class="coverage-step" data-step="2">
+          <div class="coverage-tag">03 &mdash; Relocate</div>
+          <h2>Easy Transition to Panama</h2>
+          <p>Easy transition to your new life in Panama with complete relocation support. From visa processing to community integration, we manage every detail so the move feels effortless.</p>
+        </div>
+        <div class="coverage-step" data-step="3">
+          <div class="coverage-tag">04 &mdash; Legal Support</div>
+          <h2>Trusted Partners at Every Step</h2>
+          <p>Trusted legal partners and local experts, supporting you at every step of your investment process and providing continuous guidance throughout. Title searches, contracts, residency, corporate structuring.</p>
+        </div>
+        <div class="coverage-step" data-step="4">
+          <div class="coverage-tag">05 &mdash; VIP Access</div>
+          <h2>Off Market Opportunities</h2>
+          <p>We pair local knowledge with investors, offering clear guidance and legal support so our clients can buy, sell, invest, and relocate with confidence. Access exclusive off market deals through our private network.</p>
+        </div>
+      </div>
+      <div class="coverage-visual">
+        <img class="coverage-img active" data-step="0"
+             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80"
+             alt="Luxury beachfront property for sale in Panama with ocean views" loading="lazy">
+        <img class="coverage-img" data-step="1"
+             src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80"
+             alt="Investment advisory meeting for Panama real estate opportunities" loading="lazy">
+        <img class="coverage-img" data-step="2"
+             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80"
+             alt="Panama City skyline showcasing modern urban development" loading="lazy">
+        <img class="coverage-img" data-step="3"
+             src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80"
+             alt="Legal document signing for Panama property transactions" loading="lazy">
+        <img class="coverage-img" data-step="4"
+             src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=80"
+             alt="Exclusive tropical resort pool with VIP access in Panama" loading="lazy">
+        <div class="coverage-img-overlay"></div>
+      </div>
+      <div class="coverage-nav">
+        <button class="cov-dot active" data-step="0" aria-label="Property"></button>
+        <button class="cov-dot" data-step="1" aria-label="Legal"></button>
+        <button class="cov-dot" data-step="2" aria-label="Financial"></button>
+        <button class="cov-dot" data-step="3" aria-label="Relocation"></button>
+        <button class="cov-dot" data-step="4" aria-label="Lifestyle"></button>
+      </div>
+      <div class="coverage-progress"><div class="coverage-progress-fill" id="covFill"></div></div>
+    </div>
+  </section>
+
+  <!-- GRADIENT BRIDGE: Dark → Light -->
+  <div class="dark-to-light"></div>
+
+  <!-- FINANCIAL ADVANTAGE -->
+  <section class="advantage-section" id="advantage">
+    <div class="advantage-header">
+      <span class="eyebrow" style="color:var(--dark);">Why Panama</span>
+      <h2>The Panama Advantage</h2>
+      <p>Panama stands out as a premier investment destination. Here's why investors worldwide choose to call it home.</p>
+    </div>
+    <div class="advantage-grid">
+      <div class="adv-card">
+        <div class="adv-value"><span>0%</span></div>
+        <div class="adv-label">Tax Advantages</div>
+        <div class="adv-compare">Territorial tax system</div>
+        <p>Territorial tax system with no capital gains on primary residence sales and attractive incentives. Your foreign income stays untouched.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-value"><span>USD</span></div>
+        <div class="adv-label">Dollarized Economy</div>
+        <div class="adv-compare">Stable banking system</div>
+        <p>USD based economy with stable banking system and status as regional business hub. Zero currency conversion risk from day one.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-value"><span>80+</span></div>
+        <div class="adv-label">Strategic Location</div>
+        <div class="adv-compare">Friendly Nations Visa</div>
+        <p>Tocumen International Airport connects to 80+ destinations with easy residency programs. Bridge between continents and hub for the Americas.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-value"><span>365</span></div>
+        <div class="adv-label">Lifestyle &amp; Climate</div>
+        <div class="adv-compare">Days of tropical warmth</div>
+        <p>Year round tropical climate with access to both Pacific and Caribbean coasts. World class surf, mountains, and city life within hours of each other.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-value"><span>#1</span></div>
+        <div class="adv-label">Retirement Haven</div>
+        <div class="adv-compare">Ranked top retirement destination</div>
+        <p>Pensionado program offers retirees discounts on healthcare, dining, travel, and entertainment. One of the world's most attractive retirement packages.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-value"><span>7%+</span></div>
+        <div class="adv-label">Rental Yields</div>
+        <div class="adv-compare">Above global average returns</div>
+        <p>Strong rental demand from expats and tourists drives above average returns. Short term and long term rental markets both thriving across key regions.</p>
+      </div>
+    </div>
+    <p class="advantage-note">Friendly Nations Visa program fast tracks residency for citizens of 50+ countries. Circa handles the entire application process through our trusted legal partners.</p>
+  </section>
+
+  <!-- GRADIENT BRIDGE: Light → Dark -->
+  <div class="light-to-dark"></div>
+
+  <!-- LOCATIONS GALLERY -->
+  <section class="locations-intro" id="locations">
+    <span class="eyebrow">Investment Regions</span>
+    <h2>Where Will Your Story Unfold?</h2>
+    <p>From beachfront communities to historic neighborhoods, each region offers a unique lifestyle and investment opportunity.</p>
+  </section>
+  <section class="h-scroll-wrapper" id="hScrollWrap">
+    <div class="h-scroll-track" id="hScrollTrack">
+      <div class="h-panel">
+        <img src="images/venao.jpg" alt="Playa Venao beachfront community with surf and investment opportunities" loading="lazy">
+        <div class="h-panel-overlay"></div>
+        <div class="h-panel-content">
+          <span class="eyebrow">Beachfront Community</span>
+          <h2>Playa Venao</h2>
+          <p>A fast growing beachfront community. Great investment opportunities with good returns and appreciation. World class surf, international education, and a wide range of wellness activities.</p>
+          <span class="h-panel-tag">Lifestyle &amp; Investment</span>
+        </div>
+      </div>
+      <div class="h-panel">
+        <img src="images/panama-city.jpg" alt="Coco del Mar modern waterfront district in Panama City" loading="lazy">
+        <div class="h-panel-overlay"></div>
+        <div class="h-panel-content">
+          <span class="eyebrow">Modern Waterfront</span>
+          <h2>Coco del Mar</h2>
+          <p>Panama City's modern waterfront district with world class infrastructure, connectivity, and urban appreciation potential. The heart of the city's growth.</p>
+          <span class="h-panel-tag">Urban Appreciation</span>
+        </div>
+      </div>
+      <div class="h-panel">
+        <img src="images/casco-viejo.jpg" alt="Casco Viejo historic colonial district in Panama City" loading="lazy">
+        <div class="h-panel-overlay"></div>
+        <div class="h-panel-content">
+          <span class="eyebrow">Historic Charm</span>
+          <h2>Casco Viejo</h2>
+          <p>Panama City's historic heart. A beautifully restored district blending colonial charm with modern energy, diverse culinary experiences, boutique hotels, and strong appeal for investors.</p>
+          <span class="h-panel-tag">Heritage &amp; Character</span>
+        </div>
+      </div>
+      <div class="h-panel">
+        <img src="images/hero-playa-venao.jpg" alt="Boquete mountain retreats and Pacific coast lifestyle in Panama" loading="lazy">
+        <div class="h-panel-overlay"></div>
+        <div class="h-panel-content">
+          <span class="eyebrow">Your Next Chapter</span>
+          <h2>Boquete &amp; Beyond</h2>
+          <p>Year round tropical climate with access to both Pacific and Caribbean coasts. Cool mountain retreats, coffee country, and thriving expat communities await.</p>
+          <span class="h-panel-tag">Lifestyle &amp; Climate</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOFT GLOW SEPARATOR -->
+  <div class="section-glow"></div>
+
+  <!-- TESTIMONIAL -->
+  <div class="testimonial-wrapper">
+    <section class="testimonial-section">
+      <span class="eyebrow">What Our Clients Say</span>
+      <article>
+        <blockquote class="testimonial-quote">
+          "We were terrified of buying property abroad. Circa didn't just find us a home, they handled our tax restructuring, visa applications, banking, and even enrolled our kids in school. Six months in, we're saving $40,000 a year in taxes alone. Panama is home."
+        </blockquote>
+        <div class="testimonial-author">
+          <strong>Michael &amp; Sarah Thompson</strong>
+          Relocated from Toronto, Canada
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <!-- TEAM -->
+  <section class="team-section" id="team">
+    <div class="team-header">
+      <span class="eyebrow">The People Behind Circa</span>
+      <h2>Meet Your Team</h2>
+      <p>Local expertise, global perspective. Every member of our team lives and breathes Panama.</p>
+    </div>
+
+    <!-- Featured: Michael Rudasveski -->
+    <div class="team-featured" id="teamFeatured">
+      <div class="team-featured-photo">
+        <img src="images/michael.jpeg" alt="Michael Rudasveski, Founder and CEO of Circa Panama Real Estate" loading="lazy">
+      </div>
+      <div class="team-featured-info">
+        <div class="team-featured-title">Founder &amp; CEO</div>
+        <div class="team-featured-name">Michael Rudasveski</div>
+        <div class="team-featured-tagline">Real Estate Expert &amp; Community Builder</div>
+        <div class="team-featured-bio">
+          I first visited Panama in 2015 and was immediately struck by the combination of modern infrastructure, natural beauty, and economic stability. Circa Panama Real Estate exists to be that trusted guide, offering the market insight, legal connections, and regional expertise I wish I'd had on my first deal.
+        </div>
+        <div class="team-featured-areas">
+          <span>Playa Venao</span>
+          <span>Coco del Mar</span>
+          <span>Boquete</span>
+          <span>Bilingual Service</span>
+        </div>
+        <div class="team-featured-contact">
+          <a href="https://wa.me/50760001111?text=Hi%20Michael%2C%20I'm%20interested%20in%20Panama%20real%20estate" target="_blank" rel="noopener" class="tfc-whatsapp" aria-label="WhatsApp Michael">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <a href="mailto:michael@circapanama.com" class="tfc-email" aria-label="Email Michael">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-divider"><span>The Team</span></div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Margarita, Legal Director at Circa Panama Real Estate" loading="lazy">
+        </div>
+        <div class="team-name">Margarita</div>
+        <div class="team-role">Legal Director</div>
+        <div class="team-bio">Property law, residency visas, and corporate structuring for international buyers.</div>
+        <div class="team-contact">
+          <a href="https://wa.me/50760002222?text=Hi%20Margarita%2C%20I%20have%20a%20legal%20question%20about%20Panama%20property" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Margarita">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="mailto:margarita@circapanama.com" class="tc-email" aria-label="Email Margarita">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Sabrina, Financial Advisor at Circa Panama Real Estate" loading="lazy">
+        </div>
+        <div class="team-name">Sabrina</div>
+        <div class="team-role">Financial Advisor</div>
+        <div class="team-bio">Tax optimization, banking setup, and investment structuring for Panama's territorial system.</div>
+        <div class="team-contact">
+          <a href="https://wa.me/50760003333?text=Hi%20Sabrina%2C%20I%20have%20a%20finance%20question%20about%20investing%20in%20Panama" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Sabrina">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="mailto:sabrina@circapanama.com" class="tc-email" aria-label="Email Sabrina">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Gal, Relocation Manager at Circa Panama Real Estate" loading="lazy">
+        </div>
+        <div class="team-name">Gal</div>
+        <div class="team-role">Relocation Manager</div>
+        <div class="team-bio">Visa processing, shipping, schools, healthcare, and full community integration.</div>
+        <div class="team-contact">
+          <a href="https://wa.me/50760004444?text=Hi%20Gal%2C%20I%20need%20help%20with%20relocation%20to%20Panama" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Gal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="mailto:gal@circapanama.com" class="tc-email" aria-label="Email Gal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="Juackin, Property Specialist at Circa Panama Real Estate" loading="lazy">
+        </div>
+        <div class="team-name">Juackin</div>
+        <div class="team-role">Property Specialist</div>
+        <div class="team-bio">Born and raised in Panama City. Deep local knowledge of every neighborhood and market trend.</div>
+        <div class="team-contact">
+          <a href="https://wa.me/50760005555?text=Hi%20Juackin%2C%20I'm%20looking%20for%20property%20in%20Panama" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Juackin">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="mailto:juackin@circapanama.com" class="tc-email" aria-label="Email Juackin">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="padding:6rem 5vw;background:#FFFFFF;position:relative;z-index:2;" id="faq">
+    <div style="max-width:800px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <span class="eyebrow">Common Questions</span>
+        <h2 style="color:var(--dark);">Frequently Asked Questions</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+        <details style="border:1px solid rgba(37,99,235,0.1);border-radius:12px;padding:1.5rem 2rem;background:#F8FAFC;">
+          <summary style="font-family:var(--font-display);font-size:1.1rem;color:var(--dark);cursor:pointer;font-weight:400;">Can foreigners buy property in Panama?</summary>
+          <p style="color:var(--gray);margin-top:1rem;line-height:1.7;font-size:0.95rem;">Yes, foreigners have the same property ownership rights as Panamanian citizens. There are no restrictions on foreign property ownership in Panama, making it one of the most accessible markets in Latin America for international buyers.</p>
+        </details>
+        <details style="border:1px solid rgba(37,99,235,0.1);border-radius:12px;padding:1.5rem 2rem;background:#F8FAFC;">
+          <summary style="font-family:var(--font-display);font-size:1.1rem;color:var(--dark);cursor:pointer;font-weight:400;">What is the Friendly Nations Visa?</summary>
+          <p style="color:var(--gray);margin-top:1rem;line-height:1.7;font-size:0.95rem;">The Friendly Nations Visa is a fast track residency program for citizens of 50+ countries including the US, Canada, UK, and most EU nations. It allows you to obtain permanent residency in Panama through economic or professional ties to the country.</p>
+        </details>
+        <details style="border:1px solid rgba(37,99,235,0.1);border-radius:12px;padding:1.5rem 2rem;background:#F8FAFC;">
+          <summary style="font-family:var(--font-display);font-size:1.1rem;color:var(--dark);cursor:pointer;font-weight:400;">How does Panama's tax system benefit property investors?</summary>
+          <p style="color:var(--gray);margin-top:1rem;line-height:1.7;font-size:0.95rem;">Panama uses a territorial tax system, meaning foreign sourced income is not taxed. There is no capital gains tax on primary residence sales, and the Pensionado program offers retirees significant discounts on healthcare, dining, travel, and entertainment.</p>
+        </details>
+        <details style="border:1px solid rgba(37,99,235,0.1);border-radius:12px;padding:1.5rem 2rem;background:#F8FAFC;">
+          <summary style="font-family:var(--font-display);font-size:1.1rem;color:var(--dark);cursor:pointer;font-weight:400;">What areas in Panama are best for real estate investment?</summary>
+          <p style="color:var(--gray);margin-top:1rem;line-height:1.7;font-size:0.95rem;">Top areas include Playa Venao for beachfront lifestyle and surf culture, Coco del Mar for modern urban waterfront living, Casco Viejo for historic charm and boutique appeal, and Boquete for mountain retreats and expat communities. Each offers unique investment profiles with rental yields averaging 7%+ annually.</p>
+        </details>
+        <details style="border:1px solid rgba(37,99,235,0.1);border-radius:12px;padding:1.5rem 2rem;background:#F8FAFC;">
+          <summary style="font-family:var(--font-display);font-size:1.1rem;color:var(--dark);cursor:pointer;font-weight:400;">What services does Circa Panama provide beyond property sales?</summary>
+          <p style="color:var(--gray);margin-top:1rem;line-height:1.7;font-size:0.95rem;">Circa Panama is a full service real estate partner covering buying, selling, investment advisory, legal support (title searches, contracts, residency), and complete relocation services (visa processing, banking setup, school enrollment, healthcare, and community integration).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-glow"></div>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <span class="eyebrow">Ready?</span>
+    <h2>Start Your Panama Journey</h2>
+    <p>Book a free consultation with Michael. No pressure, no obligations. Just honest advice about your property, investment, and relocation options in Panama.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn">Book a Free Consultation</a>
+      <a href="mailto:info@circapanama.com" class="btn-outline">info@circapanama.com</a>
+    </div>
+    <address style="margin-top:4rem;display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;color:#64748B;font-size:0.85rem;font-style:normal;">
+      <div>Panama City &amp; Playa Venao, Panama</div>
+      <div><a href="mailto:info@circapanama.com" style="color:#64748B;">info@circapanama.com</a></div>
+    </address>
+  </section>
+  </main>
+
+  <footer class="footer-bar">
+    <span class="nav-logo"><img src="images/circa-logo.png" alt="Circa Panama Real Estate" style="height:28px;"></span>
+    <div class="footer-links">
+      <a href="#coverage">Services</a>
+      <a href="#locations">Locations</a>
+      <a href="#team">Team</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Circa Panama Real Estate. All rights reserved. | Last updated: March 2026</div>
+  </footer>
+
+  <!-- MICHAEL FLOATING BUBBLE -->
+  <div class="michael-bubble" id="michaelBubble">
+    <div class="michael-speech" id="michaelSpeech">
+      <div class="michael-speech-name">Michael</div>
+      <p>Let's build your Panama story together.</p>
+      <a href="#contact" class="michael-speech-cta">Book a free call &rarr;</a>
+    </div>
+    <div class="michael-canvas-wrap" id="michaelCanvasWrap">
+      <div class="michael-bubble-close" id="michaelClose">&times;</div>
+      <canvas id="michaelCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- SKIP SECTION BUTTON -->
+  <button class="skip-section" id="skipSection">
+    <span class="skip-arrow">&darr;</span>
+    Skip section
+  </button>
+
+  <!-- TEAM MEMBER BUBBLES (above Michael, one per coverage step) -->
+  <div class="team-bubble" id="teamBubble0" data-step="0">
+    <div class="team-bubble-avatar">
+      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Juackin">
+    </div>
+    <div class="team-bubble-label">
+      <div class="tb-name">Juackin</div>
+      <div class="tb-role">Property Specialist</div>
+    </div>
+    <div class="team-bubble-cta">
+      <p>Have a question about buying or selling property in Panama?</p>
+      <a href="https://wa.me/50760005555?text=Hi%20Juackin%2C%20I'm%20interested%20in%20buying%20property%20in%20Panama" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Juackin
+      </a>
+    </div>
+  </div>
+  <div class="team-bubble" id="teamBubble1" data-step="1">
+    <div class="team-bubble-avatar">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80" alt="Sabrina">
+    </div>
+    <div class="team-bubble-label">
+      <div class="tb-name">Sabrina</div>
+      <div class="tb-role">Financial Advisor</div>
+    </div>
+    <div class="team-bubble-cta">
+      <p>Questions about investment structuring or tax optimization in Panama?</p>
+      <a href="https://wa.me/50760003333?text=Hi%20Sabrina%2C%20I%20have%20a%20question%20about%20investing%20in%20Panama" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Sabrina
+      </a>
+    </div>
+  </div>
+  <div class="team-bubble" id="teamBubble2" data-step="2">
+    <div class="team-bubble-avatar">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Gal">
+    </div>
+    <div class="team-bubble-label">
+      <div class="tb-name">Gal</div>
+      <div class="tb-role">Relocation Manager</div>
+    </div>
+    <div class="team-bubble-cta">
+      <p>Need help with visas, shipping, or settling into life in Panama?</p>
+      <a href="https://wa.me/50760004444?text=Hi%20Gal%2C%20I%20need%20help%20with%20relocating%20to%20Panama" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Gal
+      </a>
+    </div>
+  </div>
+  <div class="team-bubble" id="teamBubble3" data-step="3">
+    <div class="team-bubble-avatar">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80" alt="Margarita">
+    </div>
+    <div class="team-bubble-label">
+      <div class="tb-name">Margarita</div>
+      <div class="tb-role">Legal Director</div>
+    </div>
+    <div class="team-bubble-cta">
+      <p>Questions about property law, residency visas, or corporate structuring?</p>
+      <a href="https://wa.me/50760002222?text=Hi%20Margarita%2C%20I%20have%20a%20legal%20question%20about%20Panama" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Margarita
+      </a>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+  <script>
+    // Wait for deferred scripts to load
+    function bootApp() {
+    // ===== THREE.JS PARTICLE FIELD =====
+    let threeEnabled = true;
+    try {
+      const tc = document.createElement('canvas');
+      if (!(tc.getContext('webgl') || tc.getContext('experimental-webgl'))) threeEnabled = false;
+    } catch(e) { threeEnabled = false; }
+
+    let particleSystem, threeRenderer, threeCamera, threeScene;
+    if (threeEnabled) {
+      const canvas = document.getElementById('threeCanvas');
+      threeScene = new THREE.Scene();
+      threeCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      threeCamera.position.z = 5;
+
+      threeRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+      threeRenderer.setSize(window.innerWidth, window.innerHeight);
+      threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      threeRenderer.setClearColor(0x000000, 0);
+
+      // Soft circle texture
+      const texCanvas = document.createElement('canvas');
+      texCanvas.width = 64; texCanvas.height = 64;
+      const ctx = texCanvas.getContext('2d');
+      const grad = ctx.createRadialGradient(32,32,0,32,32,32);
+      grad.addColorStop(0, 'rgba(37,99,235,0.6)');
+      grad.addColorStop(0.3, 'rgba(37,99,235,0.25)');
+      grad.addColorStop(1, 'rgba(37,99,235,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,64,64);
+      const particleTex = new THREE.CanvasTexture(texCanvas);
+
+      const isMobile = window.innerWidth < 768;
+      const count = isMobile ? 80 : 200;
+      const geo = new THREE.BufferGeometry();
+      const pos = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        pos[i*3]   = (Math.random() - 0.5) * 16;
+        pos[i*3+1] = (Math.random() - 0.5) * 16;
+        pos[i*3+2] = (Math.random() - 0.5) * 8;
+      }
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+      const mat = new THREE.PointsMaterial({
+        map: particleTex,
+        size: isMobile ? 0.12 : 0.18,
+        transparent: true,
+        opacity: 0.5,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        sizeAttenuation: true
+      });
+
+      particleSystem = new THREE.Points(geo, mat);
+      threeScene.add(particleSystem);
+
+      let scrollPos = 0;
+      window.addEventListener('scroll', () => { scrollPos = window.scrollY; });
+
+      function animateThree(time) {
+        requestAnimationFrame(animateThree);
+        particleSystem.rotation.y = time * 0.00008;
+        particleSystem.rotation.x = Math.sin(time * 0.00004) * 0.15;
+        particleSystem.position.y = -scrollPos * 0.002;
+        threeRenderer.render(threeScene, threeCamera);
+      }
+      animateThree(0);
+
+      window.addEventListener('resize', () => {
+        threeCamera.aspect = window.innerWidth / window.innerHeight;
+        threeCamera.updateProjectionMatrix();
+        threeRenderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+
+    // ===== GSAP + LENIS =====
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    // Scroll progress
+    ScrollTrigger.create({
+      trigger: document.body, start: 'top top', end: 'bottom bottom',
+      onUpdate: (self) => { document.getElementById('scrollProgress').style.width = (self.progress * 100) + '%'; }
+    });
+
+    // ===== LOADER =====
+    let loadCount = 0;
+    const totalAssets = document.querySelectorAll('img, video').length + 1;
+    const loaderFill = document.getElementById('loaderFill');
+    let loaderDone = false;
+
+    const letters = document.querySelectorAll('.loader-letter');
+    gsap.to(letters, {
+      opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out', delay: 0.3,
+      onComplete: () => { gsap.to('#loaderTagline', { opacity: 1, duration: 0.6, delay: 0.2 }); }
+    });
+
+    function updateLoader() {
+      loadCount++;
+      loaderFill.style.width = Math.min((loadCount / totalAssets) * 100, 100) + '%';
+      if (loadCount >= totalAssets) dismissLoader();
+    }
+    function dismissLoader() {
+      if (loaderDone) return;
+      loaderDone = true;
+      setTimeout(() => {
+        gsap.to(letters, {
+          opacity: 0, y: -30, stagger: 0.04, duration: 0.4, ease: 'power2.in',
+          onComplete: () => {
+            document.getElementById('loader').classList.add('dismiss');
+            setTimeout(() => {
+              document.getElementById('loader').remove();
+              initPage();
+            }, 800);
+          }
+        });
+      }, 500);
+    }
+    document.querySelectorAll('img').forEach(img => {
+      if (img.complete) updateLoader();
+      else img.addEventListener('load', updateLoader);
+      img.addEventListener('error', updateLoader);
+    });
+    document.fonts.ready.then(updateLoader);
+    setTimeout(dismissLoader, 5000);
+
+    // ===== PAGE INIT (after loader) =====
+    function initPage() {
+      // Hero intro text
+      const heroTitle = document.getElementById('heroTitle');
+      if (heroTitle && typeof SplitType !== 'undefined') {
+        const split = new SplitType(heroTitle, { types: 'words,chars' });
+        gsap.from(split.chars, { y: '110%', opacity: 0, stagger: 0.03, duration: 0.8, ease: 'power3.out', delay: 0.1 });
+      }
+      gsap.from('#heroIntro .eyebrow', { opacity: 0, y: 20, duration: 1, ease: 'power2.out' });
+      gsap.from('.hero-pillar', { opacity: 0, y: 15, duration: 0.6, stagger: 0.08, delay: 0.6, ease: 'power2.out' });
+      gsap.from('#heroIntro p', { opacity: 0, y: 25, duration: 1, delay: 0.9, ease: 'power2.out' });
+      gsap.from('#heroScrollHint', { opacity: 0, duration: 1, delay: 1.5 });
+
+      // Hero scroll timeline: text fades out → dark overlay fades in → Michael reveal
+      const heroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#heroZoom',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.5
+        }
+      });
+      heroTl
+        .to('#heroIntro', { opacity: 0, y: -60, duration: 0.25 }, 0)
+        .to('#heroScrollHint', { opacity: 0, duration: 0.10 }, 0)
+        .to('#heroVideoBg', { scale: 1.12, duration: 0.85, ease: 'none' }, 0)
+        .to('#heroZoomOverlay', { opacity: 1, duration: 0.35, ease: 'power2.inOut' }, 0.30)
+        .to('#heroZoomReveal', { opacity: 1, scale: 1, duration: 0.30, ease: 'power2.out' }, 0.55);
+
+      // ===== MICHAEL FLOATING BUBBLE =====
+      const mCanvas = document.getElementById('michaelCanvas');
+      const mCtx = mCanvas.getContext('2d');
+      const totalFrames = 51;
+      const frameImages = [];
+      let mFramesLoaded = 0;
+
+      // Preload frames
+      for (let i = 1; i <= totalFrames; i++) {
+        const img = new Image();
+        img.src = `images/frames-clean/frame_${String(i).padStart(4,'0')}.png`;
+        img.onload = () => {
+          mFramesLoaded++;
+          if (mFramesLoaded === 1) {
+            mCanvas.width = img.width;
+            mCanvas.height = img.height;
+          }
+        };
+        frameImages.push(img);
+      }
+
+      let mCurrentFrame = -1;
+      function drawMichaelFrame(index) {
+        index = Math.max(0, Math.min(totalFrames - 1, index));
+        if (index === mCurrentFrame) return;
+        mCurrentFrame = index;
+        mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+        if (frameImages[index] && frameImages[index].complete) {
+          mCtx.drawImage(frameImages[index], 0, 0);
+        }
+      }
+
+      // Auto play frames in a loop
+      let mFrame = 0;
+      let mDirection = 1;
+      function animateMichael() {
+        drawMichaelFrame(mFrame);
+        mFrame += mDirection;
+        if (mFrame >= totalFrames - 1) mDirection = -1;
+        if (mFrame <= 0) mDirection = 1;
+      }
+      const mInterval = setInterval(animateMichael, 80);
+
+      // Show bubble after scrolling past hero
+      const bubble = document.getElementById('michaelBubble');
+      ScrollTrigger.create({
+        trigger: '.stats-section',
+        start: 'top 80%',
+        onEnter: () => bubble.classList.add('visible'),
+        onLeaveBack: () => bubble.classList.remove('visible')
+      });
+
+      // Close button
+      document.getElementById('michaelClose').addEventListener('click', (e) => {
+        e.stopPropagation();
+        bubble.classList.remove('visible');
+        clearInterval(mInterval);
+        bubble.style.display = 'none';
+      });
+
+      // Click speech bubble to scroll to contact
+      document.getElementById('michaelSpeech').addEventListener('click', () => {
+        lenis.scrollTo('#contact');
+      });
+    }
+
+    // ===== NAV =====
+    ScrollTrigger.create({
+      start: 80, end: 99999,
+      onEnter: () => document.getElementById('mainNav').classList.add('scrolled'),
+      onLeaveBack: () => document.getElementById('mainNav').classList.remove('scrolled')
+    });
+
+    // ===== MOBILE MENU =====
+    const hamburger = document.getElementById('navHamburger');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileOverlay.classList.toggle('open');
+      document.body.style.overflow = mobileOverlay.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ===== STATS =====
+    document.querySelectorAll('.stat-number').forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      gsap.from(el, {
+        textContent: 0, duration: 2.5, ease: 'power2.out',
+        snap: { textContent: 1 },
+        scrollTrigger: { trigger: el, start: 'top 85%' },
+        onUpdate() {
+          el.textContent = prefix + Math.ceil(parseFloat(el.textContent)).toLocaleString() + suffix;
+        }
+      });
+    });
+
+    // ===== COVERAGE STORYTELLING =====
+    const covSteps = gsap.utils.toArray('.coverage-step');
+    const covImgs = gsap.utils.toArray('.coverage-img');
+    const covDots = gsap.utils.toArray('.cov-dot');
+
+    const teamBubbles = gsap.utils.toArray('.team-bubble');
+    let activeTeamBubble = -1;
+
+    function activateCovStep(index) {
+      covSteps.forEach(s => s.classList.remove('active'));
+      covImgs.forEach(s => s.classList.remove('active'));
+      covDots.forEach(s => s.classList.remove('active'));
+      if (covSteps[index]) covSteps[index].classList.add('active');
+      if (covImgs[index]) covImgs[index].classList.add('active');
+      if (covDots[index]) covDots[index].classList.add('active');
+
+      // Show matching team member bubble
+      if (activeTeamBubble !== index) {
+        teamBubbles.forEach(b => b.classList.remove('visible'));
+        if (teamBubbles[index]) {
+          setTimeout(() => teamBubbles[index].classList.add('visible'), 150);
+        }
+        activeTeamBubble = index;
+      }
+    }
+
+    covSteps.forEach((_, i) => {
+      ScrollTrigger.create({
+        trigger: '#coverage',
+        start: () => `${(i / covSteps.length) * 100}% top`,
+        end: () => `${((i + 1) / covSteps.length) * 100}% top`,
+        onEnter: () => activateCovStep(i),
+        onEnterBack: () => activateCovStep(i)
+      });
+    });
+
+    gsap.to('#covFill', {
+      width: '100%', ease: 'none',
+      scrollTrigger: { trigger: '#coverage', start: 'top top', end: 'bottom bottom', scrub: true }
+    });
+
+    // Show/hide team bubbles and coverage nav
+    const covNav = document.querySelector('.coverage-nav');
+    ScrollTrigger.create({
+      trigger: '#coverage',
+      start: 'top 80%',
+      end: 'bottom 20%',
+      onEnter: () => covNav.classList.add('visible'),
+      onEnterBack: () => covNav.classList.add('visible'),
+      onLeave: () => { teamBubbles.forEach(b => b.classList.remove('visible')); activeTeamBubble = -1; covNav.classList.remove('visible'); },
+      onLeaveBack: () => { teamBubbles.forEach(b => b.classList.remove('visible')); activeTeamBubble = -1; covNav.classList.remove('visible'); }
+    });
+
+    // ===== SKIP SECTION BUTTON =====
+    const skipBtn = document.getElementById('skipSection');
+    let currentStickySection = null;
+    const stickySections = ['#heroZoom', '#coverage', '#hScrollWrap'];
+
+    stickySections.forEach(sel => {
+      const el = document.querySelector(sel);
+      if (!el) return;
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top top',
+        end: 'bottom bottom',
+        onEnter: () => { currentStickySection = el; skipBtn.classList.add('visible'); },
+        onEnterBack: () => { currentStickySection = el; skipBtn.classList.add('visible'); },
+        onLeave: () => { if (currentStickySection === el) { skipBtn.classList.remove('visible'); currentStickySection = null; } },
+        onLeaveBack: () => { if (currentStickySection === el) { skipBtn.classList.remove('visible'); currentStickySection = null; } }
+      });
+    });
+
+    skipBtn.addEventListener('click', () => {
+      if (currentStickySection) {
+        const end = currentStickySection.offsetTop + currentStickySection.offsetHeight + 10;
+        lenis.scrollTo(end, { duration: 1.2 });
+      }
+    });
+
+    // ===== FINANCIAL ADVANTAGE CARDS =====
+    gsap.utils.toArray('.adv-card').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: 1, delay: i * 0.12, ease: 'power2.out',
+        scrollTrigger: { trigger: '.advantage-grid', start: 'top 80%' }
+      });
+    });
+
+    // ===== LOCATIONS HORIZONTAL SCROLL =====
+    const hTrack = document.getElementById('hScrollTrack');
+    const hPanels = gsap.utils.toArray('.h-panel');
+    if (hPanels.length > 0) {
+      gsap.to(hTrack, {
+        x: () => -(hTrack.scrollWidth - window.innerWidth),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hScrollWrap',
+          pin: true,
+          scrub: 1,
+          snap: 1 / (hPanels.length - 1),
+          end: () => '+=' + (hTrack.scrollWidth - window.innerWidth),
+          invalidateOnRefresh: true
+        }
+      });
+    }
+
+    // ===== TEAM =====
+    // Featured card entrance
+    gsap.to('#teamFeatured', {
+      opacity: 1, y: 0, duration: 1.4, ease: 'power2.out',
+      scrollTrigger: { trigger: '#teamFeatured', start: 'top 85%' }
+    });
+    // Supporting team cards
+    gsap.utils.toArray('.team-card').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: 1, delay: i * 0.12, ease: 'power2.out',
+        scrollTrigger: { trigger: '.team-grid', start: 'top 85%' }
+      });
+    });
+
+    // ===== TESTIMONIAL =====
+    gsap.to('.testimonial-quote', {
+      opacity: 1, y: 0, duration: 1.4, ease: 'power2.out',
+      scrollTrigger: { trigger: '.testimonial-section', start: 'top 70%' }
+    });
+    gsap.to('.testimonial-author', {
+      opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power2.out',
+      scrollTrigger: { trigger: '.testimonial-section', start: 'top 70%' }
+    });
+
+    // ===== CTA =====
+    gsap.from('.cta-section h2', {
+      opacity: 0, y: 40, duration: 1.2, ease: 'power2.out',
+      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
+    });
+    gsap.from('.cta-section p', {
+      opacity: 0, y: 30, duration: 1, delay: 0.2, ease: 'power2.out',
+      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
+    });
+    gsap.from('.cta-buttons', {
+      opacity: 0, y: 20, duration: 0.8, delay: 0.4, ease: 'power2.out',
+      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
+    });
+
+    // ===== LOCATIONS INTRO REVEAL =====
+    gsap.from('.locations-intro .eyebrow', {
+      opacity: 0, y: 20, duration: 1, ease: 'power2.out',
+      scrollTrigger: { trigger: '.locations-intro', start: 'top 85%' }
+    });
+    gsap.from('.locations-intro h2', {
+      opacity: 0, y: 30, duration: 1.2, delay: 0.15, ease: 'power2.out',
+      scrollTrigger: { trigger: '.locations-intro', start: 'top 85%' }
+    });
+    gsap.from('.locations-intro p', {
+      opacity: 0, y: 20, duration: 1, delay: 0.3, ease: 'power2.out',
+      scrollTrigger: { trigger: '.locations-intro', start: 'top 85%' }
+    });
+
+    // ===== FAQ ANIMATION =====
+    gsap.utils.toArray('#faq details').forEach((d, i) => {
+      gsap.from(d, {
+        opacity: 0, y: 20, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
+        scrollTrigger: { trigger: '#faq', start: 'top 85%' }
+      });
+    });
+
+    // ===== BACK TO TOP BUTTON =====
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+      ScrollTrigger.create({
+        trigger: '#stats',
+        start: 'top top',
+        onEnter: () => backToTop.classList.add('visible'),
+        onLeaveBack: () => backToTop.classList.remove('visible')
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+
+    } // end bootApp
+
+    // Deferred scripts execute before DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', bootApp);
+  </script>
+</body>
+</html>
