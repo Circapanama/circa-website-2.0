@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Listings | Circa Panama Real Estate</title>
+  <meta name="description" content="Browse 40+ premium property listings across Panama. Villas, condos, penthouses, and beachfront homes in Playa Venao, Coco del Mar, Boquete, and more.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #2563EB;
+      --accent-rgb: 37,99,235;
+      --dark: #1E293B;
+      --dark-rgb: 30,41,59;
+      --gray: #64748B;
+      --light: #F1F5F9;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: #FFFFFF;
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;
+      padding: 1.2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(37,99,235,0.1);
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-back {
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gray);
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    .nav-back:hover { color: var(--accent); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 10rem 5vw 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F1F5F9 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -300px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--accent-rgb),0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -200px; left: -150px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--accent-rgb),0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ===== FILTER PILLS ===== */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      position: relative;
+      z-index: 2;
+    }
+    .filter-pill {
+      padding: 0.55rem 1.4rem;
+      border-radius: 100px;
+      border: 1.5px solid #E2E8F0;
+      background: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.01em;
+    }
+    .filter-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.04);
+    }
+    .filter-pill.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.3);
+    }
+
+    /* ===== RESULTS BAR ===== */
+    .results-bar {
+      padding: 1.5rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    .results-count {
+      font-size: 0.88rem;
+      color: var(--gray);
+      font-weight: 400;
+    }
+    .results-count strong {
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    /* ===== GRID ===== */
+    .listings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 3rem 5vw 5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      border: 1px solid #F1F5F9;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .card.visible {
+      animation: cardFadeIn 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(var(--dark-rgb), 0.1), 0 4px 20px rgba(var(--dark-rgb), 0.05);
+    }
+    .card.hidden {
+      display: none;
+    }
+
+    @keyframes cardFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-img {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/11;
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .card:hover .card-img img {
+      transform: scale(1.05);
+    }
+    .card-type {
+      position: absolute;
+      top: 0.8rem; left: 0.8rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+    .card-body {
+      padding: 1.4rem 1.5rem 1.6rem;
+    }
+    .card-location {
+      display: inline-block;
+      background: rgba(var(--accent-rgb), 0.08);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      border-radius: 100px;
+      margin-bottom: 0.7rem;
+    }
+    .card-name {
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      line-height: 1.25;
+    }
+    .card-price {
+      font-family: var(--font-body);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .card-meta {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.78rem;
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    .card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .card-meta svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.5;
+    }
+    .card-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 8px;
+      background: var(--dark);
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .card-btn:hover {
+      background: var(--accent);
+      box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.3);
+    }
+
+    /* ===== NO RESULTS ===== */
+    .no-results {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .no-results.show { display: block; }
+    .no-results h3 {
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .no-results p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      padding: 3rem 5vw;
+      border-top: 1px solid #F1F5F9;
+      color: var(--gray);
+      font-size: 0.82rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .listings-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 2.5rem 4vw 4rem;
+      }
+    }
+    @media (max-width: 640px) {
+      .listings-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2rem 5vw 3rem;
+      }
+      .hero {
+        padding: 8rem 5vw 3rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .filters {
+        gap: 0.45rem;
+      }
+      .filter-pill {
+        padding: 0.45rem 1rem;
+        font-size: 0.75rem;
+      }
+      .card-name {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Back to Home
+    </a>
+    <a href="index.html" class="nav-logo">
+      <img src="images/circa-logo-Photoroom.png" alt="Circa Panama">
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-eyebrow">Panama Property Portfolio</span>
+    <h1>Explore Our Listings</h1>
+    <p class="hero-sub">Discover handpicked properties across Panama's most sought-after locations. From oceanfront villas to modern city penthouses.</p>
+
+    <div class="filters">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="Playa Venao">Playa Venao</button>
+      <button class="filter-pill" data-filter="Coco del Mar">Coco del Mar</button>
+      <button class="filter-pill" data-filter="Casco Viejo">Casco Viejo</button>
+      <button class="filter-pill" data-filter="Boquete">Boquete</button>
+      <button class="filter-pill" data-filter="Coronado">Coronado</button>
+      <button class="filter-pill" data-filter="Pedasi">Pedasi</button>
+      <button class="filter-pill" data-filter="Bocas del Toro">Bocas del Toro</button>
+      <button class="filter-pill" data-filter="Panama City">Panama City</button>
+    </div>
+  </section>
+
+  <!-- RESULTS BAR -->
+  <div class="results-bar">
+    <span class="results-count">Showing <strong id="count">40</strong> properties</span>
+  </div>
+
+  <!-- GRID -->
+  <div class="listings-grid" id="grid">
+
+    <div class="no-results" id="noResults">
+      <h3>No properties found</h3>
+      <p>Try selecting a different region filter above.</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="card" data-region="Playa Venao">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop" alt="Casa Marejada" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Playa Venao</span>
+        <h3 class="card-name">Casa Marejada</h3>
+        <div class="card-price">$1,250,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>4 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>3,200 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card" data-region="Coco del Mar">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop" alt="Torre Pacifica Penthouse" loading="lazy">
+        <span class="card-type">Penthouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coco del Mar</span>
+        <h3 class="card-name">Torre Pacifica Penthouse</h3>
+        <div class="card-price">$2,100,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>5 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>4 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>4,800 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card" data-region="Casco Viejo">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Residencia Colonial" loading="lazy">
+        <span class="card-type">Townhouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Casco Viejo</span>
+        <h3 class="card-name">Residencia Colonial</h3>
+        <div class="card-price">$895,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2.5 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,400 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card" data-region="Boquete">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop" alt="Finca Los Quetzales" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Boquete</span>
+        <h3 class="card-name">Finca Los Quetzales</h3>
+        <div class="card-price">$675,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>4 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>3,600 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card" data-region="Coronado">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop" alt="Villa Sol y Mar" loading="lazy">
+        <span class="card-type">Beach House</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coronado</span>
+        <h3 class="card-name">Villa Sol y Mar</h3>
+        <div class="card-price">$485,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,100 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card" data-region="Pedasi">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop" alt="Casa Azuero" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Pedasi</span>
+        <h3 class="card-name">Casa Azuero</h3>
+        <div class="card-price">$395,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,000 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card" data-region="Bocas del Toro">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&h=400&fit=crop" alt="Isla Bastimentos Retreat" loading="lazy">
+        <span class="card-type">Beach House</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Bocas del Toro</span>
+        <h3 class="card-name">Isla Bastimentos Retreat</h3>
+        <div class="card-price">$725,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>4 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,800 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card" data-region="Panama City">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop" alt="Sky Tower Residence" loading="lazy">
+        <span class="card-type">Penthouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Panama City</span>
+        <h3 class="card-name">Sky Tower Residence</h3>
+        <div class="card-price">$2,500,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>5 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>5 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>5,500 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card" data-region="Playa Venao">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop" alt="Surf Cove Bungalow" loading="lazy">
+        <span class="card-type">Beach House</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Playa Venao</span>
+        <h3 class="card-name">Surf Cove Bungalow</h3>
+        <div class="card-price">$325,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,400 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card" data-region="Coco del Mar">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&h=400&fit=crop" alt="Marina Bay Condo" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coco del Mar</span>
+        <h3 class="card-name">Marina Bay Condo</h3>
+        <div class="card-price">$520,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,650 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card" data-region="Casco Viejo">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=600&h=400&fit=crop" alt="Heritage Loft" loading="lazy">
+        <span class="card-type">Studio</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Casco Viejo</span>
+        <h3 class="card-name">Heritage Loft</h3>
+        <div class="card-price">$189,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>1 Bed</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>1 Bath</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>720 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card" data-region="Boquete">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&h=400&fit=crop" alt="Cloud Forest Estate" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Boquete</span>
+        <h3 class="card-name">Cloud Forest Estate</h3>
+        <div class="card-price">$1,450,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>5 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>4 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>4,200 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="card" data-region="Coronado">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop" alt="Playa Blanca Condo" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coronado</span>
+        <h3 class="card-name">Playa Blanca Condo</h3>
+        <div class="card-price">$215,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,200 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="card" data-region="Pedasi">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&h=400&fit=crop" alt="Hacienda del Pacifico" loading="lazy">
+        <span class="card-type">Land</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Pedasi</span>
+        <h3 class="card-name">Hacienda del Pacifico</h3>
+        <div class="card-price">$125,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>12,000 sqft lot</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="card" data-region="Bocas del Toro">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&h=400&fit=crop" alt="Palapa Overwater Suite" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Bocas del Toro</span>
+        <h3 class="card-name">Palapa Overwater Suite</h3>
+        <div class="card-price">$545,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,900 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="card" data-region="Panama City">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&h=400&fit=crop" alt="Avenida Balboa Studio" loading="lazy">
+        <span class="card-type">Studio</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Panama City</span>
+        <h3 class="card-name">Avenida Balboa Studio</h3>
+        <div class="card-price">$149,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>1 Bed</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>1 Bath</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>580 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="card" data-region="Playa Venao">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=400&fit=crop" alt="Punta Venao Estate" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Playa Venao</span>
+        <h3 class="card-name">Punta Venao Estate</h3>
+        <div class="card-price">$1,890,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>6 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>5 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>5,200 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="card" data-region="Coco del Mar">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=600&h=400&fit=crop" alt="Costa Verde Towers" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coco del Mar</span>
+        <h3 class="card-name">Costa Verde Towers</h3>
+        <div class="card-price">$385,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,450 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 19 -->
+    <div class="card" data-region="Casco Viejo">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=600&h=400&fit=crop" alt="Plaza Catedral Penthouse" loading="lazy">
+        <span class="card-type">Penthouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Casco Viejo</span>
+        <h3 class="card-name">Plaza Catedral Penthouse</h3>
+        <div class="card-price">$1,150,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,900 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 20 -->
+    <div class="card" data-region="Boquete">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=600&h=400&fit=crop" alt="Rio Caldera Cottage" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Boquete</span>
+        <h3 class="card-name">Rio Caldera Cottage</h3>
+        <div class="card-price">$289,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>1 Bath</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,100 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 21 -->
+    <div class="card" data-region="Coronado">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&h=400&fit=crop" alt="Golf View Townhouse" loading="lazy">
+        <span class="card-type">Townhouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coronado</span>
+        <h3 class="card-name">Golf View Townhouse</h3>
+        <div class="card-price">$340,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2.5 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,850 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 22 -->
+    <div class="card" data-region="Pedasi">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=600&h=400&fit=crop" alt="Playa Los Destiladeros" loading="lazy">
+        <span class="card-type">Beach House</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Pedasi</span>
+        <h3 class="card-name">Playa Destiladeros Home</h3>
+        <div class="card-price">$475,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,200 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 23 -->
+    <div class="card" data-region="Bocas del Toro">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop" alt="Isla Colon Cabana" loading="lazy">
+        <span class="card-type">Beach House</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Bocas del Toro</span>
+        <h3 class="card-name">Isla Colon Cabana</h3>
+        <div class="card-price">$265,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>1 Bath</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,050 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 24 -->
+    <div class="card" data-region="Panama City">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=400&fit=crop" alt="Punta Pacifica Towers" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Panama City</span>
+        <h3 class="card-name">Punta Pacifica Towers</h3>
+        <div class="card-price">$680,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,100 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 25 -->
+    <div class="card" data-region="Playa Venao">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?w=600&h=400&fit=crop" alt="Venao Surf Lodge" loading="lazy">
+        <span class="card-type">Beach House</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Playa Venao</span>
+        <h3 class="card-name">Venao Surf Lodge</h3>
+        <div class="card-price">$198,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>1 Bath</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>950 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 26 -->
+    <div class="card" data-region="Coco del Mar">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=600&h=400&fit=crop" alt="Oceania Tower Residence" loading="lazy">
+        <span class="card-type">Penthouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coco del Mar</span>
+        <h3 class="card-name">Oceania Tower Residence</h3>
+        <div class="card-price">$1,750,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>4 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>4 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>4,100 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 27 -->
+    <div class="card" data-region="Casco Viejo">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=600&h=400&fit=crop" alt="San Felipe Townhome" loading="lazy">
+        <span class="card-type">Townhouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Casco Viejo</span>
+        <h3 class="card-name">San Felipe Townhome</h3>
+        <div class="card-price">$620,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2.5 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,300 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 28 -->
+    <div class="card" data-region="Boquete">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop&q=80" alt="Volcan Baru Vista" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Boquete</span>
+        <h3 class="card-name">Volcan Baru Vista</h3>
+        <div class="card-price">$895,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>4 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>3,400 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 29 -->
+    <div class="card" data-region="Coronado">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7a5a38?w=600&h=400&fit=crop" alt="Las Olas Beachfront" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coronado</span>
+        <h3 class="card-name">Las Olas Beachfront</h3>
+        <div class="card-price">$310,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,350 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 30 -->
+    <div class="card" data-region="Pedasi">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=600&h=400&fit=crop" alt="Refugio del Mar" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Pedasi</span>
+        <h3 class="card-name">Refugio del Mar</h3>
+        <div class="card-price">$560,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,400 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 31 -->
+    <div class="card" data-region="Bocas del Toro">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&h=400&fit=crop" alt="Starfish Beach Villa" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Bocas del Toro</span>
+        <h3 class="card-name">Starfish Beach Villa</h3>
+        <div class="card-price">$890,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>4 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>3,100 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 32 -->
+    <div class="card" data-region="Panama City">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=600&h=400&fit=crop" alt="Ocean Reef Towers" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Panama City</span>
+        <h3 class="card-name">Ocean Reef Towers</h3>
+        <div class="card-price">$445,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>2 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,600 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 33 -->
+    <div class="card" data-region="Playa Venao">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600047508788-786f3865b4b9?w=600&h=400&fit=crop" alt="Cambutal Hilltop Land" loading="lazy">
+        <span class="card-type">Land</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Playa Venao</span>
+        <h3 class="card-name">Cambutal Hilltop Land</h3>
+        <div class="card-price">$89,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>22,000 sqft lot</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 34 -->
+    <div class="card" data-region="Coco del Mar">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop&q=80" alt="The Residences at PH" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coco del Mar</span>
+        <h3 class="card-name">The Residences at PH</h3>
+        <div class="card-price">$295,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>1 Bed</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>1 Bath</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>900 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 35 -->
+    <div class="card" data-region="Casco Viejo">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop&q=80" alt="La Merced Boutique Flat" loading="lazy">
+        <span class="card-type">Condo</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Casco Viejo</span>
+        <h3 class="card-name">La Merced Boutique Flat</h3>
+        <div class="card-price">$350,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>2 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>1 Bath</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>1,100 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 36 -->
+    <div class="card" data-region="Boquete">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600&h=400&fit=crop" alt="Valle Escondido Estate" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Boquete</span>
+        <h3 class="card-name">Valle Escondido Estate</h3>
+        <div class="card-price">$1,100,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>5 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>4 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>4,500 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 37 -->
+    <div class="card" data-region="Coronado">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop&q=80" alt="Bijao Beach Penthouse" loading="lazy">
+        <span class="card-type">Penthouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Coronado</span>
+        <h3 class="card-name">Bijao Beach Penthouse</h3>
+        <div class="card-price">$775,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>3 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,700 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 38 -->
+    <div class="card" data-region="Pedasi">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600047509782-20d39509f26d?w=600&h=400&fit=crop" alt="Isla Iguana Homesite" loading="lazy">
+        <span class="card-type">Land</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Pedasi</span>
+        <h3 class="card-name">Isla Iguana Homesite</h3>
+        <div class="card-price">$98,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>15,000 sqft lot</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 39 -->
+    <div class="card" data-region="Bocas del Toro">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=600&h=400&fit=crop" alt="Red Frog Beach Estate" loading="lazy">
+        <span class="card-type">Villa</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Bocas del Toro</span>
+        <h3 class="card-name">Red Frog Beach Estate</h3>
+        <div class="card-price">$1,350,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>5 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>4 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>4,000 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+    <!-- 40 -->
+    <div class="card" data-region="Panama City">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=400&fit=crop" alt="Costa del Este Modern" loading="lazy">
+        <span class="card-type">Townhouse</span>
+      </div>
+      <div class="card-body">
+        <span class="card-location">Panama City</span>
+        <h3 class="card-name">Costa del Este Modern</h3>
+        <div class="card-price">$590,000</div>
+        <div class="card-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>4 Beds</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>3.5 Baths</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>2,850 sqft</span>
+        </div>
+        <a href="book.html" class="card-btn">View Details</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2026 Circa Panama Real Estate. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // === FILTER LOGIC ===
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.card[data-region]');
+    const countEl = document.getElementById('count');
+    const noResults = document.getElementById('noResults');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const filter = pill.dataset.filter;
+        let visible = 0;
+
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.region === filter) {
+            card.classList.remove('hidden');
+            visible++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        countEl.textContent = visible;
+        noResults.classList.toggle('show', visible === 0);
+
+        // Re-trigger animation for visible cards
+        document.querySelectorAll('.card:not(.hidden)').forEach((card, i) => {
+          card.classList.remove('visible');
+          card.style.animationDelay = `${i * 0.05}s`;
+          void card.offsetWidth; // force reflow
+          card.classList.add('visible');
+        });
+      });
+    });
+
+    // === SCROLL FADE-IN (Intersection Observer) ===
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const visibleCards = [...document.querySelectorAll('.card:not(.hidden)')];
+          const idx = visibleCards.indexOf(card);
+          card.style.animationDelay = `${(idx % 3) * 0.1}s`;
+          card.classList.add('visible');
+          observer.unobserve(card);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+  </script>
+
+</body>
+</html>
