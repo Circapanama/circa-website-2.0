@@ -134,31 +134,6 @@
     }
 
     /* ===== LOADER ===== */
-    .loader {
-      position: fixed; inset: 0; z-index: 100000;
-      background: #FFFFFF;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 2.5rem;
-    }
-    .loader.dismiss { animation: loaderWipe 0.8s cubic-bezier(0.77,0,0.175,1) forwards; }
-    @keyframes loaderWipe {
-      to { clip-path: inset(0 0 100% 0); }
-    }
-    .loader-letters { display: flex; gap: clamp(0.6rem,2vw,1.5rem); }
-    .loader-letter {
-      font-family: var(--font-display);
-      font-size: clamp(3rem,8vw,6rem);
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      opacity: 0; transform: translateY(50px);
-    }
-    .loader-bar { width: 180px; height: 1px; background: rgba(0,0,0,0.08); overflow: hidden; }
-    .loader-fill { height: 100%; width: 0%; background: var(--accent); transition: width 0.3s ease; }
-    .loader-tagline {
-      font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gray); opacity: 0;
-    }
-
     /* ===== NAV ===== */
     .nav {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;
@@ -219,9 +194,9 @@
     }
 
     /* ===== HERO VIDEO ===== */
-    .hero-zoom { height: 280vh; }
+    .hero-zoom { height: 100vh; }
     .hero-zoom-sticky {
-      position: sticky; top: 0; height: 100vh;
+      position: relative; height: 100vh;
       overflow: hidden;
       display: flex; align-items: center; justify-content: center;
     }
@@ -253,19 +228,6 @@
       max-width: 50ch; margin: 0 auto 2rem;
       text-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
-    .hero-intro .hero-pillars {
-      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-    .hero-pillar {
-      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: #fff; font-weight: 700;
-      padding: 6px 16px;
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 50px;
-      backdrop-filter: blur(4px);
-      background: rgba(255,255,255,0.08);
-    }
     .hero-scroll-hint {
       position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
       z-index: 3; color: rgba(255,255,255,0.6);
@@ -281,128 +243,105 @@
       0%,100% { opacity: 0.2; transform: scaleY(0.4); transform-origin: top; }
       50% { opacity: 1; transform: scaleY(1); }
     }
-    .hero-zoom-overlay {
-      position: absolute; inset: 0; z-index: 2;
-      background: rgba(15,23,42,0.85);
-      opacity: 0;
-    }
-    .hero-zoom-reveal {
-      position: absolute; opacity: 0; transform: scale(0.85);
-      z-index: 4; color: #fff;
-      max-width: 750px; padding: 2.5rem 3rem;
-      display: flex; align-items: center; gap: 2.5rem;
-    }
-    .hero-reveal-portrait {
-      flex-shrink: 0; width: 150px; height: 150px;
-      border-radius: 50%; overflow: hidden;
-      border: 3px solid rgba(255,255,255,0.5);
-      box-shadow: 0 10px 60px rgba(0,0,0,0.5), 0 0 0 8px rgba(255,255,255,0.08);
-    }
-    .hero-reveal-portrait img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-reveal-text { text-align: left; }
-    .hero-reveal-text .hero-reveal-name {
-      font-family: var(--font-display); font-size: 1.1rem;
-      color: #fff; margin-bottom: 0.2rem;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
-    .hero-reveal-text .hero-reveal-role {
-      font-size: 0.65rem; letter-spacing: 0.15em;
-      text-transform: uppercase; color: rgba(255,255,255,0.8);
-      margin-bottom: 1rem; font-weight: 600;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-    .hero-zoom-reveal h2 { color: #fff; margin-bottom: 0.8rem; font-size: clamp(1.4rem,3vw,2rem); text-align: left; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
-    .hero-zoom-reveal p { color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.6; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-    .hero-zoom-reveal .btn { margin-top: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
 
-    @media (max-width: 640px) {
-      .hero-zoom-reveal { flex-direction: column; text-align: center; gap: 1.5rem; }
-      .hero-reveal-text { text-align: center; }
-      .hero-zoom-reveal h2 { text-align: center; }
-      .hero-reveal-portrait { width: 110px; height: 110px; }
-    }
-
-    /* ===== PLAYA VENAO SECTION ===== */
+    /* ===== PLAYA VENAO SPLIT LAYOUT ===== */
     .venao-section {
       position: relative; z-index: 2;
-      padding: 8rem 5vw;
-      background: #FAFAF8;
-      overflow: hidden;
+      background: #FFFFFF;
+      padding: 6rem 5vw;
     }
-    .venao-section::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.15), transparent);
-    }
-    .venao-inner {
-      max-width: 1200px; margin: 0 auto;
+    .venao-split {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 45% 1fr;
       gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
       align-items: center;
     }
-    .venao-images {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 1rem;
-      height: 500px;
-    }
-    .venao-img {
-      border-radius: 12px;
+    .venao-image-wrap {
+      border-radius: 20px;
       overflow: hidden;
-      position: relative;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+      aspect-ratio: 4/5;
     }
-    .venao-img img {
+    .venao-image-wrap img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      transition: transform 0.6s ease;
     }
-    .venao-img:hover img { transform: scale(1.05); }
-    .venao-img:first-child {
-      grid-row: 1 / 3;
-      border-radius: 16px;
+    .venao-image-wrap:hover img { transform: scale(1.03); }
+    .venao-content {
+      position: relative;
     }
-    .venao-content { padding: 1rem 0; }
     .venao-content .venao-tag {
       font-family: var(--font-body);
       font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
+      letter-spacing: 0.25em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 1.5rem;
       display: block;
     }
     .venao-content h2 {
       color: var(--dark); margin-bottom: 1.5rem;
-      line-height: 1.15;
+      line-height: 1.1;
+      font-size: clamp(2rem, 4vw, 3.2rem);
     }
     .venao-content p {
       color: var(--gray); font-size: 1rem;
-      line-height: 1.8; margin-bottom: 1.5rem;
-      max-width: 48ch;
+      line-height: 1.8; margin-bottom: 1rem;
+      max-width: 55ch;
     }
-    .venao-highlights {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      margin-top: 2rem; margin-bottom: 2.5rem;
+    .venao-stats {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1rem; margin: 2rem 0;
     }
-    .venao-highlight {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.82rem; color: var(--dark);
-      font-weight: 500;
-      padding: 8px 16px;
-      background: #fff;
-      border-radius: 50px;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    .venao-stat {
+      background: #F8FAFC;
+      border: 1px solid rgba(37,99,235,0.08);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      text-align: center;
     }
-    .venao-highlight svg {
-      width: 16px; height: 16px;
+    .venao-stat-value {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--accent);
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+    }
+    .venao-stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray);
+    }
+    .venao-reasons {
+      list-style: none; padding: 0; margin: 1.5rem 0 2rem;
+    }
+    .venao-reasons li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.6rem 0;
+      font-size: 0.92rem; color: #374151;
+      line-height: 1.5;
+    }
+    .venao-reasons li svg {
+      width: 20px; height: 20px;
       color: var(--accent); flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .venao-section .btn {
+      background: var(--accent); color: #fff;
+    }
+    .venao-section .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(var(--accent-rgb),0.3);
     }
     @media (max-width: 900px) {
-      .venao-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .venao-images { height: 350px; }
+      .venao-split {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .venao-image-wrap { aspect-ratio: 16/10; }
     }
 
     /* ===== MICHAEL FLOATING BUBBLE ===== */
@@ -547,17 +486,11 @@
       background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
     }
 
-    /* Gradient bridge: tinted to white */
-    .dark-to-light {
-      position: relative; z-index: 3;
-      height: 120px;
-      background: linear-gradient(180deg, #F1F5F9 0%, #FFFFFF 100%);
-    }
-    /* Gradient bridge: white to tinted */
+    /* Gradient bridge: white to dark navy */
     .light-to-dark {
       position: relative; z-index: 3;
       height: 120px;
-      background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+      background: linear-gradient(180deg, #FFFFFF 0%, #1E293B 100%);
     }
 
     /* ===== STATS ===== */
@@ -588,146 +521,106 @@
     }
     @media (max-width: 768px) { .stats-row { grid-template-columns: repeat(2,1fr); gap: 3rem; } }
 
-    /* ===== COVERAGE / STORYTELLING ===== */
-    .coverage { height: 350vh; background: #FFFFFF; }
-    .coverage-sticky {
-      position: sticky; top: 0; height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;
-      overflow: hidden;
+    /* ===== SERVICES GRID ===== */
+    .services-section {
+      padding: 8rem 5vw;
+      background: #1E293B;
+      position: relative; z-index: 2;
     }
-    .coverage-visual { position: relative; }
-    .coverage-img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0;
-      transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    .services-section::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.25), transparent);
     }
-    .coverage-img.active { opacity: 1; }
-    .coverage-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(270deg, rgba(0,0,0,0.15) 0%, #FFFFFF 100%);
-      z-index: 1;
+    .services-header {
+      text-align: center; margin-bottom: 4rem;
     }
-    .coverage-text {
-      display: flex; align-items: center; justify-content: center;
-      padding: 5vw 5vw 5vw 4vw; position: relative; background: #FFFFFF;
+    .services-header h2 { color: #FFFFFF; }
+    .services-header p { color: rgba(255,255,255,0.6); max-width: 50ch; margin: 1.5rem auto 0; font-size: 1rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    .coverage-text::before {
-      content: '';
-      position: absolute; top: 50%; right: 0;
-      width: 1px; height: 40%;
-      transform: translateY(-50%);
-      background: linear-gradient(180deg, transparent, rgba(var(--accent-rgb),0.12), transparent);
-    }
-    .coverage-step {
-      position: absolute; opacity: 0; transform: translateY(40px);
-      transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
-      max-width: 480px;
-      padding: 2.5rem 2rem;
+    /* 4 cards in 2x2 grid, no special last-child */
+    .service-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
+      padding: 2.5rem 2rem;
+      opacity: 0; transform: translateY(24px);
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease, border-color 0.3s ease;
     }
-    .coverage-step.active {
-      opacity: 1; transform: translateY(0);
-      background: linear-gradient(135deg, rgba(var(--accent-rgb),0.02) 0%, transparent 60%);
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+      border-color: rgba(37,99,235,0.3);
+      background: rgba(255,255,255,0.08);
     }
-    .coverage-step h2 {
-      color: var(--dark); margin-bottom: 1.25rem;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      line-height: 1.15;
+    .service-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: rgba(37,99,235,0.15);
+      color: #60A5FA;
+      border-radius: 10px;
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 400;
+      margin-bottom: 1.2rem;
     }
-    .coverage-step p {
-      color: var(--gray); font-size: 1.05rem; line-height: 1.8;
-      max-width: 42ch;
+    .service-card h3 {
+      color: #FFFFFF; margin-bottom: 0.75rem;
+      font-size: 1.3rem;
     }
-    .coverage-tag {
-      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: #fff; margin-bottom: 1.5rem; font-weight: 700;
-      display: inline-block;
-      padding: 5px 14px;
-      background: var(--accent);
-      border-radius: 50px;
+    .service-card p {
+      color: rgba(255,255,255,0.6); font-size: 0.92rem;
+      line-height: 1.7; margin-bottom: 1.5rem;
     }
-    .coverage-cta {
+    .service-link {
       display: inline-flex; align-items: center; gap: 0.3rem;
-      margin-top: 2rem;
-      font-size: 0.85rem; font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.03em;
-      transition: gap 0.3s ease, color 0.3s ease;
-    }
-    .coverage-cta:hover { gap: 0.6rem; color: var(--dark); }
-    .coverage-nav {
-      position: fixed; right: 12px; top: 50%; transform: translateY(-50%);
-      display: flex; flex-direction: column; gap: 12px; z-index: 99995;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .coverage-nav.visible { opacity: 1; pointer-events: all; }
-    .cov-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      border: 1.5px solid var(--gray); background: transparent;
-      cursor: pointer; transition: all 0.3s ease; padding: 0;
-    }
-    .cov-dot.active { background: var(--accent); border-color: var(--accent); transform: scale(1.4); }
-
-    /* Skip section button — below nav dots on right edge */
-    .skip-section {
-      position: fixed; right: 4px; top: calc(50% + 60px); z-index: 99996;
-      display: flex; align-items: center; gap: 4px;
-      background: transparent; border: none;
-      cursor: pointer;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-      font-size: 0.55rem; font-weight: 600;
-      color: var(--accent); letter-spacing: 0.05em;
+      font-size: 0.8rem; font-weight: 700;
+      color: #60A5FA;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      padding: 4px 6px;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
+      transition: gap 0.3s ease;
     }
-    .skip-section.visible {
-      opacity: 1; pointer-events: all;
-    }
-    .skip-section:hover { color: var(--dark); }
-    .skip-arrow {
-      font-size: 0.7rem; color: var(--accent);
-      transition: color 0.3s ease;
-      writing-mode: horizontal-tb;
-    }
-    .skip-section:hover .skip-arrow { color: var(--dark); }
-
-    .coverage-progress { position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: rgba(0,0,0,0.06); z-index: 5; }
-    .coverage-progress-fill { height: 100%; width: 0%; background: var(--accent); }
-    @media (max-width: 768px) {
-      .coverage-sticky { grid-template-columns: 1fr; }
-      .coverage-visual { height: 40vh; }
-      .coverage-text { min-height: 60vh; }
-      .coverage-nav { flex-direction: row; bottom: 1.5rem; right: 50%; transform: translateX(50%); top: auto; position: fixed; }
+    .service-link:hover { gap: 0.6rem; }
+    @media (max-width: 640px) {
+      .services-grid { grid-template-columns: 1fr; }
+      /* single column on mobile */
     }
 
     /* ===== FINANCIAL ADVANTAGE ===== */
     .advantage-section {
-      background: var(--light);
+      background: #1E293B;
       padding: 6rem 5vw;
       position: relative; z-index: 2;
     }
     .advantage-header { text-align: center; margin-bottom: 5rem; }
-    .advantage-header h2 { color: var(--dark); }
-    .advantage-header p { color: #6b7280; max-width: 50ch; margin: 1.5rem auto 0; font-size: 1.05rem; }
+    .advantage-header h2 { color: #FFFFFF; }
+    .advantage-header p { color: rgba(255,255,255,0.6); max-width: 50ch; margin: 1.5rem auto 0; font-size: 1.05rem; }
     .advantage-grid {
       display: grid; grid-template-columns: repeat(3,1fr);
       gap: 2rem; max-width: 1100px; margin: 0 auto;
     }
     .adv-card {
-      background: #fff;
+      background: rgba(255,255,255,0.05);
       border-radius: 16px;
       padding: 3rem 2.5rem;
-      border: 1px solid rgba(0,0,0,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       opacity: 0; transform: translateY(30px);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .adv-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(37,99,235,0.3);
     }
     .adv-value {
       font-family: var(--font-display);
       font-size: clamp(2.5rem,5vw,3.5rem);
-      color: var(--dark);
+      color: #FFFFFF;
       line-height: 1;
       margin-bottom: 0.25rem;
     }
@@ -735,16 +628,16 @@
     .adv-label {
       font-size: 0.85rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--dark); margin-bottom: 0.5rem;
+      color: #FFFFFF; margin-bottom: 0.5rem;
     }
     .adv-compare {
-      font-size: 0.8rem; color: #9ca3af;
+      font-size: 0.8rem; color: rgba(255,255,255,0.4);
       margin-bottom: 1.5rem; font-style: italic;
     }
-    .adv-card p { color: #6b7280; font-size: 0.9rem; line-height: 1.6; }
+    .adv-card p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.6; }
     .advantage-note {
       text-align: center; margin-top: 3rem;
-      font-size: 0.8rem; color: #9ca3af;
+      font-size: 0.8rem; color: rgba(255,255,255,0.4);
       max-width: 55ch; margin-left: auto; margin-right: auto;
     }
     @media (max-width: 1024px) { .advantage-grid { grid-template-columns: repeat(2,1fr); } }
@@ -884,32 +777,33 @@
 
     /* ===== TESTIMONIAL ===== */
     .testimonial-wrapper {
-      background: #F8FAFC;
+      background: #1E293B;
       position: relative;
     }
     .testimonial-wrapper::before {
       content: ''; position: absolute; top: 0; left: 50%;
       transform: translateX(-50%);
       width: 30%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.25), transparent);
     }
     .testimonial-section {
       padding: 10rem 5vw; text-align: center;
       max-width: 900px; margin: 0 auto;
     }
+    .testimonial-section .eyebrow { color: var(--accent); }
     .testimonial-quote {
       font-family: var(--font-display); font-style: italic;
       font-size: clamp(1.4rem,2.8vw,2.2rem);
-      line-height: 1.5; color: var(--dark);
+      line-height: 1.5; color: #FFFFFF;
       margin-bottom: 3rem;
       opacity: 0; transform: translateY(30px);
     }
     .testimonial-author {
       font-size: 0.8rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--gray);
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
       opacity: 0; transform: translateY(20px);
     }
-    .testimonial-author strong { color: var(--accent); display: block; margin-bottom: 0.25rem; font-weight: 600; }
+    .testimonial-author strong { color: #60A5FA; display: block; margin-bottom: 0.25rem; font-weight: 600; }
 
     /* ===== TEAM ===== */
     .team-section {
@@ -1077,17 +971,17 @@
     /* ===== CTA ===== */
     .cta-section {
       text-align: center; padding: 10rem 5vw 6rem;
-      background: #F8FAFC;
+      background: #1E293B;
       position: relative;
     }
     .cta-section::before {
       content: ''; position: absolute; top: 0; left: 50%;
       transform: translateX(-50%);
       width: 30%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.1), transparent);
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.25), transparent);
     }
-    .cta-section h2 { color: var(--dark); margin-bottom: 1.5rem; }
-    .cta-section p { color: var(--gray); max-width: 50ch; margin: 0 auto 3rem; font-size: 1.05rem; }
+    .cta-section h2 { color: #FFFFFF; margin-bottom: 1.5rem; }
+    .cta-section p { color: rgba(255,255,255,0.6); max-width: 50ch; margin: 0 auto 3rem; font-size: 1.05rem; }
     .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
     .footer-bar {
@@ -1132,6 +1026,186 @@
     }
     .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
     .back-to-top:hover { transform: translateY(-2px); }
+
+    /* ===== PAST PROJECTS (SOLD & DELIVERED) ===== */
+    .past-projects-section {
+      padding: 8rem 5vw;
+      background: #1E293B;
+      position: relative; z-index: 2;
+    }
+    .past-projects-section::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.25), transparent);
+    }
+    .past-projects-header {
+      text-align: center; margin-bottom: 4rem;
+    }
+    .past-projects-header h2 { color: #FFFFFF; }
+    .past-projects-header p { color: rgba(255,255,255,0.6); max-width: 50ch; margin: 1.5rem auto 0; font-size: 1rem; }
+    .past-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .past-project-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      opacity: 0; transform: translateY(24px);
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
+    }
+    .past-project-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
+    }
+    .past-project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.08);
+    }
+    .past-project-img {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    .past-project-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      filter: saturate(0.85);
+    }
+    .past-project-card:hover .past-project-img img { transform: scale(1.06); }
+    .past-project-badge {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 14px;
+      background: rgba(30,41,59,0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 50px;
+      color: #fff;
+    }
+    .past-project-body {
+      padding: 1.25rem 1.25rem 1.5rem;
+    }
+    .past-project-location {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .past-project-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .past-project-price {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+    .past-project-label {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      letter-spacing: 0.03em;
+    }
+    @media (max-width: 900px) { .past-projects-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .past-projects-grid { grid-template-columns: 1fr; } }
+
+    /* ===== DEVELOPER PARTNERS ===== */
+    /* Partners section removed */
+
+    /* ===== CRYPTO SECTION ===== */
+    .crypto-section {
+      padding: 8rem 5vw;
+      background: #FFFFFF;
+      position: relative; z-index: 2;
+      overflow: hidden;
+    }
+    .crypto-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .crypto-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+    }
+    .crypto-content .eyebrow { color: var(--accent); }
+    .crypto-content h2 {
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+    .crypto-content p {
+      color: var(--gray);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 50ch;
+      margin-bottom: 2.5rem;
+    }
+    .crypto-content .btn {
+      background: #2563EB;
+      color: #fff;
+    }
+    .crypto-features {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .crypto-feature {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: #F8FAFC;
+      border: 1px solid rgba(37,99,235,0.08);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.3s ease;
+    }
+    .crypto-feature:hover {
+      border-color: rgba(37,99,235,0.25);
+    }
+    .crypto-feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(37,99,235,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+    .crypto-feature-text h4 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+    .crypto-feature-text p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.5;
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .crypto-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
   </style>
 
   <!-- JSON-LD Structured Data -->
@@ -1246,18 +1320,6 @@
   <div class="scroll-progress" id="scrollProgress"></div>
   <canvas id="threeCanvas"></canvas>
 
-  <!-- LOADER -->
-  <div class="loader" id="loader">
-    <div class="loader-letters" id="loaderLetters">
-      <span class="loader-letter">C</span>
-      <span class="loader-letter">I</span>
-      <span class="loader-letter">R</span>
-      <span class="loader-letter">C</span>
-      <span class="loader-letter">A</span>
-    </div>
-    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-    <div class="loader-tagline" id="loaderTagline">Closing the Circle Between Lifestyle, Investment &amp; Community</div>
-  </div>
 
   <!-- NAV -->
   <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -1299,151 +1361,351 @@
            alt="Playa Venao Panama beachfront"
            style="opacity:0; pointer-events:none;">
       <div class="hero-zoom-gradient"></div>
-      <div class="hero-zoom-overlay" id="heroZoomOverlay"></div>
       <div class="hero-intro" id="heroIntro">
         <h1 id="heroTitle">Your Complete Panama Partner</h1>
-        <div class="hero-pillars">
-          <span class="hero-pillar">Buy / Sell</span>
-          <span class="hero-pillar">Invest</span>
-          <span class="hero-pillar">Relocate</span>
-          <span class="hero-pillar">VIP / Off Market Access</span>
-        </div>
         <p>Personalized guidance, access to on and off market opportunities. We pair local knowledge with investors so you can buy, sell, invest, and relocate with confidence.</p>
-      </div>
-      <div class="hero-zoom-reveal" id="heroZoomReveal">
-        <div class="hero-reveal-portrait">
-          <img src="images/michael.jpeg" alt="Michael Rudasveski">
-        </div>
-        <div class="hero-reveal-text">
-          <div class="hero-reveal-name">Michael Rudasveski</div>
-          <div class="hero-reveal-role">Founder &amp; CEO, Circa Panama</div>
-          <h2>I'll Guide You Through Every Step</h2>
-          <p>Property, legal, financial, relocation. I built Circa so you'd never have to navigate Panama alone.</p>
-          <a href="book.html" class="btn">Book a Call With Michael</a>
-        </div>
+        <a href="book.html" class="btn" style="margin-top:0.5rem;">Book a Free Consultation</a>
       </div>
       <div class="hero-scroll-hint" id="heroScrollHint">Scroll to explore</div>
     </div>
   </section>
 
-  <!-- PLAYA VENAO INFO -->
+  <!-- PLAYA VENAO SPLIT LAYOUT -->
   <section class="venao-section" id="venaoInfo">
-    <div class="venao-inner">
-      <div class="venao-images">
-        <div class="venao-img">
-          <img src="images/hero-playa-venao.jpg" alt="Aerial view of Playa Venao coastline" loading="lazy">
-        </div>
-        <div class="venao-img">
-          <img src="images/hero-playa-venao.jpg" alt="Playa Venao surf break" loading="lazy">
-        </div>
-        <div class="venao-img">
-          <img src="images/hero-playa-venao.jpg" alt="Playa Venao beachfront living" loading="lazy">
-        </div>
+    <div class="venao-split">
+      <div class="venao-image-wrap">
+        <img src="images/hero-playa-venao.jpg" alt="Playa Venao Panama coastline aerial view" loading="lazy">
       </div>
       <div class="venao-content">
         <span class="venao-tag">Featured Destination</span>
-        <h2>Playa Venao</h2>
-        <p>Tucked along Panama's Pacific coast on the Azuero Peninsula, Playa Venao is a crescent-shaped bay known for world-class surf breaks, untouched nature, and a tight-knit community of expats and locals.</p>
-        <p>Once a hidden gem, Venao is now one of the fastest-growing coastal destinations in Central America — attracting investors, digital nomads, and families seeking an authentic beach lifestyle with real upside.</p>
-        <div class="venao-highlights">
-          <span class="venao-highlight">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
-            Year-Round Surf
-          </span>
-          <span class="venao-highlight">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 0h.008v.008h-.008V7.5Z"/></svg>
-            Growing Infrastructure
-          </span>
-          <span class="venao-highlight">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/></svg>
-            High Appreciation
-          </span>
-          <span class="venao-highlight">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
-            Expat Community
-          </span>
-          <span class="venao-highlight">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
-            Tax-Friendly
-          </span>
+        <h2>Why Playa Venao?</h2>
+        <p>Tucked along Panama's Pacific coast on the Azuero Peninsula, Playa Venao is a crescent shaped bay rapidly becoming Central America's most sought after coastal investment. Here's why smart investors are moving now.</p>
+
+        <div class="venao-stats">
+          <div class="venao-stat">
+            <div class="venao-stat-value">15%+</div>
+            <div class="venao-stat-label">Annual Appreciation</div>
+          </div>
+          <div class="venao-stat">
+            <div class="venao-stat-value">$180K</div>
+            <div class="venao-stat-label">Starting From</div>
+          </div>
+          <div class="venao-stat">
+            <div class="venao-stat-value">45 min</div>
+            <div class="venao-stat-label">Flight from Panama City</div>
+          </div>
+          <div class="venao-stat">
+            <div class="venao-stat-value">0%</div>
+            <div class="venao-stat-label">Capital Gains Tax</div>
+          </div>
         </div>
+
+        <ul class="venao-reasons">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            <span><strong>Early stage opportunity</strong> with limited beachfront supply and surging demand from expats, surfers, and digital nomads</span>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            <span><strong>Dual income potential</strong> with short term vacation rentals yielding 8%+ and long term leases for steady cash flow</span>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            <span><strong>Infrastructure boom</strong> with new roads, boutique hotels, restaurants, and coworking spaces transforming the area</span>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            <span><strong>Lifestyle + investment</strong> with world class surf, nature reserves, and a welcoming expat community already in place</span>
+          </li>
+        </ul>
+
         <a href="book.html" class="btn">Explore Venao Properties</a>
       </div>
     </div>
   </section>
 
 
-  <!-- COVERAGE STORYTELLING -->
-  <section class="coverage" id="coverage">
-    <div class="coverage-sticky">
-      <div class="coverage-text">
-        <div class="coverage-step active" data-step="0">
-          <div class="coverage-tag">01 &mdash; Buy / Sell</div>
-          <h2>Discover &amp; Maximize Value</h2>
-          <p>Discover your new investment property in Panama. Maximize your property's value with strategic management and our extensive network. We work hand in hand with trusted local developers to offer the best options in the market.</p>
-          <a href="book.html" class="coverage-cta">Get Started &rarr;</a>
-        </div>
-        <div class="coverage-step" data-step="1">
-          <div class="coverage-tag">02 &mdash; Invest</div>
-          <h2>Curated Opportunities</h2>
-          <p>Curated investment opportunities. Joint ventures, local developments, and exclusive real estate projects. Our discreet investor network gives you access to deals that never hit the public market.</p>
-          <a href="book.html" class="coverage-cta">Explore Investments &rarr;</a>
-        </div>
-        <div class="coverage-step" data-step="2">
-          <div class="coverage-tag">03 &mdash; Relocate</div>
-          <h2>Easy Transition to Panama</h2>
-          <p>Easy transition to your new life in Panama with complete relocation support. From visa processing to community integration, we manage every detail so the move feels effortless.</p>
-          <a href="book.html" class="coverage-cta">Plan Your Move &rarr;</a>
-        </div>
-        <div class="coverage-step" data-step="3">
-          <div class="coverage-tag">04 &mdash; Legal Support</div>
-          <h2>Trusted Partners at Every Step</h2>
-          <p>Trusted legal partners and local experts, supporting you at every step of your investment process and providing continuous guidance throughout. Title searches, contracts, residency, corporate structuring.</p>
-          <a href="book.html" class="coverage-cta">Learn More &rarr;</a>
-        </div>
-        <div class="coverage-step" data-step="4">
-          <div class="coverage-tag">05 &mdash; VIP Access</div>
-          <h2>Off Market Opportunities</h2>
-          <p>We pair local knowledge with investors, offering clear guidance and legal support so our clients can buy, sell, invest, and relocate with confidence. Access exclusive off market deals through our private network.</p>
-          <a href="book.html" class="coverage-cta">Request Access &rarr;</a>
-        </div>
+  <!-- SERVICES GRID -->
+  <section class="services-section" id="coverage">
+    <div class="services-header">
+      <span class="eyebrow">What We Do</span>
+      <h2>Full Service Real Estate</h2>
+      <p>From property search to legal support, we handle every aspect of your Panama journey so you can focus on living.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-badge">01</div>
+        <h3>Buy &amp; Sell</h3>
+        <p>Discover your ideal property or maximize your sale value. We work with trusted local developers and leverage our network to find the best opportunities on the market.</p>
+        <a href="book.html" class="service-link">Get Started &rarr;</a>
       </div>
-      <div class="coverage-visual">
-        <img class="coverage-img active" data-step="0"
-             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80"
-             alt="Luxury beachfront property for sale in Panama with ocean views" loading="lazy">
-        <img class="coverage-img" data-step="1"
-             src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80"
-             alt="Investment advisory meeting for Panama real estate opportunities" loading="lazy">
-        <img class="coverage-img" data-step="2"
-             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80"
-             alt="Panama City skyline showcasing modern urban development" loading="lazy">
-        <img class="coverage-img" data-step="3"
-             src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=80"
-             alt="Legal consultation and contract review for Panama property transactions" loading="lazy">
-        <img class="coverage-img" data-step="4"
-             src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80"
-             alt="Exclusive luxury villa with private pool in Panama" loading="lazy">
-        <div class="coverage-img-overlay"></div>
+      <div class="service-card">
+        <div class="service-badge">02</div>
+        <h3>Invest</h3>
+        <p>Curated investment opportunities including joint ventures, local developments, and exclusive projects. Our discreet investor network gives you access to deals that never go public.</p>
+        <a href="book.html" class="service-link">Explore Investments &rarr;</a>
       </div>
-      <div class="coverage-nav">
-        <button class="cov-dot active" data-step="0" aria-label="Property"></button>
-        <button class="cov-dot" data-step="1" aria-label="Legal"></button>
-        <button class="cov-dot" data-step="2" aria-label="Financial"></button>
-        <button class="cov-dot" data-step="3" aria-label="Relocation"></button>
-        <button class="cov-dot" data-step="4" aria-label="Lifestyle"></button>
+      <div class="service-card">
+        <div class="service-badge">03</div>
+        <h3>Relocate</h3>
+        <p>Complete relocation support from visa processing and shipping to schools, healthcare, and community integration. We manage every detail so the move feels effortless.</p>
+        <a href="book.html" class="service-link">Plan Your Move &rarr;</a>
       </div>
-      <div class="coverage-progress"><div class="coverage-progress-fill" id="covFill"></div></div>
+      <div class="service-card">
+        <div class="service-badge">04</div>
+        <h3>Legal Support</h3>
+        <p>Trusted legal partners supporting you at every step. Title searches, contracts, residency applications, and corporate structuring handled by experienced professionals.</p>
+        <a href="book.html" class="service-link">Learn More &rarr;</a>
+      </div>
     </div>
   </section>
 
-  <!-- GRADIENT BRIDGE: Dark → Light -->
-  <div class="dark-to-light"></div>
+  <!-- FEATURED LISTINGS -->
+  <section class="locations-intro" id="locations">
+    <span class="eyebrow">Available Now</span>
+    <h2>Featured Properties</h2>
+    <p>Handpicked properties across Panama's most desirable locations. From beachfront villas to mountain retreats, all available now.</p>
+  </section>
+  <div class="listings-section" id="listingsGrid">
+    <div class="listings-grid">
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Casa del Sol Beachfront Villa in Playa Venao" loading="lazy">
+          <span class="listing-type">Beachfront Villa</span>
+          <span class="listing-price-badge">$485,000</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-location">Playa Venao</div>
+          <div class="listing-name">Casa del Sol Beachfront Villa</div>
+          <div class="listing-meta">
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>3 Beds</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
+            <span>2,400 sqft</span>
+          </div>
+          <a href="book.html" class="listing-cta">View Details</a>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Olas Surf Residence in Playa Venao" loading="lazy">
+          <span class="listing-type">Surf Residence</span>
+          <span class="listing-price-badge">$289,000</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-location">Playa Venao</div>
+          <div class="listing-name">Olas Surf Residence</div>
+          <div class="listing-meta">
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>2 Beds</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>1 Bath</span>
+            <span>1,200 sqft</span>
+          </div>
+          <a href="book.html" class="listing-cta">View Details</a>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Luxury Penthouse in Panama City" loading="lazy">
+          <span class="listing-type">Luxury Penthouse</span>
+          <span class="listing-price-badge">$1,200,000</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-location">Panama City</div>
+          <div class="listing-name">Torre Pacifica Sky Penthouse</div>
+          <div class="listing-meta">
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>4 Beds</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>3.5 Baths</span>
+            <span>3,800 sqft</span>
+          </div>
+          <a href="book.html" class="listing-cta">View Details</a>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=80" alt="Waterfront Apartment in Coco del Mar" loading="lazy">
+          <span class="listing-type">Waterfront Apartment</span>
+          <span class="listing-price-badge">$650,000</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-location">Coco del Mar</div>
+          <div class="listing-name">Marina Bay Waterfront Residence</div>
+          <div class="listing-meta">
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>3 Beds</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
+            <span>2,100 sqft</span>
+          </div>
+          <a href="book.html" class="listing-cta">View Details</a>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Mountain Retreat in Boquete" loading="lazy">
+          <span class="listing-type">Mountain Retreat</span>
+          <span class="listing-price-badge">$395,000</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-location">Boquete</div>
+          <div class="listing-name">Finca Los Quetzales Retreat</div>
+          <div class="listing-meta">
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>3 Beds</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
+            <span>2,800 sqft</span>
+          </div>
+          <a href="book.html" class="listing-cta">View Details</a>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Golf Residence in Coronado" loading="lazy">
+          <span class="listing-type">Golf Residence</span>
+          <span class="listing-price-badge">$215,000</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-location">Coronado</div>
+          <div class="listing-name">Coronado Golf &amp; Beach Villa</div>
+          <div class="listing-meta">
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>2 Beds</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
+            <span>1,600 sqft</span>
+          </div>
+          <a href="book.html" class="listing-cta">View Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="listings-more">
+      <a href="listings.html">View All Properties</a>
+    </div>
+  </div>
+
+  <!-- PAST PROJECTS (SOLD & DELIVERED) -->
+  <section class="past-projects-section" id="pastProjects">
+    <div class="past-projects-header">
+      <span class="eyebrow">Track Record</span>
+      <h2>Completed Projects</h2>
+      <p>A selection of properties we have successfully placed with investors and families across Panama.</p>
+    </div>
+    <div class="past-projects-grid">
+      <div class="past-project-card">
+        <div class="past-project-img">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Sky Tower Penthouse Panama City" loading="lazy">
+          <span class="past-project-badge">SOLD</span>
+        </div>
+        <div class="past-project-body">
+          <div class="past-project-location">Panama City</div>
+          <div class="past-project-name">Sky Tower 360 Penthouse</div>
+          <div class="past-project-price">$2,100,000</div>
+          <span class="past-project-label">Sold in 18 days</span>
+        </div>
+      </div>
+      <div class="past-project-card">
+        <div class="past-project-img">
+          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Luxury apartment Panama City" loading="lazy">
+          <span class="past-project-badge">SOLD</span>
+        </div>
+        <div class="past-project-body">
+          <div class="past-project-location">Panama City</div>
+          <div class="past-project-name">Punta Pacifica Luxury Suite</div>
+          <div class="past-project-price">$890,000</div>
+          <span class="past-project-label">Off Market Deal</span>
+        </div>
+      </div>
+      <div class="past-project-card">
+        <div class="past-project-img">
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Mountain retreat Boquete" loading="lazy">
+          <span class="past-project-badge">DELIVERED</span>
+        </div>
+        <div class="past-project-body">
+          <div class="past-project-location">Boquete</div>
+          <div class="past-project-name">Villa Montaña Cloud Retreat</div>
+          <div class="past-project-price">$395,000</div>
+          <span class="past-project-label">Sold in 32 days</span>
+        </div>
+      </div>
+      <div class="past-project-card">
+        <div class="past-project-img">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Waterfront condo Coco del Mar" loading="lazy">
+          <span class="past-project-badge">SOLD</span>
+        </div>
+        <div class="past-project-body">
+          <div class="past-project-location">Coco del Mar</div>
+          <div class="past-project-name">Torre Oceano Waterfront Condo</div>
+          <div class="past-project-price">$1,250,000</div>
+          <span class="past-project-label">Sold in 24 days</span>
+        </div>
+      </div>
+      <div class="past-project-card">
+        <div class="past-project-img">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="Heritage loft Casco Viejo" loading="lazy">
+          <span class="past-project-badge">DELIVERED</span>
+        </div>
+        <div class="past-project-body">
+          <div class="past-project-location">Casco Viejo</div>
+          <div class="past-project-name">La Colonial Heritage Loft</div>
+          <div class="past-project-price">$320,000</div>
+          <span class="past-project-label">Off Market Deal</span>
+        </div>
+      </div>
+      <div class="past-project-card">
+        <div class="past-project-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Beach residence Coronado" loading="lazy">
+          <span class="past-project-badge">SOLD</span>
+        </div>
+        <div class="past-project-body">
+          <div class="past-project-location">Coronado</div>
+          <div class="past-project-name">Coronado Bay Beach Residence</div>
+          <div class="past-project-price">$215,000</div>
+          <span class="past-project-label">Sold in 41 days</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer Partners section removed -->
+
+  <!-- BUY WITH CRYPTO -->
+  <section class="crypto-section" id="crypto">
+    <div class="crypto-inner">
+      <div class="crypto-content">
+        <span class="eyebrow">Crypto Friendly</span>
+        <h2>Buy Property with Bitcoin &amp; Crypto</h2>
+        <p>Circa facilitates property purchases using cryptocurrency. Panama's progressive regulatory environment means no capital gains tax and a welcoming stance toward digital assets. We handle the entire process from wallet to title deed, making your crypto work for you in the real world.</p>
+        <a href="book.html" class="btn">Learn About Crypto Purchases</a>
+      </div>
+      <div class="crypto-features">
+        <div class="crypto-feature">
+          <div class="crypto-feature-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="crypto-feature-text">
+            <h4>Bitcoin &amp; Ethereum Accepted</h4>
+            <p>Direct crypto payments for property purchases with transparent conversion rates.</p>
+          </div>
+        </div>
+        <div class="crypto-feature">
+          <div class="crypto-feature-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <div class="crypto-feature-text">
+            <h4>Secure Escrow Process</h4>
+            <p>Regulated escrow accounts protect both buyer and seller throughout the transaction.</p>
+          </div>
+        </div>
+        <div class="crypto-feature">
+          <div class="crypto-feature-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"/></svg>
+          </div>
+          <div class="crypto-feature-text">
+            <h4>Full Legal Compliance</h4>
+            <p>Complete documentation, KYC verification, and legal structuring for every deal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- FINANCIAL ADVANTAGE -->
   <section class="advantage-section" id="advantage">
     <div class="advantage-header">
-      <span class="eyebrow" style="color:var(--dark);">Why Panama</span>
+      <span class="eyebrow" style="color:var(--accent);">Why Panama</span>
       <h2>The Panama Advantage</h2>
       <p>Panama stands out as a premier investment destination. Here's why investors worldwide choose to call it home.</p>
     </div>
@@ -1487,195 +1749,6 @@
     </div>
     <p class="advantage-note">Friendly Nations Visa program fast tracks residency for citizens of 50+ countries. Circa handles the entire application process through our trusted legal partners.</p>
   </section>
-
-  <!-- GRADIENT BRIDGE: Light → Dark -->
-  <div class="light-to-dark"></div>
-
-  <!-- LOCATIONS GALLERY -->
-  <section class="locations-intro" id="locations">
-    <span class="eyebrow">Investment Regions</span>
-    <h2>Where Will Your Story Unfold?</h2>
-    <p>From beachfront communities to historic neighborhoods, each region offers a unique lifestyle and investment opportunity.</p>
-  </section>
-  <div class="listings-section" id="listingsGrid">
-    <div class="listings-grid">
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Casa del Sol" loading="lazy">
-          <span class="listing-type">Villa</span>
-          <span class="listing-price-badge">$485,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Playa Venao</div>
-          <div class="listing-name">Casa del Sol Beachfront Villa</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>3 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
-            <span>2,400 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Torre Oceano" loading="lazy">
-          <span class="listing-type">Penthouse</span>
-          <span class="listing-price-badge">$1,250,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Coco del Mar</div>
-          <div class="listing-name">Torre Oceano Penthouse</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>4 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>3 Baths</span>
-            <span>3,800 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="La Colonial" loading="lazy">
-          <span class="listing-type">Condo</span>
-          <span class="listing-price-badge">$320,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Casco Viejo</div>
-          <div class="listing-name">La Colonial Heritage Loft</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>2 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
-            <span>1,600 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Villa Montaña" loading="lazy">
-          <span class="listing-type">Villa</span>
-          <span class="listing-price-badge">$395,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Boquete</div>
-          <div class="listing-name">Villa Montaña Cloud Forest</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>3 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
-            <span>2,100 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Surf Residences" loading="lazy">
-          <span class="listing-type">Beach House</span>
-          <span class="listing-price-badge">$289,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Playa Venao</div>
-          <div class="listing-name">Surf Residences Unit 4B</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>2 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>1 Bath</span>
-            <span>1,200 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Coronado Bay" loading="lazy">
-          <span class="listing-type">Condo</span>
-          <span class="listing-price-badge">$215,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Coronado</div>
-          <div class="listing-name">Coronado Bay Golf Residence</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>2 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>2 Baths</span>
-            <span>1,450 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&q=80" alt="Pedasi Retreat" loading="lazy">
-          <span class="listing-type">Beach House</span>
-          <span class="listing-price-badge">$179,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Pedasi</div>
-          <div class="listing-name">Las Olas Coastal Retreat</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>2 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>1 Bath</span>
-            <span>1,100 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1602343168117-bb8bbe3ce6e3?w=600&q=80" alt="Bocas Villa" loading="lazy">
-          <span class="listing-type">Villa</span>
-          <span class="listing-price-badge">$625,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Bocas del Toro</div>
-          <div class="listing-name">Isla Colón Overwater Villa</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>4 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>3 Baths</span>
-            <span>3,200 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-      <div class="listing-card">
-        <div class="listing-img">
-          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Sky Tower" loading="lazy">
-          <span class="listing-type">Penthouse</span>
-          <span class="listing-price-badge">$2,100,000</span>
-        </div>
-        <div class="listing-body">
-          <div class="listing-location">Panama City</div>
-          <div class="listing-name">Sky Tower 360 Penthouse</div>
-          <div class="listing-meta">
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>5 Beds</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>4 Baths</span>
-            <span>5,200 sqft</span>
-          </div>
-          <a href="book.html" class="listing-cta">View Details</a>
-        </div>
-      </div>
-    </div>
-    <div class="listings-more">
-      <a href="listings.html">See All 40+ Listings</a>
-    </div>
-  </div>
-
-  <!-- SOFT GLOW SEPARATOR -->
-  <div class="section-glow"></div>
-
-  <!-- TESTIMONIAL -->
-  <div class="testimonial-wrapper">
-    <section class="testimonial-section">
-      <span class="eyebrow">What Our Clients Say</span>
-      <article>
-        <blockquote class="testimonial-quote">
-          "We were terrified of buying property abroad. Circa didn't just find us a home, they handled our tax restructuring, visa applications, banking, and even enrolled our kids in school. Six months in, we're saving $40,000 a year in taxes alone. Panama is home."
-        </blockquote>
-        <div class="testimonial-author">
-          <strong>Michael &amp; Sarah Thompson</strong>
-          Relocated from Toronto, Canada
-        </div>
-      </article>
-    </section>
-  </div>
 
   <!-- TEAM -->
   <section class="team-section" id="team">
@@ -1786,6 +1859,22 @@
     </div>
   </section>
 
+  <!-- TESTIMONIAL -->
+  <div class="testimonial-wrapper">
+    <section class="testimonial-section">
+      <span class="eyebrow">What Our Clients Say</span>
+      <article>
+        <blockquote class="testimonial-quote">
+          "We were terrified of buying property abroad. Circa didn't just find us a home, they handled our tax restructuring, visa applications, banking, and even enrolled our kids in school. Six months in, we're saving $40,000 a year in taxes alone. Panama is home."
+        </blockquote>
+        <div class="testimonial-author">
+          <strong>Michael &amp; Sarah Thompson</strong>
+          Relocated from Toronto, Canada
+        </div>
+      </article>
+    </section>
+  </div>
+
   <!-- FAQ -->
   <section style="padding:6rem 5vw;background:#FFFFFF;position:relative;z-index:2;" id="faq">
     <div style="max-width:800px;margin:0 auto;">
@@ -1818,21 +1907,45 @@
     </div>
   </section>
 
-  <div class="section-glow"></div>
-
   <!-- CTA -->
-  <section class="cta-section" id="contact">
-    <span class="eyebrow">Ready?</span>
-    <h2>Start Your Panama Journey</h2>
-    <p>Book a free consultation with Michael. No pressure, no obligations. Just honest advice about your property, investment, and relocation options in Panama.</p>
-    <div class="cta-buttons">
-      <a href="book.html" class="btn">Book a Free Consultation</a>
-      <a href="mailto:info@circapanama.com" class="btn-outline">info@circapanama.com</a>
+  <section class="cta-section" id="contact" style="text-align:left;padding:6rem 5vw 6rem;">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+      <div>
+        <span class="eyebrow">Free Consultation</span>
+        <h2 style="margin-bottom:1.5rem;color:#FFFFFF;">Book a Call<br>With Michael</h2>
+        <p style="margin:0 0 2.5rem;max-width:45ch;color:rgba(255,255,255,0.6);">30 minutes of honest, no pressure advice about your property, investment, or relocation plans in Panama.</p>
+        <div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:2.5rem;">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:48px;height:48px;border-radius:12px;background:rgba(37,99,235,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" fill="none" stroke="#2563EB" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            </div>
+            <div><strong style="display:block;font-size:0.9rem;color:#FFFFFF;">30 Minute Call</strong><span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">Focused session via Zoom or WhatsApp</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:48px;height:48px;border-radius:12px;background:rgba(37,99,235,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" fill="none" stroke="#2563EB" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            </div>
+            <div><strong style="display:block;font-size:0.9rem;color:#FFFFFF;">No Obligations</strong><span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">Honest advice, zero sales pressure</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:48px;height:48px;border-radius:12px;background:rgba(37,99,235,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" fill="none" stroke="#2563EB" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+            </div>
+            <div><strong style="display:block;font-size:0.9rem;color:#FFFFFF;">Local Expertise</strong><span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">10+ years navigating the Panama market</span></div>
+          </div>
+        </div>
+        <a href="book.html" class="btn" style="background:#FFFFFF;color:#1E293B;">Book a Free Consultation</a>
+      </div>
+      <div style="position:relative;">
+        <img src="images/michael.jpeg" alt="Michael Rudasveski, Founder of Circa Panama" style="width:100%;border-radius:20px;object-fit:cover;aspect-ratio:4/5;box-shadow:0 24px 64px rgba(0,0,0,0.3);">
+        <div style="position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-radius:12px;padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;">
+          <div>
+            <strong style="font-family:var(--font-display);font-size:1.1rem;color:#1E293B;display:block;">Michael Rudasveski</strong>
+            <span style="font-size:0.75rem;color:var(--accent);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Founder &amp; CEO, Circa Panama</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <address style="margin-top:4rem;display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;color:#64748B;font-size:0.85rem;font-style:normal;">
-      <div>Panama City &amp; Playa Venao, Panama</div>
-      <div><a href="mailto:info@circapanama.com" style="color:#64748B;">info@circapanama.com</a></div>
-    </address>
   </section>
   </main>
 
@@ -1860,12 +1973,6 @@
       <canvas id="michaelCanvas"></canvas>
     </div>
   </div>
-
-  <!-- SKIP SECTION BUTTON -->
-  <button class="skip-section" id="skipSection">
-    <span class="skip-arrow">&darr;</span>
-    Skip section
-  </button>
 
   <!-- Back to top -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
@@ -1965,48 +2072,8 @@
       onUpdate: (self) => { document.getElementById('scrollProgress').style.width = (self.progress * 100) + '%'; }
     });
 
-    // ===== LOADER =====
-    let loadCount = 0;
-    const totalAssets = document.querySelectorAll('img, video').length + 1;
-    const loaderFill = document.getElementById('loaderFill');
-    let loaderDone = false;
-
-    const letters = document.querySelectorAll('.loader-letter');
-    gsap.to(letters, {
-      opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out', delay: 0.3,
-      onComplete: () => { gsap.to('#loaderTagline', { opacity: 1, duration: 0.6, delay: 0.2 }); }
-    });
-
-    function updateLoader() {
-      loadCount++;
-      loaderFill.style.width = Math.min((loadCount / totalAssets) * 100, 100) + '%';
-      if (loadCount >= totalAssets) dismissLoader();
-    }
-    function dismissLoader() {
-      if (loaderDone) return;
-      loaderDone = true;
-      setTimeout(() => {
-        gsap.to(letters, {
-          opacity: 0, y: -30, stagger: 0.04, duration: 0.4, ease: 'power2.in',
-          onComplete: () => {
-            document.getElementById('loader').classList.add('dismiss');
-            setTimeout(() => {
-              document.getElementById('loader').remove();
-              initPage();
-            }, 800);
-          }
-        });
-      }, 500);
-    }
-    document.querySelectorAll('img').forEach(img => {
-      if (img.complete) updateLoader();
-      else img.addEventListener('load', updateLoader);
-      img.addEventListener('error', updateLoader);
-    });
-    document.fonts.ready.then(updateLoader);
-    setTimeout(dismissLoader, 5000);
-
-    // ===== PAGE INIT (after loader) =====
+    // ===== PAGE INIT =====
+    initPage();
     function initPage() {
       // Hero intro text
       const heroTitle = document.getElementById('heroTitle');
@@ -2014,25 +2081,9 @@
         const split = new SplitType(heroTitle, { types: 'words,chars' });
         gsap.from(split.chars, { y: '110%', opacity: 0, stagger: 0.03, duration: 0.8, ease: 'power3.out', delay: 0.1 });
       }
-      gsap.from('.hero-pillar', { opacity: 0, y: 15, duration: 0.6, stagger: 0.08, delay: 0.6, ease: 'power2.out' });
-      gsap.from('#heroIntro p', { opacity: 0, y: 25, duration: 1, delay: 0.9, ease: 'power2.out' });
-      gsap.from('#heroScrollHint', { opacity: 0, duration: 1, delay: 1.5 });
-
-      // Hero scroll timeline: text fades out → dark overlay fades in → Michael reveal
-      const heroTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#heroZoom',
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.2
-        }
-      });
-      heroTl
-        .to('#heroIntro', { opacity: 0, y: -60, duration: 0.25 }, 0)
-        .to('#heroScrollHint', { opacity: 0, duration: 0.10 }, 0)
-        .to('#heroVideoBg', { scale: 1.12, duration: 0.85, ease: 'none' }, 0)
-        .to('#heroZoomOverlay', { opacity: 1, duration: 0.35, ease: 'power2.inOut' }, 0.30)
-        .to('#heroZoomReveal', { opacity: 1, scale: 1, duration: 0.30, ease: 'power2.out' }, 0.55);
+      gsap.from('#heroIntro p', { opacity: 0, y: 25, duration: 1, delay: 0.6, ease: 'power2.out' });
+      gsap.from('#heroIntro .btn', { opacity: 0, y: 20, duration: 0.8, delay: 0.9, ease: 'power2.out' });
+      gsap.from('#heroScrollHint', { opacity: 0, duration: 1, delay: 1.2 });
 
       // ===== MICHAEL FLOATING BUBBLE =====
       const mCanvas = document.getElementById('michaelCanvas');
@@ -2078,15 +2129,10 @@
       const mInterval = setInterval(animateMichael, 80);
 
       // Playa Venao section reveal
-      gsap.from('.venao-images .venao-img', {
-        scrollTrigger: { trigger: '#venaoInfo', start: 'top 75%' },
-        opacity: 0, y: 40, stagger: 0.15, duration: 0.8, ease: 'power2.out'
-      });
       gsap.from('.venao-content', {
         scrollTrigger: { trigger: '#venaoInfo', start: 'top 70%' },
-        opacity: 0, x: 40, duration: 0.9, ease: 'power2.out'
+        opacity: 0, y: 40, duration: 0.9, ease: 'power2.out'
       });
-
       // Show bubble after scrolling past hero, hide near footer
       const bubble = document.getElementById('michaelBubble');
       ScrollTrigger.create({
@@ -2154,71 +2200,12 @@
       });
     });
 
-    // ===== COVERAGE STORYTELLING =====
-    const covSteps = gsap.utils.toArray('.coverage-step');
-    const covImgs = gsap.utils.toArray('.coverage-img');
-    const covDots = gsap.utils.toArray('.cov-dot');
-
-    function activateCovStep(index) {
-      covSteps.forEach(s => s.classList.remove('active'));
-      covImgs.forEach(s => s.classList.remove('active'));
-      covDots.forEach(s => s.classList.remove('active'));
-      if (covSteps[index]) covSteps[index].classList.add('active');
-      if (covImgs[index]) covImgs[index].classList.add('active');
-      if (covDots[index]) covDots[index].classList.add('active');
-    }
-
-    covSteps.forEach((_, i) => {
-      ScrollTrigger.create({
-        trigger: '#coverage',
-        start: () => `${(i / covSteps.length) * 100}% top`,
-        end: () => `${((i + 1) / covSteps.length) * 100}% top`,
-        onEnter: () => activateCovStep(i),
-        onEnterBack: () => activateCovStep(i)
+    // ===== SERVICE CARDS REVEAL =====
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: 0.8, delay: i * 0.1, ease: 'power2.out',
+        scrollTrigger: { trigger: '.services-grid', start: 'top 85%' }
       });
-    });
-
-    gsap.to('#covFill', {
-      width: '100%', ease: 'none',
-      scrollTrigger: { trigger: '#coverage', start: 'top top', end: 'bottom bottom', scrub: true }
-    });
-
-    // Show/hide team bubbles and coverage nav
-    const covNav = document.querySelector('.coverage-nav');
-    ScrollTrigger.create({
-      trigger: '#coverage',
-      start: 'top 80%',
-      end: 'bottom 20%',
-      onEnter: () => covNav.classList.add('visible'),
-      onEnterBack: () => covNav.classList.add('visible'),
-      onLeave: () => { covNav.classList.remove('visible'); },
-      onLeaveBack: () => { covNav.classList.remove('visible'); }
-    });
-
-    // ===== SKIP SECTION BUTTON =====
-    const skipBtn = document.getElementById('skipSection');
-    let currentStickySection = null;
-    const stickySections = ['#heroZoom', '#coverage'];
-
-    stickySections.forEach(sel => {
-      const el = document.querySelector(sel);
-      if (!el) return;
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top top',
-        end: 'bottom bottom',
-        onEnter: () => { currentStickySection = el; skipBtn.classList.add('visible'); },
-        onEnterBack: () => { currentStickySection = el; skipBtn.classList.add('visible'); },
-        onLeave: () => { if (currentStickySection === el) { skipBtn.classList.remove('visible'); currentStickySection = null; } },
-        onLeaveBack: () => { if (currentStickySection === el) { skipBtn.classList.remove('visible'); currentStickySection = null; } }
-      });
-    });
-
-    skipBtn.addEventListener('click', () => {
-      if (currentStickySection) {
-        const end = currentStickySection.offsetTop + currentStickySection.offsetHeight + 10;
-        lenis.scrollTo(end, { duration: 1.2 });
-      }
     });
 
     // ===== FINANCIAL ADVANTAGE CARDS =====
@@ -2238,6 +2225,29 @@
         once: true,
         onEnter: () => card.classList.add('visible')
       });
+    });
+
+    // ===== PAST PROJECTS REVEAL =====
+    document.querySelectorAll('.past-project-card').forEach((card, i) => {
+      card.style.transitionDelay = (i % 3) * 0.1 + 's';
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 90%',
+        once: true,
+        onEnter: () => card.classList.add('visible')
+      });
+    });
+
+    // Partner cards section removed
+
+    // ===== CRYPTO SECTION REVEAL =====
+    gsap.from('.crypto-content', {
+      opacity: 0, y: 40, duration: 1, ease: 'power2.out',
+      scrollTrigger: { trigger: '.crypto-section', start: 'top 75%' }
+    });
+    gsap.from('.crypto-features', {
+      opacity: 0, y: 30, duration: 1, delay: 0.2, ease: 'power2.out',
+      scrollTrigger: { trigger: '.crypto-section', start: 'top 75%' }
     });
 
     // ===== TEAM =====
