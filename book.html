@@ -413,6 +413,26 @@
       }
     }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    /* ===== FOOTER ===== */
+    .footer-bar {
+      background: #FFFFFF;
+      border-top: 1px solid rgba(37,99,235,0.08);
+      padding: 2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bar .nav-logo { font-size: 1.2rem; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.75rem; color: var(--gray); letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 0.7rem; color: rgba(0,0,0,0.3);
+      width: 100%; text-align: center; margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -664,10 +684,14 @@
     });
 
     // Submit
-    document.getElementById('submitBooking').addEventListener('click', () => {
+    document.getElementById('submitBooking').addEventListener('click', async () => {
+      const btn = document.getElementById('submitBooking');
       const firstName = document.getElementById('firstName').value.trim();
       const lastName = document.getElementById('lastName').value.trim();
       const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const interest = document.getElementById('interest').value;
+      const notes = document.getElementById('notes').value.trim();
 
       if (!firstName || !lastName || !email) {
         alert('Please fill in your name and email.');
@@ -676,6 +700,25 @@
 
       const formatted = selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
 
+      // Disable button while submitting
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      try {
+        await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            firstName, lastName, email, phone, interest, notes,
+            date: formatted,
+            time: selectedTime + ' (Panama Time, EST)'
+          })
+        });
+      } catch (err) {
+        console.error('Booking submission error:', err);
+      }
+
+      // Show confirmation regardless (don't block UX on API issues)
       document.getElementById('calendarView').style.display = 'none';
       bookingForm.style.display = 'none';
 
@@ -691,5 +734,19 @@
     // Init
     renderCalendar();
   </script>
+
+  <!-- FOOTER -->
+  <footer class="footer-bar">
+    <span class="nav-logo"><img src="images/circa-logo-Photoroom.png" alt="Circa Panama Real Estate" style="height:28px;"></span>
+    <div class="footer-links">
+      <a href="index.html#coverage">Services</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#team">Team</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Circa Panama Real Estate. All rights reserved. | Last updated: March 2026</div>
+  </footer>
+
 </body>
 </html>

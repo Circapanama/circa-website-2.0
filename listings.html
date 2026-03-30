@@ -391,12 +391,23 @@
     }
 
     /* ===== FOOTER ===== */
-    .footer {
-      text-align: center;
-      padding: 3rem 5vw;
-      border-top: 1px solid #F1F5F9;
-      color: var(--gray);
-      font-size: 0.82rem;
+    .footer-bar {
+      background: #FFFFFF;
+      border-top: 1px solid rgba(37,99,235,0.08);
+      padding: 2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bar .nav-logo { font-size: 1.2rem; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.75rem; color: var(--gray); letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 0.7rem; color: rgba(0,0,0,0.3);
+      width: 100%; text-align: center; margin-top: 1rem;
     }
 
     /* ===== RESPONSIVE ===== */
@@ -804,8 +815,16 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    &copy; 2026 Circa Panama Real Estate. All rights reserved.
+  <footer class="footer-bar">
+    <span class="nav-logo"><img src="images/circa-logo-Photoroom.png" alt="Circa Panama Real Estate" style="height:28px;"></span>
+    <div class="footer-links">
+      <a href="index.html#coverage">Services</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#team">Team</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Circa Panama Real Estate. All rights reserved. | Last updated: March 2026</div>
   </footer>
 
   <script>
@@ -907,6 +926,31 @@
     }, { threshold: 0.1 });
 
     cards.forEach(card => observer.observe(card));
+
+    // Map card names to property detail page IDs
+    const propertyIds = {
+      'Casa Marejada': 'casa-marejada',
+      'Casa del Sol Beachfront': 'casa-del-sol',
+      'Olas Surf Residence': 'olas-surf',
+      'Surf Cove Bungalow': 'surf-cove-bungalow',
+      'Venao Hills Eco Lot': 'venao-hills-lot',
+      'Cambutal Hilltop Land': 'cambutal-hilltop',
+      'Azuero Bay Boutique Suite': 'azuero-bay-suite',
+      'Punta Venao Estate': 'punta-venao-estate',
+      'Venao Surf Lodge': 'venao-surf-lodge-2',
+      'Coastal Ridge Lot': 'coastal-ridge-lot',
+      'Playa Vista Apartment': 'playa-vista',
+      'Tropical Garden Villa': 'tropical-garden-villa',
+      'Azuero Coastal Home': 'azuero-coastal',
+      'Venao Studio Loft': 'venao-studio'
+    };
+    document.querySelectorAll('.card').forEach(card => {
+      const name = card.querySelector('.card-name');
+      const btn = card.querySelector('.card-btn');
+      if (name && btn && propertyIds[name.textContent.trim()]) {
+        btn.href = 'property.html?id=' + propertyIds[name.textContent.trim()];
+      }
+    });
   </script>
 </body>
 </html>

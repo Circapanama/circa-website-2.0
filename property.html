@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Details | Circa Panama Real Estate</title>
+  <meta name="description" content="View property details in Playa Venao, Panama. Circa Panama Real Estate.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #2563EB;
+      --accent-rgb: 37,99,235;
+      --dark: #1E293B;
+      --gray: #64748B;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: #FFFFFF;
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky; top: 0; z-index: 9999;
+      padding: 1.2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(37,99,235,0.1);
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-back {
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--gray);
+      transition: color 0.3s;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* ===== HERO IMAGE ===== */
+    .property-hero {
+      width: 100%;
+      height: 50vh;
+      min-height: 360px;
+      overflow: hidden;
+      position: relative;
+    }
+    .property-hero img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .property-hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.5));
+      padding: 3rem 5vw 2rem;
+    }
+    .property-type-badge {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 16px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50px;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .property-hero-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .property-hero-location {
+      font-size: 0.85rem; color: rgba(255,255,255,0.8);
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-top: 0.5rem;
+    }
+
+    /* ===== CONTENT ===== */
+    .property-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 5vw 4rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 4rem;
+    }
+
+    .property-price {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .property-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .property-stat {
+      background: #F8FAFC;
+      border: 1px solid rgba(37,99,235,0.08);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .property-stat-value {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 0.2rem;
+    }
+    .property-stat-label {
+      font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--gray);
+    }
+
+    .property-description h2 {
+      font-size: 1.4rem; color: var(--dark); margin-bottom: 1rem;
+    }
+    .property-description p {
+      color: var(--gray); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem;
+    }
+
+    .property-features {
+      margin-top: 2rem;
+    }
+    .property-features h3 {
+      font-size: 1.1rem; color: var(--dark); margin-bottom: 1rem;
+    }
+    .property-features ul {
+      list-style: none; padding: 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+    }
+    .property-features li {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.88rem; color: #374151;
+    }
+    .property-features li svg {
+      width: 18px; height: 18px; color: var(--accent); flex-shrink: 0;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .property-sidebar {
+      position: sticky; top: 100px; align-self: start;
+    }
+    .contact-card {
+      background: #F8FAFC;
+      border: 1px solid rgba(37,99,235,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .contact-card h3 {
+      font-size: 1.2rem; color: var(--dark); margin-bottom: 0.5rem;
+    }
+    .contact-card p {
+      color: var(--gray); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.6;
+    }
+    .contact-btn {
+      display: block; width: 100%; padding: 14px;
+      text-align: center; border-radius: 50px;
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 0.75rem;
+    }
+    .contact-btn:hover { transform: translateY(-2px); }
+    .contact-btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .contact-btn-primary:hover { box-shadow: 0 8px 30px rgba(var(--accent-rgb),0.3); }
+    .contact-btn-whatsapp {
+      background: #25D366; color: #fff;
+    }
+    .contact-btn-whatsapp:hover { box-shadow: 0 8px 30px rgba(37,211,102,0.3); }
+
+    .location-card {
+      margin-top: 1.5rem;
+      background: #F8FAFC;
+      border: 1px solid rgba(37,99,235,0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+    .location-card h4 {
+      font-size: 0.95rem; color: var(--dark); margin-bottom: 0.5rem;
+    }
+    .location-card p {
+      color: var(--gray); font-size: 0.82rem; line-height: 1.6;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-bar {
+      background: #FFFFFF;
+      border-top: 1px solid rgba(37,99,235,0.08);
+      padding: 2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bar .nav-logo { font-size: 1.2rem; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.75rem; color: var(--gray); letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 0.7rem; color: rgba(0,0,0,0.3);
+      width: 100%; text-align: center; margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .property-content { grid-template-columns: 1fr; gap: 2rem; }
+      .property-sidebar { position: static; }
+      .property-stats { grid-template-columns: repeat(3, 1fr); }
+      .property-features ul { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><img src="images/circa-logo-Photoroom.png" alt="Circa Panama Real Estate"></a>
+    <a href="javascript:history.back()" class="nav-back">&larr; Back to Listings</a>
+  </nav>
+
+  <div class="property-hero" id="propertyHero">
+    <img id="heroImg" src="" alt="">
+    <div class="property-hero-overlay">
+      <span class="property-type-badge" id="heroType"></span>
+      <h1 class="property-hero-title" id="heroTitle"></h1>
+      <div class="property-hero-location" id="heroLocation"></div>
+    </div>
+  </div>
+
+  <div class="property-content">
+    <div>
+      <div class="property-price" id="propertyPrice"></div>
+
+      <div class="property-stats" id="propertyStats"></div>
+
+      <div class="property-description">
+        <h2>About This Property</h2>
+        <p id="propertyDesc"></p>
+        <p id="propertyDesc2"></p>
+      </div>
+
+      <div class="property-features">
+        <h3>Property Features</h3>
+        <ul id="featuresList"></ul>
+      </div>
+    </div>
+
+    <div class="property-sidebar">
+      <div class="contact-card">
+        <h3>Interested in this property?</h3>
+        <p>Schedule a private viewing or get more details from our team. No obligations, just honest advice.</p>
+        <a href="book.html" class="contact-btn contact-btn-primary">Book a Consultation</a>
+        <a id="whatsappBtn" href="#" target="_blank" rel="noopener" class="contact-btn contact-btn-whatsapp">WhatsApp Michael</a>
+      </div>
+      <div class="location-card">
+        <h4>Playa Venao, Panama</h4>
+        <p>Tucked along Panama's Pacific coast on the Azuero Peninsula. World-class surf, growing expat community, and 15%+ annual appreciation. Zero capital gains tax.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-bar">
+    <span class="nav-logo"><img src="images/circa-logo-Photoroom.png" alt="Circa Panama Real Estate" style="height:28px;"></span>
+    <div class="footer-links">
+      <a href="index.html#coverage">Services</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#team">Team</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Circa Panama Real Estate. All rights reserved. | Last updated: March 2026</div>
+  </footer>
+
+  <script>
+    const properties = {
+      'casa-del-sol': {
+        name: 'Casa del Sol Beachfront Villa',
+        type: 'Beachfront Villa',
+        location: 'Playa Venao',
+        price: '$485,000',
+        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80',
+        beds: '3', baths: '2', sqft: '2,400',
+        desc: 'A stunning beachfront villa nestled along the golden sands of Playa Venao. Casa del Sol offers panoramic ocean views from every room, with floor-to-ceiling windows that flood the space with natural light. The open-concept living area flows seamlessly onto a spacious terrace perfect for watching Pacific sunsets.',
+        desc2: 'Built with premium materials and designed to complement the tropical landscape, this property features a private pool, landscaped gardens, and direct beach access. An ideal primary residence or high-yield vacation rental in one of Panama\'s fastest-appreciating markets.',
+        features: ['Ocean front location', 'Private infinity pool', 'Open-concept living', 'Covered terrace', 'Landscaped gardens', 'Direct beach access', 'Modern kitchen', 'Outdoor shower']
+      },
+      'olas-surf': {
+        name: 'Olas Surf Residence',
+        type: 'Surf Residence',
+        location: 'Playa Venao',
+        price: '$289,000',
+        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80',
+        beds: '2', baths: '1', sqft: '1,200',
+        desc: 'Designed for the surf lifestyle, Olas Residence sits just minutes from the break at Playa Venao. This modern two-bedroom home combines clean lines with tropical warmth, featuring an open floor plan, vaulted ceilings, and a wraparound deck for board storage and outdoor living.',
+        desc2: 'Surrounded by lush vegetation with ocean breezes year-round, this property is perfect for surfers, digital nomads, or investors looking for strong short-term rental returns in a growing surf destination.',
+        features: ['Steps from the surf break', 'Wraparound deck', 'Vaulted ceilings', 'Board storage area', 'Open floor plan', 'Tropical landscaping', 'Outdoor living space', 'Strong rental potential']
+      },
+      'venao-hills-eco': {
+        name: 'Venao Hills Eco Villa',
+        type: 'Eco Villa',
+        location: 'Playa Venao',
+        price: '$340,000',
+        image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80',
+        beds: '3', baths: '2', sqft: '2,200',
+        desc: 'Perched on the hillside above Playa Venao, this eco-conscious villa offers breathtaking views of the Pacific and the surrounding tropical forest. Built with sustainable materials and featuring solar power integration, it represents the future of coastal living in Panama.',
+        desc2: 'The three-bedroom layout provides ample space for families or guests, while the outdoor entertaining area with infinity-edge plunge pool makes every day feel like a retreat. Located within a gated eco-community with shared trails and organic gardens.',
+        features: ['Hilltop ocean views', 'Solar power ready', 'Sustainable materials', 'Plunge pool', 'Gated eco-community', 'Nature trails', 'Organic garden access', 'Covered parking']
+      },
+      'sunset-bay': {
+        name: 'Sunset Bay Apartment',
+        type: 'Bay View Apartment',
+        location: 'Playa Venao',
+        price: '$215,000',
+        image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&q=80',
+        beds: '2', baths: '1', sqft: '1,100',
+        desc: 'A stylish bay-view apartment offering the perfect entry point into the Playa Venao market. The modern interior features an open kitchen, spacious living area, and a private balcony overlooking the bay where you can watch surfers and sunsets daily.',
+        desc2: 'Part of a well-managed building with communal pool, secure parking, and on-site management. Ideal for owner-occupiers or as a turnkey vacation rental with proven booking history in the area.',
+        features: ['Bay views from balcony', 'Communal pool', 'Secure parking', 'On-site management', 'Modern finishes', 'Open kitchen', 'Turnkey condition', 'Walk to beach']
+      },
+      'punta-venao': {
+        name: 'Punta Venao Estate',
+        type: 'Luxury Estate',
+        location: 'Playa Venao',
+        price: '$720,000',
+        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80',
+        beds: '4', baths: '3', sqft: '3,500',
+        desc: 'The crown jewel of Playa Venao real estate. This luxury estate sits on an elevated point offering 270-degree ocean views across the bay. Four spacious bedrooms, three designer bathrooms, and an expansive great room with double-height ceilings create an atmosphere of refined coastal elegance.',
+        desc2: 'The property features a large infinity pool, professional outdoor kitchen, manicured tropical gardens, and a separate guest casita. Built to the highest standards with imported fixtures and hurricane-rated construction. A rare opportunity for those seeking the finest in Pacific coastal living.',
+        features: ['270-degree ocean views', 'Large infinity pool', 'Outdoor kitchen', 'Guest casita', 'Double-height ceilings', 'Imported fixtures', 'Hurricane-rated build', 'Tropical gardens']
+      },
+      'venao-surf-lodge': {
+        name: 'Venao Surf Lodge',
+        type: 'Surf Lodge',
+        location: 'Playa Venao',
+        price: '$185,000',
+        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80',
+        beds: '2', baths: '2', sqft: '1,400',
+        desc: 'An authentic surf lodge experience just steps from Playa Venao\'s famous break. This charming two-bedroom property blends rustic character with modern comforts, featuring polished concrete floors, exposed beams, and a large covered porch perfect for post-surf relaxation.',
+        desc2: 'With two full bathrooms, a fully equipped kitchen, and outdoor rinse stations, the property is ideal for personal use or as a high-demand vacation rental. The surf lodge vibe attracts consistent bookings from the growing wave of travelers discovering Venao.',
+        features: ['Steps from surf break', 'Covered porch', 'Polished concrete floors', 'Exposed beam ceilings', 'Outdoor rinse stations', 'Fully equipped kitchen', 'High rental demand', 'Authentic character']
+      },
+      'casa-marejada': {
+        name: 'Casa Marejada',
+        type: 'Luxury Villa',
+        location: 'Playa Venao',
+        price: '$850,000',
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80',
+        beds: '5', baths: '4', sqft: '4,200',
+        desc: 'An exceptional five-bedroom luxury villa commanding prime position in Playa Venao. Casa Marejada features expansive living spaces, a chef\'s kitchen, and walls of glass that frame the Pacific horizon. Every detail has been crafted to deliver the ultimate in tropical luxury.',
+        desc2: 'The property includes a resort-style pool with swim-up bar, dedicated home office, staff quarters, and a three-car garage. Set within a private compound with tropical landscaping and 24-hour security.',
+        features: ['Resort-style pool', 'Swim-up bar', 'Chef\'s kitchen', 'Home office', 'Staff quarters', '3-car garage', '24-hour security', 'Private compound']
+      },
+      'surf-cove-bungalow': {
+        name: 'Surf Cove Bungalow',
+        type: 'Beach Bungalow',
+        location: 'Playa Venao',
+        price: '$325,000',
+        image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=80',
+        beds: '2', baths: '2', sqft: '1,400',
+        desc: 'A charming beach bungalow tucked into a quiet cove near Playa Venao. This two-bedroom retreat features an open-air living concept that blurs the line between indoor and outdoor spaces, with natural wood finishes and tropical vegetation creating a serene atmosphere.',
+        desc2: 'Perfect for couples or small families, the bungalow includes a private garden, outdoor shower, and hammock terrace. Strong short-term rental potential with the growing surf tourism market.',
+        features: ['Quiet cove location', 'Open-air living', 'Natural wood finishes', 'Private garden', 'Outdoor shower', 'Hammock terrace', 'Short-term rental ready', 'Tropical vegetation']
+      },
+      'venao-hills-lot': {
+        name: 'Venao Hills Eco Lot',
+        type: 'Eco Lot',
+        location: 'Playa Venao',
+        price: '$120,000',
+        image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80',
+        beds: '0', baths: '0', sqft: '5,400',
+        desc: 'A rare build-ready lot in the coveted Venao Hills eco-development. This ocean-view parcel offers the opportunity to create your dream home on the Pacific coast of Panama, with architectural guidelines that ensure harmony with the natural landscape.',
+        desc2: 'The lot comes with road access, utility connections, and approved building plans available. Part of a sustainable community with shared green spaces, walking trails, and a commitment to preserving the natural beauty of the Azuero Peninsula.',
+        features: ['Ocean views', 'Build ready', 'Road access', 'Utility connections', 'Eco-community', 'Walking trails', 'Approved plans available', 'Sustainable development'],
+        isLand: true
+      },
+      'cambutal-hilltop': {
+        name: 'Cambutal Hilltop Land',
+        type: 'Land',
+        location: 'Playa Venao',
+        price: '$89,000',
+        image: 'https://images.unsplash.com/photo-1600047508788-786f3865b4b9?w=1200&q=80',
+        beds: '0', baths: '0', sqft: '22,000',
+        desc: 'A generous hilltop parcel offering commanding views of the coastline and surrounding countryside. This 22,000 sqft lot is positioned in the Cambutal area near Playa Venao, one of the last stretches of undeveloped Pacific coastline in Panama.',
+        desc2: 'Perfect for a private estate, boutique hotel, or eco-retreat. The elevated position ensures year-round ocean breezes and privacy. Access road in place, with water and electricity available at the property line.',
+        features: ['Hilltop position', 'Coastal panoramic views', '22,000 sqft', 'Access road in place', 'Utilities at property line', 'Near Cambutal beach', 'Development potential', 'Privacy and seclusion'],
+        isLand: true
+      },
+      'azuero-bay-suite': {
+        name: 'Azuero Bay Boutique Suite',
+        type: 'Boutique Apartment',
+        location: 'Playa Venao',
+        price: '$215,000',
+        image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&q=80',
+        beds: '1', baths: '1', sqft: '850',
+        desc: 'A beautifully appointed boutique apartment in a new development overlooking Azuero Bay. This one-bedroom suite features high-end finishes, floor-to-ceiling windows, and a private terrace with ocean views.',
+        desc2: 'The building offers resort-style amenities including pool, fitness center, and concierge service. Excellent turnkey investment with professional rental management available on-site.',
+        features: ['Ocean view terrace', 'High-end finishes', 'Resort amenities', 'Pool and fitness center', 'Concierge service', 'Rental management', 'Floor-to-ceiling windows', 'New construction']
+      },
+      'punta-venao-estate': {
+        name: 'Punta Venao Estate',
+        type: 'Villa',
+        location: 'Playa Venao',
+        price: '$695,000',
+        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80',
+        beds: '4', baths: '3', sqft: '3,400',
+        desc: 'An impressive four-bedroom villa located on the prestigious Punta Venao point. This property offers sweeping ocean views, premium finishes throughout, and an intelligent floor plan designed for tropical living with maximum natural ventilation.',
+        desc2: 'Features include a private pool, covered outdoor dining area, and mature tropical landscaping. The master suite occupies the entire upper level with a private ocean-view balcony and spa-style bathroom.',
+        features: ['Sweeping ocean views', 'Private pool', 'Covered outdoor dining', 'Master suite with balcony', 'Spa-style bathroom', 'Natural ventilation design', 'Mature landscaping', 'Premium finishes']
+      },
+      'venao-surf-lodge-2': {
+        name: 'Venao Surf Lodge',
+        type: 'Surf House',
+        location: 'Playa Venao',
+        price: '$198,000',
+        image: 'https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?w=1200&q=80',
+        beds: '2', baths: '1', sqft: '950',
+        desc: 'A compact and efficient surf house in the heart of the Playa Venao community. This two-bedroom property is designed for the active lifestyle, with an open layout, outdoor living focus, and easy maintenance.',
+        desc2: 'Walking distance to restaurants, surf shops, and the beach. A proven rental performer with consistent bookings from the surf tourism market. Low HOA fees and minimal upkeep make this an ideal hands-off investment.',
+        features: ['Heart of Venao', 'Walk to everything', 'Outdoor living focus', 'Low maintenance', 'Proven rental income', 'Surf community', 'Open layout', 'Low HOA fees']
+      },
+      'coastal-ridge-lot': {
+        name: 'Coastal Ridge Lot',
+        type: 'Land',
+        location: 'Playa Venao',
+        price: '$155,000',
+        image: 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1200&q=80',
+        beds: '0', baths: '0', sqft: '8,500',
+        desc: 'A premium lot on the coastal ridge offering unobstructed panoramic views of the Pacific. At 8,500 sqft, this parcel provides ample space for a custom home with pool, gardens, and guest accommodations.',
+        desc2: 'Located in a small community of quality homes with paved road access and all utilities available. One of the few remaining ridge-top lots in the Venao area with this caliber of views.',
+        features: ['Panoramic ocean views', '8,500 sqft', 'Ridge-top position', 'Paved road access', 'All utilities available', 'Quality neighborhood', 'Custom build ready', 'Last remaining lot'],
+        isLand: true
+      },
+      'playa-vista': {
+        name: 'Playa Vista Apartment',
+        type: 'Apartment',
+        location: 'Playa Venao',
+        price: '$265,000',
+        image: 'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=1200&q=80',
+        beds: '2', baths: '2', sqft: '1,100',
+        desc: 'A modern two-bedroom apartment in the Playa Vista development, one of Venao\'s most sought-after addresses. Features include an open-plan living space, contemporary kitchen, and a generous balcony with ocean views.',
+        desc2: 'Building amenities include a rooftop pool, BBQ area, and underground parking. Professional property management ensures hassle-free ownership and strong rental returns year-round.',
+        features: ['Ocean view balcony', 'Rooftop pool', 'BBQ area', 'Underground parking', 'Property management', 'Contemporary design', 'Open-plan living', '2 full bathrooms']
+      },
+      'tropical-garden-villa': {
+        name: 'Tropical Garden Villa',
+        type: 'Garden Villa',
+        location: 'Playa Venao',
+        price: '$420,000',
+        image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&q=80',
+        beds: '3', baths: '2.5', sqft: '2,600',
+        desc: 'Surrounded by lush tropical gardens, this three-bedroom villa offers privacy and tranquility just minutes from Playa Venao beach. The indoor-outdoor design features multiple terraces, a private pool, and garden pathways throughout the property.',
+        desc2: 'The villa includes a spacious master suite with garden views, a modern kitchen with breakfast bar, and a separate dining pavilion for entertaining. Every room opens to the outdoors, creating a true tropical living experience.',
+        features: ['Lush tropical gardens', 'Private pool', 'Multiple terraces', 'Garden pathways', 'Dining pavilion', 'Indoor-outdoor design', 'Master with garden views', 'Minutes from beach']
+      },
+      'azuero-coastal': {
+        name: 'Azuero Coastal Home',
+        type: 'Coastal Home',
+        location: 'Playa Venao',
+        price: '$375,000',
+        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80',
+        beds: '3', baths: '2', sqft: '2,000',
+        desc: 'A beautifully designed coastal home that captures the essence of Azuero Peninsula living. Three bedrooms, two bathrooms, and an open-concept main living area that flows onto a covered ocean-view terrace.',
+        desc2: 'Built with local materials and designed by a renowned Panama architect, this home blends seamlessly into the coastal landscape while offering all modern comforts. Located in a quiet residential area with easy access to Venao\'s amenities.',
+        features: ['Ocean-view terrace', 'Architect designed', 'Local materials', 'Open-concept living', 'Quiet residential area', 'Modern comforts', 'Covered outdoor space', 'Easy beach access']
+      },
+      'venao-studio': {
+        name: 'Venao Studio Loft',
+        type: 'Studio Loft',
+        location: 'Playa Venao',
+        price: '$178,000',
+        image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=1200&q=80',
+        beds: '1', baths: '1', sqft: '650',
+        desc: 'A clever studio loft that maximizes every square foot with a mezzanine sleeping area, full kitchen, and a private balcony. Perfect for solo travelers, couples, or as a high-yield rental unit.',
+        desc2: 'Located in a vibrant mixed-use building with ground-floor shops and restaurants. The lowest entry point in Playa Venao for titled property, making it an accessible first investment in this fast-growing market.',
+        features: ['Mezzanine bedroom', 'Full kitchen', 'Private balcony', 'Mixed-use building', 'Ground-floor shops', 'Lowest entry point', 'High rental yield', 'Titled property']
+      }
+    };
+
+    const checkSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>';
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const prop = properties[id];
+
+    if (!prop) {
+      document.querySelector('.property-content').innerHTML = '<div style="text-align:center;padding:4rem;grid-column:1/-1;"><h2>Property Not Found</h2><p style="color:var(--gray);margin-top:1rem;">This property may no longer be available. <a href="listings.html" style="color:var(--accent);font-weight:600;">Browse all properties</a></p></div>';
+    } else {
+      document.title = prop.name + ' | Circa Panama Real Estate';
+      document.getElementById('heroImg').src = prop.image;
+      document.getElementById('heroImg').alt = prop.name + ' in ' + prop.location;
+      document.getElementById('heroType').textContent = prop.type;
+      document.getElementById('heroTitle').textContent = prop.name;
+      document.getElementById('heroLocation').textContent = prop.location;
+      document.getElementById('propertyPrice').textContent = prop.price;
+      document.getElementById('propertyDesc').textContent = prop.desc;
+      document.getElementById('propertyDesc2').textContent = prop.desc2;
+
+      // Stats
+      const statsEl = document.getElementById('propertyStats');
+      if (prop.isLand) {
+        statsEl.innerHTML =
+          '<div class="property-stat"><div class="property-stat-value">' + prop.sqft + '</div><div class="property-stat-label">Lot Size (sqft)</div></div>' +
+          '<div class="property-stat"><div class="property-stat-value">' + prop.type + '</div><div class="property-stat-label">Property Type</div></div>' +
+          '<div class="property-stat"><div class="property-stat-value">' + prop.location + '</div><div class="property-stat-label">Location</div></div>';
+      } else {
+        statsEl.innerHTML =
+          '<div class="property-stat"><div class="property-stat-value">' + prop.beds + '</div><div class="property-stat-label">Bedrooms</div></div>' +
+          '<div class="property-stat"><div class="property-stat-value">' + prop.baths + '</div><div class="property-stat-label">Bathrooms</div></div>' +
+          '<div class="property-stat"><div class="property-stat-value">' + prop.sqft + '</div><div class="property-stat-label">Sq Ft</div></div>';
+      }
+
+      // Features
+      const featuresEl = document.getElementById('featuresList');
+      featuresEl.innerHTML = prop.features.map(f => '<li>' + checkSvg + '<span>' + f + '</span></li>').join('');
+
+      // WhatsApp
+      document.getElementById('whatsappBtn').href = 'https://wa.me/50760001111?text=' + encodeURIComponent('Hi Michael, I\'m interested in ' + prop.name + ' (' + prop.price + ') in ' + prop.location);
+    }
+  </script>
+
+</body>
+</html>
