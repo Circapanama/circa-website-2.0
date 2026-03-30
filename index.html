@@ -551,7 +551,6 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       padding: 2.5rem 2rem;
-      opacity: 0; transform: translateY(24px);
       transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease, border-color 0.3s ease;
     }
     .service-card:hover {
@@ -610,7 +609,6 @@
       border-radius: 16px;
       padding: 3rem 2.5rem;
       border: 1px solid rgba(255,255,255,0.08);
-      opacity: 0; transform: translateY(30px);
       transition: background 0.3s ease, border-color 0.3s ease;
     }
     .adv-card:hover {
@@ -668,13 +666,6 @@
       overflow: hidden;
       border: 1px solid rgba(0,0,0,0.06);
       transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    .listing-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
     }
     .listing-card:hover {
       transform: translateY(-4px);
@@ -796,12 +787,10 @@
       font-size: clamp(1.4rem,2.8vw,2.2rem);
       line-height: 1.5; color: #FFFFFF;
       margin-bottom: 3rem;
-      opacity: 0; transform: translateY(30px);
     }
     .testimonial-author {
       font-size: 0.8rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: rgba(255,255,255,0.5);
-      opacity: 0; transform: translateY(20px);
     }
     .testimonial-author strong { color: #60A5FA; display: block; margin-bottom: 0.25rem; font-weight: 600; }
 
@@ -828,7 +817,6 @@
       padding: 3rem; border-radius: 20px;
       background: #F8FAFC;
       border: 1px solid rgba(37,99,235,0.08);
-      opacity: 0; transform: translateY(40px);
     }
     .team-featured-photo {
       flex-shrink: 0; width: 220px; height: 220px;
@@ -892,7 +880,6 @@
     }
     .team-card {
       text-align: center;
-      opacity: 0; transform: translateY(30px);
     }
     .team-photo-wrap {
       width: 120px; height: 120px; margin: 0 auto 1.2rem;
@@ -1056,12 +1043,7 @@
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
-      opacity: 0; transform: translateY(24px);
       transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
-    }
-    .past-project-card.visible {
-      opacity: 1; transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
     }
     .past-project-card:hover {
       transform: translateY(-4px);
@@ -2127,11 +2109,6 @@
       }
       const mInterval = setInterval(animateMichael, 80);
 
-      // Playa Venao section reveal
-      gsap.from('.venao-content', {
-        scrollTrigger: { trigger: '#venaoInfo', start: 'top 70%' },
-        opacity: 0, y: 40, duration: 0.9, ease: 'power2.out'
-      });
       // Show bubble after scrolling past hero, hide near footer
       const bubble = document.getElementById('michaelBubble');
       ScrollTrigger.create({
@@ -2199,115 +2176,9 @@
       });
     });
 
-    // ===== SERVICE CARDS REVEAL =====
-    gsap.utils.toArray('.service-card').forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1, y: 0, duration: 0.8, delay: i * 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: '.services-grid', start: 'top 85%' }
-      });
-    });
-
-    // ===== FINANCIAL ADVANTAGE CARDS =====
-    gsap.utils.toArray('.adv-card').forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1, y: 0, duration: 1, delay: i * 0.12, ease: 'power2.out',
-        scrollTrigger: { trigger: '.advantage-grid', start: 'top 80%' }
-      });
-    });
-
-    // ===== LISTINGS REVEAL =====
-    document.querySelectorAll('.listing-card').forEach((card, i) => {
-      card.style.transitionDelay = (i % 3) * 0.1 + 's';
-      ScrollTrigger.create({
-        trigger: card,
-        start: 'top 90%',
-        once: true,
-        onEnter: () => card.classList.add('visible')
-      });
-    });
-
-    // ===== PAST PROJECTS REVEAL =====
-    document.querySelectorAll('.past-project-card').forEach((card, i) => {
-      card.style.transitionDelay = (i % 3) * 0.1 + 's';
-      ScrollTrigger.create({
-        trigger: card,
-        start: 'top 90%',
-        once: true,
-        onEnter: () => card.classList.add('visible')
-      });
-    });
-
-    // Partner cards section removed
-
-    // ===== CRYPTO SECTION REVEAL =====
-    gsap.from('.crypto-content', {
-      opacity: 0, y: 40, duration: 1, ease: 'power2.out',
-      scrollTrigger: { trigger: '.crypto-section', start: 'top 75%' }
-    });
-    gsap.from('.crypto-features', {
-      opacity: 0, y: 30, duration: 1, delay: 0.2, ease: 'power2.out',
-      scrollTrigger: { trigger: '.crypto-section', start: 'top 75%' }
-    });
-
-    // ===== TEAM =====
-    // Featured card entrance
-    gsap.to('#teamFeatured', {
-      opacity: 1, y: 0, duration: 1.4, ease: 'power2.out',
-      scrollTrigger: { trigger: '#teamFeatured', start: 'top 85%' }
-    });
-    // Supporting team cards
-    gsap.utils.toArray('.team-card').forEach((card, i) => {
-      gsap.to(card, {
-        opacity: 1, y: 0, duration: 1, delay: i * 0.12, ease: 'power2.out',
-        scrollTrigger: { trigger: '.team-grid', start: 'top 85%' }
-      });
-    });
-
-    // ===== TESTIMONIAL =====
-    gsap.to('.testimonial-quote', {
-      opacity: 1, y: 0, duration: 1.4, ease: 'power2.out',
-      scrollTrigger: { trigger: '.testimonial-section', start: 'top 70%' }
-    });
-    gsap.to('.testimonial-author', {
-      opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power2.out',
-      scrollTrigger: { trigger: '.testimonial-section', start: 'top 70%' }
-    });
-
-    // ===== CTA =====
-    gsap.from('.cta-section h2', {
-      opacity: 0, y: 40, duration: 1.2, ease: 'power2.out',
-      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
-    });
-    gsap.from('.cta-section p', {
-      opacity: 0, y: 30, duration: 1, delay: 0.2, ease: 'power2.out',
-      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
-    });
-    gsap.from('.cta-buttons', {
-      opacity: 0, y: 20, duration: 0.8, delay: 0.4, ease: 'power2.out',
-      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
-    });
-
-    // ===== LOCATIONS INTRO REVEAL =====
-    gsap.from('.locations-intro .eyebrow', {
-      opacity: 0, y: 20, duration: 1, ease: 'power2.out',
-      scrollTrigger: { trigger: '.locations-intro', start: 'top 85%' }
-    });
-    gsap.from('.locations-intro h2', {
-      opacity: 0, y: 30, duration: 1.2, delay: 0.15, ease: 'power2.out',
-      scrollTrigger: { trigger: '.locations-intro', start: 'top 85%' }
-    });
-    gsap.from('.locations-intro p', {
-      opacity: 0, y: 20, duration: 1, delay: 0.3, ease: 'power2.out',
-      scrollTrigger: { trigger: '.locations-intro', start: 'top 85%' }
-    });
-
-    // ===== FAQ ANIMATION & ACCORDION =====
+    // ===== FAQ ACCORDION =====
     const faqDetails = document.querySelectorAll('#faq details');
-    faqDetails.forEach((d, i) => {
-      gsap.from(d, {
-        opacity: 0, y: 20, duration: 0.6, delay: i * 0.1, ease: 'power2.out',
-        scrollTrigger: { trigger: '#faq', start: 'top 85%' }
-      });
+    faqDetails.forEach((d) => {
       d.addEventListener('toggle', () => {
         if (d.open) {
           faqDetails.forEach(other => { if (other !== d) other.open = false; });
