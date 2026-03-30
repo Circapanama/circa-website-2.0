@@ -45,7 +45,7 @@ export default async function handler(req, res) {
 
   // 2. Create lead in Follow Up Boss (only if configured)
   if (process.env.FUB_API_KEY) {
-    const authToken = btoa(process.env.FUB_API_KEY + ':');
+    const authToken = Buffer.from(process.env.FUB_API_KEY + ':').toString('base64');
     const fubHeaders = {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ' + authToken
