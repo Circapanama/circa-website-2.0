@@ -9,6 +9,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email format' });
+  }
+
   const interestLabels = {
     buying: 'Buying Property',
     selling: 'Selling Property',
@@ -41,32 +46,76 @@ export default async function handler(req, res) {
   // 2. Create lead in Follow Up Boss (only if configured)
   if (process.env.FUB_API_KEY) {
     const authToken = Buffer.from(process.env.FUB_API_KEY + ':').toString('base64');
+    const fubHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + authToken
+    };
+
+    const interestTag = interestLabels[interest] || 'General Inquiry';
+    const noteBody = [
+      `BOOKING REQUEST`,
+      `Date: ${date}`,
+      `Time: ${time}`,
+      `Interest: ${interestTag}`,
+      notes ? `Notes: ${notes}` : null
+    ].filter(Boolean).join('\n');
+
     tasks.push(
+      // Create the lead via Events API
       fetch('https://api.followupboss.com/v1/events', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Basic ' + authToken
-        },
+        headers: fubHeaders,
         body: JSON.stringify({
           source: 'Circa Panama Website',
           system: 'CircaPanama',
           type: 'Registration',
-          message: `New booking request for ${date} at ${time}.\nInterest: ${interestLabels[interest] || interest || 'Not specified'}\nNotes: ${notes || 'None'}`,
+          description: noteBody,
+          message: noteBody,
           person: {
             firstName,
             lastName,
             emails: [{ value: email }],
             phones: phone ? [{ value: phone }] : [],
-            tags: ['Website Booking', 'Playa Venao']
+            tags: ['Website Booking', 'Playa Venao', interestTag]
+          },
+          property: {
+            street: 'Playa Venao',
+            city: 'Pedasi',
+            state: 'Los Santos',
+            country: 'Panama'
           }
         })
       }).then(async (r) => {
         if (!r.ok) {
           const body = await r.text();
-          throw new Error(`FUB ${r.status}: ${body}`);
+          throw new Error(`FUB event ${r.status}: ${body}`);
         }
-        return r.json();
+        const eventData = await r.json();
+
+        // Add a note to the person so the booking details show in their timeline
+        if (eventData.id) {
+          // Look up the person by email to get their ID
+          const searchRes = await fetch('https://api.followupboss.com/v1/people?q=' + encodeURIComponent(email), {
+            headers: fubHeaders
+          });
+          if (searchRes.ok) {
+            const searchData = await searchRes.json();
+            if (searchData.people && searchData.people.length > 0) {
+              const personId = searchData.people[0].id;
+              await fetch('https://api.followupboss.com/v1/notes', {
+                method: 'POST',
+                headers: fubHeaders,
+                body: JSON.stringify({
+                  personId,
+                  subject: 'Website Booking Request',
+                  body: noteBody
+                })
+              });
+            }
+          }
+        }
+
+        return eventData;
       })
     );
   }
