@@ -45,7 +45,7 @@ export default async function handler(req, res) {
 
   // 2. Create lead in Follow Up Boss (only if configured)
   if (process.env.FUB_API_KEY) {
-    const authToken = Buffer.from(process.env.FUB_API_KEY + ':').toString('base64');
+    const authToken = btoa(process.env.FUB_API_KEY + ':');
     const fubHeaders = {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ' + authToken
@@ -120,13 +120,18 @@ export default async function handler(req, res) {
     );
   }
 
-  const results = await Promise.allSettled(tasks);
-
-  results.forEach((r, i) => {
-    if (r.status === 'rejected') {
-      console.error(`Task ${i} error:`, r.reason);
-    }
-  });
-
-  return res.status(200).json({ success: true });
+  try {
+    const results = await Promise.allSettled(tasks);
+    const errors = [];
+    results.forEach((r, i) => {
+      if (r.status === 'rejected') {
+        console.error(`Task ${i} error:`, r.reason);
+        errors.push(r.reason?.message || String(r.reason));
+      }
+    });
+    return res.status(200).json({ success: true, errors: errors.length ? errors : undefined });
+  } catch (err) {
+    console.error('Book handler error:', err);
+    return res.status(200).json({ success: true, error: err.message });
+  }
 }
