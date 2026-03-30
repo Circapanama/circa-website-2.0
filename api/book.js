@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { firstName, lastName, email, phone, interest, notes, date, time } = req.body;
+  const { firstName, lastName, email, phone, interest, notes, date, time, newsletter } = req.body;
 
   if (!firstName || !lastName || !email) {
     return res.status(400).json({ error: 'Missing required fields' });
@@ -76,7 +76,7 @@ export default async function handler(req, res) {
             lastName,
             emails: [{ value: email }],
             phones: phone ? [{ value: phone }] : [],
-            tags: ['Website Booking', 'Playa Venao', interestTag]
+            tags: ['Website Booking', 'Playa Venao', interestTag, ...(newsletter ? ['Newsletter'] : [])]
           },
           property: {
             street: 'Playa Venao',

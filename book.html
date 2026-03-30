@@ -542,6 +542,10 @@
         </select>
         <label for="notes">Anything else? (optional)</label>
         <textarea id="notes" placeholder="Tell us about your goals, timeline, or questions..."></textarea>
+        <label style="display:flex;align-items:center;gap:8px;margin:12px 0 16px;cursor:pointer;font-size:0.85rem;color:var(--gray);text-transform:none;letter-spacing:0;font-weight:400;">
+          <input type="checkbox" id="newsletter" checked style="width:18px;height:18px;accent-color:var(--accent);cursor:pointer;">
+          Sign me up for market updates & investment insights
+        </label>
         <button class="btn-book" id="submitBooking">Confirm Booking</button>
       </div>
 
@@ -692,6 +696,7 @@
       const phone = document.getElementById('phone').value.trim();
       const interest = document.getElementById('interest').value;
       const notes = document.getElementById('notes').value.trim();
+      const newsletter = document.getElementById('newsletter').checked;
 
       if (!firstName || !lastName || !email) {
         alert('Please fill in your name and email.');
@@ -715,7 +720,7 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            firstName, lastName, email, phone, interest, notes,
+            firstName, lastName, email, phone, interest, notes, newsletter,
             date: formatted,
             time: selectedTime + ' (Panama Time, EST)'
           })
