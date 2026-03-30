@@ -1,10 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
-);
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -24,51 +17,67 @@ export default async function handler(req, res) {
     other: 'Something Else'
   };
 
-  // Save to Supabase and FUB in parallel
-  const [supaResult, fubResult] = await Promise.allSettled([
-    // 1. Save to Supabase
-    supabase.from('leads').insert({
-      first_name: firstName,
-      last_name: lastName,
-      email,
-      phone: phone || null,
-      interest: interestLabels[interest] || interest || null,
-      notes: notes || null,
-      booking_date: date,
-      booking_time: time,
-      source: 'website'
-    }),
+  const tasks = [];
 
-    // 2. Create lead in Follow Up Boss
-    fetch('https://api.followupboss.com/v1/events', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(process.env.FUB_API_KEY + ':')
-      },
-      body: JSON.stringify({
-        source: 'Circa Panama Website',
-        system: 'CircaPanama',
-        type: 'Registration',
-        message: `New booking request for ${date} at ${time}.\nInterest: ${interestLabels[interest] || interest || 'Not specified'}\nNotes: ${notes || 'None'}`,
-        person: {
-          firstName,
-          lastName,
-          emails: [{ value: email }],
-          phones: phone ? [{ value: phone }] : [],
-          tags: ['Website Booking', 'Playa Venao']
-        }
+  // 1. Save to Supabase (only if configured)
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY) {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+    tasks.push(
+      supabase.from('leads').insert({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone: phone || null,
+        interest: interestLabels[interest] || interest || null,
+        notes: notes || null,
+        booking_date: date,
+        booking_time: time,
+        source: 'website'
       })
-    })
-  ]);
+    );
+  }
 
-  // Log errors but don't fail the request
-  if (supaResult.status === 'rejected') {
-    console.error('Supabase error:', supaResult.reason);
+  // 2. Create lead in Follow Up Boss (only if configured)
+  if (process.env.FUB_API_KEY) {
+    const authToken = Buffer.from(process.env.FUB_API_KEY + ':').toString('base64');
+    tasks.push(
+      fetch('https://api.followupboss.com/v1/events', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + authToken
+        },
+        body: JSON.stringify({
+          source: 'Circa Panama Website',
+          system: 'CircaPanama',
+          type: 'Registration',
+          message: `New booking request for ${date} at ${time}.\nInterest: ${interestLabels[interest] || interest || 'Not specified'}\nNotes: ${notes || 'None'}`,
+          person: {
+            firstName,
+            lastName,
+            emails: [{ value: email }],
+            phones: phone ? [{ value: phone }] : [],
+            tags: ['Website Booking', 'Playa Venao']
+          }
+        })
+      }).then(async (r) => {
+        if (!r.ok) {
+          const body = await r.text();
+          throw new Error(`FUB ${r.status}: ${body}`);
+        }
+        return r.json();
+      })
+    );
   }
-  if (fubResult.status === 'rejected') {
-    console.error('FUB error:', fubResult.reason);
-  }
+
+  const results = await Promise.allSettled(tasks);
+
+  results.forEach((r, i) => {
+    if (r.status === 'rejected') {
+      console.error(`Task ${i} error:`, r.reason);
+    }
+  });
 
   return res.status(200).json({ success: true });
 }
