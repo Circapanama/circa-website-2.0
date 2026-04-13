@@ -356,7 +356,7 @@
 
     function renderProperty(prop) {
       var price = formatPrice(prop.price);
-      var img = getDriveThumb(prop.drive_folder_link, 1200) || defaultImages[0];
+      var img = prop._hero_image || getDriveThumb(prop.drive_folder_link, 1200) || defaultImages[0];
       var fallback = defaultImages[Math.floor(Math.random() * defaultImages.length)];
 
       document.title = prop.name + ' | Circa Panama Real Estate';
@@ -406,23 +406,42 @@
       document.getElementById('whatsappBtn').href = 'https://wa.me/50762256363?text=' + encodeURIComponent('Hi Michael, I\'m interested in ' + prop.name + (price ? ' (' + price + ')' : '') + ' in ' + (prop.location || 'Panama'));
     }
 
-    // Load property from Google Sheets
+    // Load property from listings.json (built by sync agent)
     var params = new URLSearchParams(window.location.search);
     var propName = params.get('name');
 
     if (!propName) {
       showNotFound();
     } else {
-      var gvizUrl = 'https://docs.google.com/spreadsheets/d/' + SHEETS_ID + '/gviz/tq?tqx=out:json&sheet=Sheet1';
-      fetch(gvizUrl)
-        .then(function(r) { return r.text(); })
-        .then(function(text) {
-          var json = JSON.parse(text.replace(/^[^(]*\(/, '').replace(/\);?\s*$/, ''));
-          var rows = json.table.rows.map(parseGvizRow);
+      fetch('listings.json', { cache: 'no-cache' })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
           var searchName = propName.trim().toLowerCase();
-          var found = rows.find(function(r) { return r.name.toLowerCase().trim() === searchName; });
-          if (found) renderProperty(found);
-          else showNotFound();
+          var found = (data.properties || []).find(function(p) {
+            return (p.name || '').toLowerCase().trim() === searchName;
+          });
+          if (!found) return showNotFound();
+          // Adapt json shape to the renderer
+          var firstImg = found.images && found.images[0];
+          renderProperty({
+            name: found.name,
+            location: found.location,
+            category: found.category,
+            lot_size: found.lot_size ? String(Math.round(Number(found.lot_size))) : '',
+            construction_size: found.construction_size ? String(Math.round(Number(found.construction_size))) : '',
+            price_sqm: found.price_per_sqm || '',
+            price: found.price || '',
+            bedrooms: found.bedrooms ? String(found.bedrooms) : '',
+            bathrooms: found.bathrooms ? String(found.bathrooms) : '',
+            parking: found.parking ? String(found.parking) : '',
+            amenities: found.amenities || '',
+            owner: found.owner || '',
+            contact: found.contact || '',
+            drive_folder_link: firstImg ? firstImg.url : (found.drive_link || ''),
+            status: found.status || '',
+            notes: found.notes || '',
+            _hero_image: firstImg ? firstImg.url : ''
+          });
         })
         .catch(function() { showNotFound(); });
     }

@@ -855,8 +855,8 @@
       });
     }
 
-    // ===== Dynamic listings from Google Sheets (gviz, no backend) =====
-    const SHEETS_ID = '17nryG-WPTeSxC1n2XiPuRZ1h2CByXUQPlttul35P6Ck';
+    // ===== Dynamic listings from listings.json (built by sync agent) =====
+    const LISTINGS_URL = 'listings.json';
     const FALLBACK_IMAGES = [
       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
@@ -911,24 +911,21 @@
       return 'house';
     }
 
-    function parseGvizRow(row) {
-      const c = row.c || [];
-      const val = (i) => c[i] ? (c[i].f || String(c[i].v == null ? '' : c[i].v)) : '';
-      const num = (i) => (c[i] && c[i].v != null && c[i].v !== '') ? Number(c[i].v) : 0;
+    function normalizeProperty(p) {
       return {
-        name: val(0).trim(),
-        location: val(1).trim(),
-        category: val(2).trim(),
-        lot_size: num(3),
-        construction_size: num(4),
-        price_raw: val(6),
-        price_num: parsePrice(val(6)),
-        bedrooms: num(7),
-        bathrooms: num(8),
-        parking: num(9),
-        amenities: val(10),
-        drive_link: val(13),
-        status: val(14)
+        name: (p.name || '').trim(),
+        location: (p.location || '').trim(),
+        category: (p.category || '').trim(),
+        lot_size: Number(p.lot_size) || 0,
+        construction_size: Number(p.construction_size) || 0,
+        price_raw: p.price || '',
+        price_num: parsePrice(p.price || ''),
+        bedrooms: Number(p.bedrooms) || 0,
+        bathrooms: Number(p.bathrooms) || 0,
+        parking: Number(p.parking) || 0,
+        amenities: p.amenities || '',
+        images: Array.isArray(p.images) ? p.images : [],
+        status: p.status || ''
       };
     }
 
@@ -938,7 +935,8 @@
       const frag = document.createDocumentFragment();
       list.forEach((p, idx) => {
         const filterBucket = categoryToFilter(p.category);
-        const img = driveThumb(p.drive_link, 800) || FALLBACK_IMAGES[idx % FALLBACK_IMAGES.length];
+        const firstImg = p.images && p.images[0];
+        const img = (firstImg && (firstImg.thumb || firstImg.url)) || FALLBACK_IMAGES[idx % FALLBACK_IMAGES.length];
         const fallback = FALLBACK_IMAGES[idx % FALLBACK_IMAGES.length];
 
         const meta = [];
@@ -1016,20 +1014,18 @@
     });
 
     // Fetch and render
-    const gvizUrl = 'https://docs.google.com/spreadsheets/d/' + SHEETS_ID + '/gviz/tq?tqx=out:json&sheet=Sheet1';
-    fetch(gvizUrl)
-      .then(r => r.text())
-      .then(text => {
-        const json = JSON.parse(text.replace(/^[^(]*\(/, '').replace(/\);?\s*$/, ''));
-        const rows = (json.table.rows || []).map(parseGvizRow)
-          .filter(r => r.name && r.name.length > 1 && !/^property.*project/i.test(r.name));
+    fetch(LISTINGS_URL, { cache: 'no-cache' })
+      .then(r => r.json())
+      .then(data => {
+        const rows = (data.properties || []).map(normalizeProperty)
+          .filter(r => r.name && r.name.length > 1);
         allProperties = rows;
         loadingState.style.display = 'none';
         renderCards(rows);
         applyFilters();
       })
       .catch(err => {
-        console.error('Failed to load sheet:', err);
+        console.error('Failed to load listings.json:', err);
         loadingState.innerHTML = '<p style="color:#b91c1c;">Could not load listings. Please refresh the page.</p>';
       });
   </script>

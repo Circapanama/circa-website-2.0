@@ -1,0 +1,969 @@
+{
+  "generated_at": "2026-04-13T14:01:22.267870Z",
+  "count": 22,
+  "properties": [
+    {
+      "name": "Casa Valley",
+      "location": "Playa Venao",
+      "category": "Project",
+      "lot_size": "600",
+      "construction_size": "280",
+      "price_per_sqm": "$1,964.29",
+      "price": "$550,000.00",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "commercial area, green areas & padel courts",
+      "owner": "Papaya Holdings (Tomer)",
+      "contact": "972 54 56 21 449",
+      "drive_link": "https://drive.google.com/file/d/1wn5ep8fcZ1D7Y1peulwxMxaUbFqqbZ2I/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Ready in 3 months",
+      "images": [
+        {
+          "id": "1haowlV6QHr4FvNuvR9B4cm0mSzWl4QcP",
+          "name": "Balcony-poolview.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1haowlV6QHr4FvNuvR9B4cm0mSzWl4QcP=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1haowlV6QHr4FvNuvR9B4cm0mSzWl4QcP=w600"
+        },
+        {
+          "id": "1hQTo5quogkwDQ5sMC8P0TbShLlWh2ekN",
+          "name": "Floorplan.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1hQTo5quogkwDQ5sMC8P0TbShLlWh2ekN=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1hQTo5quogkwDQ5sMC8P0TbShLlWh2ekN=w600"
+        },
+        {
+          "id": "1u1t6PNBA-IZ1fy9NjM86xxWuChm4kLX8",
+          "name": "Front.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1u1t6PNBA-IZ1fy9NjM86xxWuChm4kLX8=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1u1t6PNBA-IZ1fy9NjM86xxWuChm4kLX8=w600"
+        },
+        {
+          "id": "13B-rV6_cOsFzNQq5hG_E6FSeC70aeZBi",
+          "name": "kitchen.jpg",
+          "url": "https://lh3.googleusercontent.com/d/13B-rV6_cOsFzNQq5hG_E6FSeC70aeZBi=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/13B-rV6_cOsFzNQq5hG_E6FSeC70aeZBi=w600"
+        },
+        {
+          "id": "1tjOyDcXsFQg7VNKN1hsK-PUjVs6aMcZ6",
+          "name": "Living2.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1tjOyDcXsFQg7VNKN1hsK-PUjVs6aMcZ6=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1tjOyDcXsFQg7VNKN1hsK-PUjVs6aMcZ6=w600"
+        },
+        {
+          "id": "1Jng3Na2hf76_UxqDWUlueREuChO4t8ZB",
+          "name": "Livingroom.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1Jng3Na2hf76_UxqDWUlueREuChO4t8ZB=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1Jng3Na2hf76_UxqDWUlueREuChO4t8ZB=w600"
+        },
+        {
+          "id": "1tWofO6-2FNYyq0wMGvx8KBOphZFbgIUy",
+          "name": "masterbed.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1tWofO6-2FNYyq0wMGvx8KBOphZFbgIUy=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1tWofO6-2FNYyq0wMGvx8KBOphZFbgIUy=w600"
+        },
+        {
+          "id": "15zEaN2SzV97xKCfbV_aqiI6Ah2hHfhU6",
+          "name": "Poolview.jpg",
+          "url": "https://lh3.googleusercontent.com/d/15zEaN2SzV97xKCfbV_aqiI6Ah2hHfhU6=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/15zEaN2SzV97xKCfbV_aqiI6Ah2hHfhU6=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Casa Marvalley ",
+        "folder_id": "1ZI9Ib72cJVfZbJTrzoa5XhzB8rP9vkhK",
+        "score": 0.87
+      }
+    },
+    {
+      "name": "Villa Brisa",
+      "location": "Venao Village",
+      "category": "House",
+      "lot_size": "646",
+      "construction_size": "272",
+      "price_per_sqm": "$3,308.82",
+      "price": "$900,000.00",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "parking": "2",
+      "amenities": "Pool, BBQ, Solar system, Guets house",
+      "owner": "Green Ace Aviad",
+      "contact": "507 6885 5232",
+      "drive_link": "https://drive.google.com/file/d/1kED4MthqGxGbVnx2sdb5I9IjhQFCe-dR/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Ready in 6 months",
+      "images": [
+        {
+          "id": "1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf",
+          "name": "_Q9A3504-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w600"
+        },
+        {
+          "id": "1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq",
+          "name": "_Q9A3525-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w600"
+        },
+        {
+          "id": "1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG",
+          "name": "_Q9A3626-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w600"
+        },
+        {
+          "id": "14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB",
+          "name": "_Q9A3716-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w600"
+        },
+        {
+          "id": "1P8hV53arK4ahSqVM47FVia1SkXoC1-R4",
+          "name": "_Q9A3737-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w600"
+        },
+        {
+          "id": "1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D",
+          "name": "DJI_0130.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w600"
+        },
+        {
+          "id": "185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl",
+          "name": "DJI_0142.JPG",
+          "url": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w600"
+        },
+        {
+          "id": "1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN",
+          "name": "DJI_0200.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w600"
+        },
+        {
+          "id": "1BqL_uKtODt9hCiJILvivga_TG5lh-afE",
+          "name": "IMG_5726.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Villa Marina Boho",
+        "folder_id": "15iFsm96U5-IpKgic8tymLrECRw0zSHzu",
+        "score": 0.64
+      }
+    },
+    {
+      "name": "Duplex Villa",
+      "location": "Lomas Venao",
+      "category": "Duplex",
+      "lot_size": "488",
+      "construction_size": "180",
+      "price_per_sqm": "$2,777.78",
+      "price": "$500,000.00",
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "parking": "1",
+      "amenities": "Pool,  Outdooe areas",
+      "owner": "VEO Construction Oded",
+      "contact": "507 6237 3577",
+      "drive_link": "",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Ready in 3 months",
+      "images": [],
+      "match": {
+        "folder_name": "Duplex Lomas ",
+        "folder_id": "1sCus4HCVoZ9AiE8StYs1oRG-oLnyAdmJ",
+        "score": 0.73
+      }
+    },
+    {
+      "name": "Villa Marina 402",
+      "location": "Villa Marina",
+      "category": "House",
+      "lot_size": "",
+      "construction_size": "180",
+      "price_per_sqm": "$3,611.11",
+      "price": "$650,000.00",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "Pool, future plans, bbq area",
+      "owner": "Azul",
+      "contact": "507 6460 7739",
+      "drive_link": "",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Completly furnished",
+      "images": [
+        {
+          "id": "1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf",
+          "name": "_Q9A3504-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w600"
+        },
+        {
+          "id": "1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq",
+          "name": "_Q9A3525-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w600"
+        },
+        {
+          "id": "1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG",
+          "name": "_Q9A3626-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w600"
+        },
+        {
+          "id": "14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB",
+          "name": "_Q9A3716-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w600"
+        },
+        {
+          "id": "1P8hV53arK4ahSqVM47FVia1SkXoC1-R4",
+          "name": "_Q9A3737-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w600"
+        },
+        {
+          "id": "1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D",
+          "name": "DJI_0130.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w600"
+        },
+        {
+          "id": "185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl",
+          "name": "DJI_0142.JPG",
+          "url": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w600"
+        },
+        {
+          "id": "1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN",
+          "name": "DJI_0200.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w600"
+        },
+        {
+          "id": "1BqL_uKtODt9hCiJILvivga_TG5lh-afE",
+          "name": "IMG_5726.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Villa Marina Boho",
+        "folder_id": "15iFsm96U5-IpKgic8tymLrECRw0zSHzu",
+        "score": 0.76
+      }
+    },
+    {
+      "name": "Casa Ceviche",
+      "location": "Blue Venao",
+      "category": "House",
+      "lot_size": "300",
+      "construction_size": "160",
+      "price_per_sqm": "$4,531.25",
+      "price": "$725,000.00",
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "parking": "1",
+      "amenities": "Beach Club, BBq area",
+      "owner": "Pirawa Properties",
+      "contact": "6898 9669",
+      "drive_link": "https://drive.google.com/file/d/1nlHryQKtIaLVhSJKF_W9uvlSI7hsU6By/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Completly furnished",
+      "images": [
+        {
+          "id": "1pSrzXtc_JCx0r0GNj5v_6mMVc4CMJZha",
+          "name": "4W2A2981-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1pSrzXtc_JCx0r0GNj5v_6mMVc4CMJZha=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1pSrzXtc_JCx0r0GNj5v_6mMVc4CMJZha=w600"
+        },
+        {
+          "id": "1zC537mcD4zaFQRpyCgKjW6j9uYPz5T6q",
+          "name": "4W2A3044-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1zC537mcD4zaFQRpyCgKjW6j9uYPz5T6q=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1zC537mcD4zaFQRpyCgKjW6j9uYPz5T6q=w600"
+        },
+        {
+          "id": "1PgHat9mdBPbpo7iy6iVX5TflInoPFgkJ",
+          "name": "4W2A3107-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1PgHat9mdBPbpo7iy6iVX5TflInoPFgkJ=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1PgHat9mdBPbpo7iy6iVX5TflInoPFgkJ=w600"
+        },
+        {
+          "id": "15NzaqNPRfUxeOfuwrlbKg0D1QXIovwgq",
+          "name": "4W2A3167-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/15NzaqNPRfUxeOfuwrlbKg0D1QXIovwgq=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/15NzaqNPRfUxeOfuwrlbKg0D1QXIovwgq=w600"
+        },
+        {
+          "id": "1eJh3YkSY86B08zUXFK6vetOf5E54uYjX",
+          "name": "4W2A3185-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1eJh3YkSY86B08zUXFK6vetOf5E54uYjX=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1eJh3YkSY86B08zUXFK6vetOf5E54uYjX=w600"
+        },
+        {
+          "id": "1l1FCW8_3B-y4EuGF-xtL4KAwoIQaXM94",
+          "name": "4W2A3203-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1l1FCW8_3B-y4EuGF-xtL4KAwoIQaXM94=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1l1FCW8_3B-y4EuGF-xtL4KAwoIQaXM94=w600"
+        },
+        {
+          "id": "1HTHQ2ohW6N2kPQU5ICzTtcwqrn4zTddM",
+          "name": "4W2A3233-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1HTHQ2ohW6N2kPQU5ICzTtcwqrn4zTddM=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1HTHQ2ohW6N2kPQU5ICzTtcwqrn4zTddM=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Blue Villa ceviche",
+        "folder_id": "1c_XePpCetUBPCi9mvSmAANZDJbwEQFCS",
+        "score": 0.59
+      }
+    },
+    {
+      "name": "Blue B21",
+      "location": "Blue Venao",
+      "category": "Apartment",
+      "lot_size": "-",
+      "construction_size": "107",
+      "price_per_sqm": "$3,271.03",
+      "price": "$350,000.00",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "Beach Club, Terrace area",
+      "owner": "Michael/Azuero Rental",
+      "contact": "507 6225 6363",
+      "drive_link": "https://drive.google.com/file/d/1yqzAUx246brhDphLMtgSTP7-r6YwxP5r/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "furnished",
+      "images": [
+        {
+          "id": "1ychO2G5Q3ce9AFVs5NN_4Ib1ZH3W9cQS",
+          "name": "0Y4A5046-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1ychO2G5Q3ce9AFVs5NN_4Ib1ZH3W9cQS=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1ychO2G5Q3ce9AFVs5NN_4Ib1ZH3W9cQS=w600"
+        },
+        {
+          "id": "1x61w_hEFKfuuVm1WdfuMN7nvMeiCz6Kw",
+          "name": "0Y4A5088-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1x61w_hEFKfuuVm1WdfuMN7nvMeiCz6Kw=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1x61w_hEFKfuuVm1WdfuMN7nvMeiCz6Kw=w600"
+        },
+        {
+          "id": "1GCgF0BbQ0uGE5iPV4KbJUabtPUBrjKrB",
+          "name": "0Y4A5109-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1GCgF0BbQ0uGE5iPV4KbJUabtPUBrjKrB=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1GCgF0BbQ0uGE5iPV4KbJUabtPUBrjKrB=w600"
+        },
+        {
+          "id": "1juwJ8lF8e8LQVAJwvKhgkyNUOqLsf-97",
+          "name": "0Y4A5217-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1juwJ8lF8e8LQVAJwvKhgkyNUOqLsf-97=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1juwJ8lF8e8LQVAJwvKhgkyNUOqLsf-97=w600"
+        },
+        {
+          "id": "1JqOYL66kfs6IctIgj87Fun0njC25CiMO",
+          "name": "0Y4A5232-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1JqOYL66kfs6IctIgj87Fun0njC25CiMO=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1JqOYL66kfs6IctIgj87Fun0njC25CiMO=w600"
+        },
+        {
+          "id": "1RLKv7svmWgqKDLMtHMQEXvgCe_5WqF0R",
+          "name": "0Y4A5300-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1RLKv7svmWgqKDLMtHMQEXvgCe_5WqF0R=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1RLKv7svmWgqKDLMtHMQEXvgCe_5WqF0R=w600"
+        },
+        {
+          "id": "16vRBo3AeFEVtcHr_wGtsNgz04GHuPBTi",
+          "name": "Blue 2.jpg",
+          "url": "https://lh3.googleusercontent.com/d/16vRBo3AeFEVtcHr_wGtsNgz04GHuPBTi=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/16vRBo3AeFEVtcHr_wGtsNgz04GHuPBTi=w600"
+        },
+        {
+          "id": "1M_hzX4c4mgpS5FtIlSkvYwYj9_Kvmn6s",
+          "name": "Blue.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1M_hzX4c4mgpS5FtIlSkvYwYj9_Kvmn6s=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1M_hzX4c4mgpS5FtIlSkvYwYj9_Kvmn6s=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Blue B21 condo",
+        "folder_id": "1ytjbWiMEzaOknLZtHKv-Fnax-qJ79IXx",
+        "score": 0.9
+      }
+    },
+    {
+      "name": "Villa Umutu",
+      "location": "Cañas",
+      "category": "House",
+      "lot_size": "3342",
+      "construction_size": "",
+      "price_per_sqm": "#DIV/0!",
+      "price": "",
+      "bedrooms": "3",
+      "bathrooms": "2.5",
+      "parking": "2",
+      "amenities": "Pool, terrace, solay system, ocean view",
+      "owner": "Margarita",
+      "contact": "507 67785469",
+      "drive_link": "https://drive.google.com/file/d/1CMraaJGlbbs-J_9BbPWmnRSBG0cC8FBW/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "furnished",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Duplex 47 B",
+      "location": "Blue Venao",
+      "category": "Duplex",
+      "lot_size": "-",
+      "construction_size": "282",
+      "price_per_sqm": "$2,659.57",
+      "price": "$750,000.00",
+      "bedrooms": "3",
+      "bathrooms": "3.5",
+      "parking": "1",
+      "amenities": "Beach club, penthouse, rooftop",
+      "owner": "Michael",
+      "contact": "",
+      "drive_link": "https://drive.google.com/file/d/1s9BKLTABO0WMFCikN0PyOz-cR6SI9yTz/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Ready in 6 months option to add private jacuzzi",
+      "images": [],
+      "match": {
+        "folder_name": "Duplex Lomas ",
+        "folder_id": "1sCus4HCVoZ9AiE8StYs1oRG-oLnyAdmJ",
+        "score": 0.6
+      }
+    },
+    {
+      "name": "Duplex 46 A",
+      "location": "Blue Venao",
+      "category": "Duplex",
+      "lot_size": "-",
+      "construction_size": "205",
+      "price_per_sqm": "$3,560.98",
+      "price": "$730,000.00",
+      "bedrooms": "3",
+      "bathrooms": "3.5",
+      "parking": "1",
+      "amenities": "Beach club, penthouse, rooftop",
+      "owner": "Michael",
+      "contact": "",
+      "drive_link": "https://drive.google.com/file/d/1s9BKLTABO0WMFCikN0PyOz-cR6SI9yTz/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "ready in 6 months gorund floor area option to add pool",
+      "images": [],
+      "match": {
+        "folder_name": "Duplex Lomas ",
+        "folder_id": "1sCus4HCVoZ9AiE8StYs1oRG-oLnyAdmJ",
+        "score": 0.7
+      }
+    },
+    {
+      "name": "Villa Marina Condo Torre 100",
+      "location": "Villa Marina",
+      "category": "Condo",
+      "lot_size": "-",
+      "construction_size": "132",
+      "price_per_sqm": "$3,030.30",
+      "price": "$400,000.00",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "Signature Beach Club\nSports activities and Spa\nBycicle trails\nA 40-room hotel that will provide\nprofessional property management\nservices",
+      "owner": "Michael",
+      "contact": "",
+      "drive_link": "https://drive.google.com/file/d/1xn9CDHxN8wsMwQULWMfgZHGiyjSRKgZB/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "2028",
+      "images": [
+        {
+          "id": "1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf",
+          "name": "_Q9A3504-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w600"
+        },
+        {
+          "id": "1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq",
+          "name": "_Q9A3525-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w600"
+        },
+        {
+          "id": "1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG",
+          "name": "_Q9A3626-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w600"
+        },
+        {
+          "id": "14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB",
+          "name": "_Q9A3716-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w600"
+        },
+        {
+          "id": "1P8hV53arK4ahSqVM47FVia1SkXoC1-R4",
+          "name": "_Q9A3737-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w600"
+        },
+        {
+          "id": "1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D",
+          "name": "DJI_0130.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w600"
+        },
+        {
+          "id": "185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl",
+          "name": "DJI_0142.JPG",
+          "url": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w600"
+        },
+        {
+          "id": "1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN",
+          "name": "DJI_0200.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w600"
+        },
+        {
+          "id": "1BqL_uKtODt9hCiJILvivga_TG5lh-afE",
+          "name": "IMG_5726.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Villa Marina Boho",
+        "folder_id": "15iFsm96U5-IpKgic8tymLrECRw0zSHzu",
+        "score": 0.67
+      }
+    },
+    {
+      "name": "Villa Marina Condo Torre 200",
+      "location": "Villa Marina",
+      "category": "Condo",
+      "lot_size": "-",
+      "construction_size": "180",
+      "price_per_sqm": "$3,027.78",
+      "price": "$545,000.00",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "Signature Beach Club\nSports activities and Spa\nBycicle trails\nA 40-room hotel that will provide\nprofessional property management\nservices",
+      "owner": "Michael",
+      "contact": "",
+      "drive_link": "https://drive.google.com/file/d/1xn9CDHxN8wsMwQULWMfgZHGiyjSRKgZB/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "2028",
+      "images": [
+        {
+          "id": "1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf",
+          "name": "_Q9A3504-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w600"
+        },
+        {
+          "id": "1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq",
+          "name": "_Q9A3525-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w600"
+        },
+        {
+          "id": "1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG",
+          "name": "_Q9A3626-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w600"
+        },
+        {
+          "id": "14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB",
+          "name": "_Q9A3716-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w600"
+        },
+        {
+          "id": "1P8hV53arK4ahSqVM47FVia1SkXoC1-R4",
+          "name": "_Q9A3737-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w600"
+        },
+        {
+          "id": "1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D",
+          "name": "DJI_0130.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w600"
+        },
+        {
+          "id": "185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl",
+          "name": "DJI_0142.JPG",
+          "url": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w600"
+        },
+        {
+          "id": "1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN",
+          "name": "DJI_0200.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w600"
+        },
+        {
+          "id": "1BqL_uKtODt9hCiJILvivga_TG5lh-afE",
+          "name": "IMG_5726.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Villa Marina Boho",
+        "folder_id": "15iFsm96U5-IpKgic8tymLrECRw0zSHzu",
+        "score": 0.67
+      }
+    },
+    {
+      "name": "Villa 20",
+      "location": "Blue Venao",
+      "category": "House",
+      "lot_size": "300",
+      "construction_size": "110",
+      "price_per_sqm": "$5,318.18",
+      "price": "$585,000.00",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "Beach Club, BBq area",
+      "owner": "Michael/Azuero Rental",
+      "contact": "507 6225 6363",
+      "drive_link": "",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "They can do another bedroom  for 40 k",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Condo F11",
+      "location": "Blue Venao",
+      "category": "Apartment",
+      "lot_size": "-",
+      "construction_size": "135",
+      "price_per_sqm": "$2,777.78",
+      "price": "$375,000.00",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "Beach Club, BBq area",
+      "owner": "Michael",
+      "contact": "",
+      "drive_link": "",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Ground floor apartment",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Rio Venao",
+      "location": "Playa Venao",
+      "category": "Duplex",
+      "lot_size": "300",
+      "construction_size": "100",
+      "price_per_sqm": "$3,200.00",
+      "price": "$320,000.00",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "2",
+      "amenities": "Pool, Terraces",
+      "owner": "Nadav",
+      "contact": "507 6444 7221",
+      "drive_link": "https://drive.google.com/file/d/1UlWBj3pZLav6u8_Lvwllqo7JwR8V1p7r/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Next  to new habat pre sale opportunity",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Rio Venao",
+      "location": "Playa Venao",
+      "category": "Duplex",
+      "lot_size": "300",
+      "construction_size": "117",
+      "price_per_sqm": "$3,247.86",
+      "price": "$380,000.00",
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "parking": "2",
+      "amenities": "Pool, Terraces",
+      "owner": "Nadav",
+      "contact": "507 6444 7221",
+      "drive_link": "https://drive.google.com/file/d/1UlWBj3pZLav6u8_Lvwllqo7JwR8V1p7r/view?usp=sharing",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Next  to new habat pre sale opportunity",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Condo b11",
+      "location": "Blue Venao",
+      "category": "Condo",
+      "lot_size": "-",
+      "construction_size": "126",
+      "price_per_sqm": "$2,896.83",
+      "price": "$365,000.00",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "Beach Club, BBq area",
+      "owner": "Melanie/Michael",
+      "contact": "1 303 667 9340",
+      "drive_link": "",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "Ground floor apartment/rented (2300)",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Vervana",
+      "location": "La playita",
+      "category": "Condo",
+      "lot_size": "",
+      "construction_size": "101",
+      "price_per_sqm": "",
+      "price": "450-575",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "",
+      "amenities": "secluded beach, private pool, security 24/7, sundeck, restaurant, fitness center, lobby, owners launch",
+      "owner": "Carlos orillac",
+      "contact": "",
+      "drive_link": "https://drive.google.com/drive/folders/1IzrWneGK31jggo7NcIY0_SxXNYvnpvXR?usp=share_link",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Cocobolo PH",
+      "location": "Playa venao",
+      "category": "Condo",
+      "lot_size": "",
+      "construction_size": "355.94",
+      "price_per_sqm": "",
+      "price": "$1,100,000.00",
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "parking": "2",
+      "amenities": "",
+      "owner": "Caroline",
+      "contact": "",
+      "drive_link": "https://drive.google.com/drive/folders/1eKAaCJwBio2qVZjxJhugZNXiUTed121q?usp=share_link",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Cocobolo 2 bdr",
+      "location": "Playa Venao",
+      "category": "Condo",
+      "lot_size": "",
+      "construction_size": "166.8",
+      "price_per_sqm": "",
+      "price": "$580,000.00",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "parking": "1",
+      "amenities": "",
+      "owner": "Caroline",
+      "contact": "",
+      "drive_link": "https://drive.google.com/drive/folders/1eKAaCJwBio2qVZjxJhugZNXiUTed121q?usp=share_link",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Cocobolo Studio",
+      "location": "Playa Venao",
+      "category": "Condo",
+      "lot_size": "",
+      "construction_size": "123.09",
+      "price_per_sqm": "",
+      "price": "$440,000.00",
+      "bedrooms": "1",
+      "bathrooms": "1",
+      "parking": "1",
+      "amenities": "",
+      "owner": "Caroline",
+      "contact": "",
+      "drive_link": "https://drive.google.com/drive/folders/1eKAaCJwBio2qVZjxJhugZNXiUTed121q?usp=share_link",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Raya del Sol",
+      "location": "Playa Raya",
+      "category": "Lot + Villa",
+      "lot_size": "",
+      "construction_size": "from 2618 -5236",
+      "price_per_sqm": "",
+      "price": "80-100",
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "parking": "2",
+      "amenities": "Beach front, beac access, food garden, 12 acres",
+      "owner": "Matt",
+      "contact": "",
+      "drive_link": "https://drive.google.com/drive/folders/1kSCERH7pK3P40TSdEGi8ueebI9HWIdB9?usp=share_link",
+      "status": "Available",
+      "legal_docs": "TRUE",
+      "notes": "",
+      "images": [],
+      "match": null
+    },
+    {
+      "name": "Villa Oro",
+      "location": "Playa Venao",
+      "category": "House",
+      "lot_size": "",
+      "construction_size": "",
+      "price_per_sqm": "",
+      "price": "",
+      "bedrooms": "",
+      "bathrooms": "",
+      "parking": "",
+      "amenities": "",
+      "owner": "",
+      "contact": "",
+      "drive_link": "",
+      "status": "",
+      "legal_docs": "",
+      "notes": "",
+      "images": [
+        {
+          "id": "1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf",
+          "name": "_Q9A3504-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1D9Wd0LzRQiRs6xmtN4FCje3eE1Gv81tf=w600"
+        },
+        {
+          "id": "1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq",
+          "name": "_Q9A3525-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1hDdb4lWuJPqB2h--K50xbG-g4FugJpZq=w600"
+        },
+        {
+          "id": "1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG",
+          "name": "_Q9A3626-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1IqKRyNzzo7ZPP5gh9X-QBbxv3P29EuXG=w600"
+        },
+        {
+          "id": "14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB",
+          "name": "_Q9A3716-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/14cINocPKQ2fp_iPbBIt7m6lmgDllvpTB=w600"
+        },
+        {
+          "id": "1P8hV53arK4ahSqVM47FVia1SkXoC1-R4",
+          "name": "_Q9A3737-HDR.jpg",
+          "url": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1P8hV53arK4ahSqVM47FVia1SkXoC1-R4=w600"
+        },
+        {
+          "id": "1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D",
+          "name": "DJI_0130.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1EIrfa-8RwoAn5giwuFMHg2wzuY33I9_D=w600"
+        },
+        {
+          "id": "185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl",
+          "name": "DJI_0142.JPG",
+          "url": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/185yA6-MDg3-_LBh8yKIPXIM_EQ5f0edl=w600"
+        },
+        {
+          "id": "1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN",
+          "name": "DJI_0200.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1PnHse0Ch0N9GlaCGr_P_nLAq9N6IfQZN=w600"
+        },
+        {
+          "id": "1BqL_uKtODt9hCiJILvivga_TG5lh-afE",
+          "name": "IMG_5726.JPG",
+          "url": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w1200",
+          "thumb": "https://lh3.googleusercontent.com/d/1BqL_uKtODt9hCiJILvivga_TG5lh-afE=w600"
+        }
+      ],
+      "match": {
+        "folder_name": "Villa Marina Boho",
+        "folder_id": "15iFsm96U5-IpKgic8tymLrECRw0zSHzu",
+        "score": 0.61
+      }
+    }
+  ],
+  "report": {
+    "matched": 11,
+    "unmatched_sheet_rows": [
+      "Villa Umutu",
+      "Villa 20",
+      "Condo F11",
+      "Rio Venao",
+      "Rio Venao",
+      "Condo b11",
+      "Vervana",
+      "Cocobolo PH",
+      "Cocobolo 2 bdr",
+      "Cocobolo Studio",
+      "Raya del Sol"
+    ],
+    "unmatched_drive_folders": [
+      "Listing",
+      "Projects",
+      "Casa Duplex Lomas",
+      "Casa Brisa",
+      "Villa Marina Oasis",
+      "Casa De Oro",
+      "Blue Penthouse ",
+      "Villa Marina Tropical ",
+      "Blue F11 condo"
+    ],
+    "matched_but_empty_folders": [
+      [
+        "Duplex Villa",
+        "Duplex Lomas "
+      ],
+      [
+        "Duplex 47 B",
+        "Duplex Lomas "
+      ],
+      [
+        "Duplex 46 A",
+        "Duplex Lomas "
+      ]
+    ]
+  }
+}
