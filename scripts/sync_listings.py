@@ -172,10 +172,13 @@ def main():
     used_folder_ids = {p["match"]["folder_id"] for p in properties if p["match"]}
     unused_folders = [f["name"] for f in folders if f["id"] not in used_folder_ids]
 
+    # Only publish properties that matched a Drive folder AND have at least one image
+    published = [p for p in properties if p.get("match") and p.get("images")]
+
     out = {
         "generated_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
-        "count": len(properties),
-        "properties": properties,
+        "count": len(published),
+        "properties": published,
         "report": {
             "matched": matched,
             "unmatched_sheet_rows": unmatched,
