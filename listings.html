@@ -548,6 +548,14 @@
       <p>Try adjusting your filters to see more results.</p>
     </div>
 
+    <div id="loadingState" style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--gray);">
+      <p>Loading properties&hellip;</p>
+    </div>
+
+    <template id="cardTemplate" style="display:none;"><!-- hidden --></template>
+
+    <!-- legacy hardcoded cards retained below but hidden; dynamic cards replace them -->
+    <div style="display:none;">
     <!-- 1 -->
     <div class="card" data-type="villa" data-price="850000" data-beds="5">
       <div class="card-img">
@@ -812,6 +820,7 @@
       </div>
     </div>
 
+    </div><!-- /legacy hidden wrapper -->
   </div>
 
   <!-- FOOTER -->
@@ -846,14 +855,125 @@
       });
     }
 
-    // Filter logic
+    // ===== Dynamic listings from Google Sheets (gviz, no backend) =====
+    const SHEETS_ID = '17nryG-WPTeSxC1n2XiPuRZ1h2CByXUQPlttul35P6Ck';
+    const FALLBACK_IMAGES = [
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80',
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80'
+    ];
+
+    const grid = document.getElementById('grid');
+    const loadingState = document.getElementById('loadingState');
+    const noResults = document.getElementById('noResults');
+    const countEl = document.getElementById('count');
     const filterType = document.getElementById('filterType');
     const filterPrice = document.getElementById('filterPrice');
     const filterBeds = document.getElementById('filterBeds');
     const clearBtn = document.getElementById('clearFilters');
-    const countEl = document.getElementById('count');
-    const noResults = document.getElementById('noResults');
-    const cards = document.querySelectorAll('.card[data-type]');
+
+    const bedSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M1 11h22"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>';
+    const bathSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h1a2 2 0 012 2v7"/></svg>';
+    const sqSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>';
+
+    function driveThumb(link, size) {
+      if (!link) return '';
+      let m = link.match(/\/d\/([^/]+)/);           // file link
+      if (!m) m = link.match(/folders\/([^?/]+)/);  // folder link
+      if (!m) m = link.match(/[?&]id=([^&]+)/);     // direct id
+      if (!m) return '';
+      return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w' + (size || 800);
+    }
+
+    function parsePrice(raw) {
+      if (!raw) return 0;
+      const str = String(raw).replace(/[^0-9.\-]/g, '');
+      const n = parseFloat(str);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function formatPrice(raw) {
+      const n = parsePrice(raw);
+      if (!n) return 'Contact for price';
+      if (n < 1000) return 'From $' + n + 'k';
+      return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+
+    // Map sheet "category" to filter bucket
+    function categoryToFilter(cat) {
+      const c = (cat || '').toLowerCase();
+      if (c.includes('villa')) return 'villa';
+      if (c.includes('house') || c.includes('project') || c.includes('duplex')) return 'house';
+      if (c.includes('apartment') || c.includes('condo') || c.includes('studio') || c.includes('loft')) return 'apartment';
+      if (c.includes('lot') || c.includes('land')) return 'land';
+      return 'house';
+    }
+
+    function parseGvizRow(row) {
+      const c = row.c || [];
+      const val = (i) => c[i] ? (c[i].f || String(c[i].v == null ? '' : c[i].v)) : '';
+      const num = (i) => (c[i] && c[i].v != null && c[i].v !== '') ? Number(c[i].v) : 0;
+      return {
+        name: val(0).trim(),
+        location: val(1).trim(),
+        category: val(2).trim(),
+        lot_size: num(3),
+        construction_size: num(4),
+        price_raw: val(6),
+        price_num: parsePrice(val(6)),
+        bedrooms: num(7),
+        bathrooms: num(8),
+        parking: num(9),
+        amenities: val(10),
+        drive_link: val(13),
+        status: val(14)
+      };
+    }
+
+    let allProperties = [];
+
+    function renderCards(list) {
+      const frag = document.createDocumentFragment();
+      list.forEach((p, idx) => {
+        const filterBucket = categoryToFilter(p.category);
+        const img = driveThumb(p.drive_link, 800) || FALLBACK_IMAGES[idx % FALLBACK_IMAGES.length];
+        const fallback = FALLBACK_IMAGES[idx % FALLBACK_IMAGES.length];
+
+        const meta = [];
+        if (p.bedrooms) meta.push('<span>' + bedSvg + (p.bedrooms) + ' Bed' + (p.bedrooms !== 1 ? 's' : '') + '</span>');
+        if (p.bathrooms) meta.push('<span>' + bathSvg + (p.bathrooms) + ' Bath' + (p.bathrooms !== 1 ? 's' : '') + '</span>');
+        if (p.construction_size) meta.push('<span>' + sqSvg + Math.round(p.construction_size) + ' m²</span>');
+        else if (p.lot_size) meta.push('<span>' + sqSvg + Math.round(p.lot_size) + ' m² lot</span>');
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.type = filterBucket;
+        card.dataset.price = p.price_num;
+        card.dataset.beds = p.bedrooms || 0;
+        card.innerHTML =
+          '<div class="card-img">' +
+            '<img src="' + img + '" alt="' + p.name + '" loading="lazy" onerror="this.src=\'' + fallback + '\'">' +
+            '<span class="card-type">' + (p.category || 'Property') + '</span>' +
+          '</div>' +
+          '<div class="card-body">' +
+            '<span class="card-location">' + (p.location || 'Panama') + '</span>' +
+            '<h3 class="card-name">' + p.name + '</h3>' +
+            '<div class="card-price">' + formatPrice(p.price_raw) + '</div>' +
+            '<div class="card-meta">' + (meta.join('') || '<span>Contact for details</span>') + '</div>' +
+            '<a href="property.html?name=' + encodeURIComponent(p.name) + '" class="card-btn">View Details</a>' +
+          '</div>';
+        frag.appendChild(card);
+      });
+
+      // Remove any previously rendered dynamic cards before re-rendering
+      grid.querySelectorAll('.card.dynamic').forEach(el => el.remove());
+      // Mark fragment cards as dynamic
+      frag.querySelectorAll('.card').forEach(el => el.classList.add('dynamic'));
+      // Insert before the legacy hidden wrapper (which sits at the end of grid)
+      grid.insertBefore(frag, grid.querySelector('div[style*="display:none"]'));
+    }
 
     function applyFilters() {
       const type = filterType.value;
@@ -861,42 +981,25 @@
       const beds = filterBeds.value;
       let visible = 0;
 
-      cards.forEach(card => {
+      document.querySelectorAll('.card.dynamic').forEach(card => {
         const cardType = card.dataset.type;
         const cardPrice = parseInt(card.dataset.price);
         const cardBeds = parseInt(card.dataset.beds);
-
         let show = true;
-
-        // Type filter
         if (type !== 'all' && cardType !== type) show = false;
-
-        // Price filter
         if (price === 'under200' && cardPrice >= 200000) show = false;
         if (price === '200to500' && (cardPrice < 200000 || cardPrice > 500000)) show = false;
         if (price === '500to1m' && (cardPrice < 500000 || cardPrice > 1000000)) show = false;
         if (price === 'over1m' && cardPrice <= 1000000) show = false;
-
-        // Beds filter
         if (beds !== 'all' && cardBeds < parseInt(beds)) show = false;
-
-        if (show) {
-          card.classList.remove('hidden');
-          visible++;
-        } else {
-          card.classList.add('hidden');
-        }
+        if (show) { card.classList.remove('hidden'); visible++; }
+        else { card.classList.add('hidden'); }
       });
 
       countEl.textContent = visible;
-      if (visible === 0) {
-        noResults.classList.add('show');
-      } else {
-        noResults.classList.remove('show');
-      }
+      noResults.classList.toggle('show', visible === 0);
 
-      // Re-trigger animation for visible cards
-      document.querySelectorAll('.card:not(.hidden)').forEach((card, i) => {
+      document.querySelectorAll('.card.dynamic:not(.hidden)').forEach((card, i) => {
         card.classList.remove('visible');
         setTimeout(() => card.classList.add('visible'), i * 60);
       });
@@ -905,7 +1008,6 @@
     filterType.addEventListener('change', applyFilters);
     filterPrice.addEventListener('change', applyFilters);
     filterBeds.addEventListener('change', applyFilters);
-
     clearBtn.addEventListener('click', () => {
       filterType.value = 'all';
       filterPrice.value = 'all';
@@ -913,44 +1015,23 @@
       applyFilters();
     });
 
-    // Intersection Observer for card animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting && !entry.target.classList.contains('hidden')) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-          observer.unobserve(entry.target);
-        }
+    // Fetch and render
+    const gvizUrl = 'https://docs.google.com/spreadsheets/d/' + SHEETS_ID + '/gviz/tq?tqx=out:json&sheet=Sheet1';
+    fetch(gvizUrl)
+      .then(r => r.text())
+      .then(text => {
+        const json = JSON.parse(text.replace(/^[^(]*\(/, '').replace(/\);?\s*$/, ''));
+        const rows = (json.table.rows || []).map(parseGvizRow)
+          .filter(r => r.name && r.name.length > 1 && !/^property.*project/i.test(r.name));
+        allProperties = rows;
+        loadingState.style.display = 'none';
+        renderCards(rows);
+        applyFilters();
+      })
+      .catch(err => {
+        console.error('Failed to load sheet:', err);
+        loadingState.innerHTML = '<p style="color:#b91c1c;">Could not load listings. Please refresh the page.</p>';
       });
-    }, { threshold: 0.1 });
-
-    cards.forEach(card => observer.observe(card));
-
-    // Map card names to property detail page IDs
-    const propertyIds = {
-      'Casa Marejada': 'casa-marejada',
-      'Casa del Sol Beachfront': 'casa-del-sol',
-      'Olas Surf Residence': 'olas-surf',
-      'Surf Cove Bungalow': 'surf-cove-bungalow',
-      'Venao Hills Eco Lot': 'venao-hills-lot',
-      'Cambutal Hilltop Land': 'cambutal-hilltop',
-      'Azuero Bay Boutique Suite': 'azuero-bay-suite',
-      'Punta Venao Estate': 'punta-venao-estate',
-      'Venao Surf Lodge': 'venao-surf-lodge-2',
-      'Coastal Ridge Lot': 'coastal-ridge-lot',
-      'Playa Vista Apartment': 'playa-vista',
-      'Tropical Garden Villa': 'tropical-garden-villa',
-      'Azuero Coastal Home': 'azuero-coastal',
-      'Venao Studio Loft': 'venao-studio'
-    };
-    document.querySelectorAll('.card').forEach(card => {
-      const name = card.querySelector('.card-name');
-      const btn = card.querySelector('.card-btn');
-      if (name && btn && propertyIds[name.textContent.trim()]) {
-        btn.href = 'property.html?id=' + propertyIds[name.textContent.trim()];
-      }
-    });
   </script>
 </body>
 </html>
