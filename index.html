@@ -1553,88 +1553,50 @@
   })();
   </script>
 
-  <!-- PAST PROJECTS (SOLD & DELIVERED) -->
-  <section class="past-projects-section" id="pastProjects">
+  <!-- PROJECTS BY LOCATION (dynamic from Sheet column B) -->
+  <section class="past-projects-section" id="projectsSection">
     <div class="past-projects-header">
-      <span class="eyebrow">Track Record</span>
-      <h2>Completed Projects</h2>
-      <p>A selection of properties we have successfully placed with investors and families across Panama.</p>
+      <span class="eyebrow">Projects</span>
+      <h2>Our Locations</h2>
+      <p>Browse properties grouped by project and location across Panama's coast.</p>
     </div>
-    <div class="past-projects-grid">
-      <div class="past-project-card">
-        <div class="past-project-img">
-          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Sky Tower Penthouse Panama City" loading="lazy">
-          <span class="past-project-badge">SOLD</span>
-        </div>
-        <div class="past-project-body">
-          <div class="past-project-location">Panama City</div>
-          <div class="past-project-name">Sky Tower 360 Penthouse</div>
-          <div class="past-project-price">$2,100,000</div>
-          <span class="past-project-label">Sold in 18 days</span>
-        </div>
-      </div>
-      <div class="past-project-card">
-        <div class="past-project-img">
-          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Luxury apartment Panama City" loading="lazy">
-          <span class="past-project-badge">SOLD</span>
-        </div>
-        <div class="past-project-body">
-          <div class="past-project-location">Panama City</div>
-          <div class="past-project-name">Punta Pacifica Luxury Suite</div>
-          <div class="past-project-price">$890,000</div>
-          <span class="past-project-label">Off Market Deal</span>
-        </div>
-      </div>
-      <div class="past-project-card">
-        <div class="past-project-img">
-          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Mountain retreat Boquete" loading="lazy">
-          <span class="past-project-badge">DELIVERED</span>
-        </div>
-        <div class="past-project-body">
-          <div class="past-project-location">Boquete</div>
-          <div class="past-project-name">Villa Montaña Cloud Retreat</div>
-          <div class="past-project-price">$395,000</div>
-          <span class="past-project-label">Sold in 32 days</span>
-        </div>
-      </div>
-      <div class="past-project-card">
-        <div class="past-project-img">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Waterfront condo Coco del Mar" loading="lazy">
-          <span class="past-project-badge">SOLD</span>
-        </div>
-        <div class="past-project-body">
-          <div class="past-project-location">Coco del Mar</div>
-          <div class="past-project-name">Torre Oceano Waterfront Condo</div>
-          <div class="past-project-price">$1,250,000</div>
-          <span class="past-project-label">Sold in 24 days</span>
-        </div>
-      </div>
-      <div class="past-project-card">
-        <div class="past-project-img">
-          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="Heritage loft Casco Viejo" loading="lazy">
-          <span class="past-project-badge">DELIVERED</span>
-        </div>
-        <div class="past-project-body">
-          <div class="past-project-location">Casco Viejo</div>
-          <div class="past-project-name">La Colonial Heritage Loft</div>
-          <div class="past-project-price">$320,000</div>
-          <span class="past-project-label">Off Market Deal</span>
-        </div>
-      </div>
-      <div class="past-project-card">
-        <div class="past-project-img">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Beach residence Coronado" loading="lazy">
-          <span class="past-project-badge">SOLD</span>
-        </div>
-        <div class="past-project-body">
-          <div class="past-project-location">Coronado</div>
-          <div class="past-project-name">Coronado Bay Beach Residence</div>
-          <div class="past-project-price">$215,000</div>
-          <span class="past-project-label">Sold in 41 days</span>
-        </div>
-      </div>
-    </div>
+    <div class="past-projects-grid" id="projectsGrid"></div>
   </section>
+  <script>
+    (function(){
+      fetch('listings.json', { cache: 'no-cache' })
+        .then(r => r.json())
+        .then(data => {
+          var grid = document.getElementById('projectsGrid');
+          if (!grid) return;
+          var groups = {};
+          (data.properties || []).forEach(function(p) {
+            var loc = (p.location || '').trim();
+            if (!loc) return;
+            var key = loc.toLowerCase();
+            if (!groups[key]) groups[key] = { name: loc, count: 0, image: null };
+            groups[key].count += 1;
+            if (!groups[key].image && p.images && p.images[0]) {
+              groups[key].image = p.images[0].url || p.images[0].thumb;
+            }
+          });
+          var list = Object.values(groups).sort(function(a,b){return b.count - a.count;});
+          grid.innerHTML = list.map(function(g){
+            var img = g.image || 'images/hero-playa-venao.jpg';
+            var q = encodeURIComponent(g.name);
+            return '<a class="past-project-card" href="listings.html?project=' + q + '" style="text-decoration:none;color:inherit;">' +
+              '<div class="past-project-img"><img src="' + img + '" alt="' + g.name + '" loading="lazy"></div>' +
+              '<div class="past-project-body">' +
+                '<div class="past-project-location">Project</div>' +
+                '<div class="past-project-name">' + g.name + '</div>' +
+                '<span class="past-project-label">' + g.count + ' ' + (g.count === 1 ? 'property' : 'properties') + '</span>' +
+              '</div>' +
+            '</a>';
+          }).join('');
+        })
+        .catch(function(e){ console.error('projects load failed', e); });
+    })();
+  </script>
 
   <!-- Developer Partners section removed -->
 

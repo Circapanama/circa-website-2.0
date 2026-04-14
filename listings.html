@@ -474,6 +474,7 @@
       <a href="index.html">Home</a>
       <a href="index.html#services">Services</a>
       <a href="index.html#locations">Listings</a>
+      <a href="projects.html">Projects</a>
       <a href="index.html#about">About</a>
       <a href="book.html" class="nav-cta">Book a Call</a>
     </div>
@@ -487,7 +488,8 @@
     <a href="index.html">Home</a>
     <a href="index.html#services">Services</a>
     <a href="index.html#locations">Listings</a>
-    <a href="index.html#about">About</a>
+    <a href="projects.html">Projects</a>
+      <a href="index.html#about">About</a>
     <a href="book.html" style="color: var(--accent);">Book a Call</a>
   </div>
 
@@ -1016,8 +1018,16 @@
     fetch(LISTINGS_URL, { cache: 'no-cache' })
       .then(r => r.json())
       .then(data => {
-        const rows = (data.properties || []).map(normalizeProperty)
+        let rows = (data.properties || []).map(normalizeProperty)
           .filter(r => r.name && r.name.length > 1);
+        // ?project=X filter (case-insensitive, trim)
+        const qs = new URLSearchParams(window.location.search);
+        const projectFilter = (qs.get('project') || '').trim().toLowerCase();
+        if (projectFilter) {
+          rows = rows.filter(r => (r.location || '').trim().toLowerCase() === projectFilter);
+          const h1 = document.querySelector('.hero h1');
+          if (h1) h1.textContent = qs.get('project');
+        }
         allProperties = rows;
         loadingState.style.display = 'none';
         renderCards(rows);
