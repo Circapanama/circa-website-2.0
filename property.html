@@ -421,6 +421,41 @@
             return (p.name || '').toLowerCase().trim() === searchName;
           });
           if (!found) return showNotFound();
+
+          // Build gallery of additional photos inside the body
+          var gallery = document.getElementById('propertyGallery');
+          if (!gallery) {
+            gallery = document.createElement('section');
+            gallery.id = 'propertyGallery';
+            gallery.style.cssText = 'padding:3rem 5vw;max-width:1200px;margin:0 auto;';
+            var heading = document.createElement('h2');
+            heading.textContent = 'Gallery';
+            heading.style.cssText = 'font-family:var(--font-display);font-size:1.8rem;margin-bottom:1.5rem;';
+            gallery.appendChild(heading);
+            var grid = document.createElement('div');
+            grid.id = 'galleryGrid';
+            grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;';
+            gallery.appendChild(grid);
+            var hero = document.querySelector('.property-hero');
+            if (hero && hero.parentNode) hero.parentNode.insertBefore(gallery, hero.nextSibling);
+          }
+          var grid = document.getElementById('galleryGrid');
+          grid.innerHTML = '';
+          (found.images || []).forEach(function(img) {
+            var a = document.createElement('a');
+            a.href = img.url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.style.cssText = 'display:block;aspect-ratio:4/3;overflow:hidden;border-radius:10px;background:#f1f5f9;';
+            var el = document.createElement('img');
+            el.src = img.thumb || img.url;
+            el.alt = found.name;
+            el.loading = 'lazy';
+            el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+            a.appendChild(el);
+            grid.appendChild(a);
+          });
+
           // Adapt json shape to the renderer
           var firstImg = found.images && found.images[0];
           renderProperty({
