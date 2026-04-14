@@ -1490,11 +1490,8 @@
       if (!container) return;
       container.innerHTML = properties.slice(0, 6).map((p, i) => {
         const price = formatPrice(p.price);
-        const driveLink = p.drive_folder_link || '';
-        const driveId = driveLink.match(/\/d\/([^/]+)/)?.[1] || driveLink.match(/folders\/([^?/]+)/)?.[1] || '';
-        const img = driveId
-          ? 'https://drive.google.com/thumbnail?id=' + driveId + '&sz=w600'
-          : defaultImages[i % defaultImages.length];
+        const firstImg = p.images && p.images[0];
+        const img = (firstImg && (firstImg.thumb || firstImg.url)) || defaultImages[i % defaultImages.length];
         return '<div class="listing-card">' +
           '<div class="listing-img">' +
             '<img src="' + img + '" alt="' + p.name + ' in ' + p.location + '" loading="lazy" onerror="this.src=\'' + defaultImages[i % defaultImages.length] + '\'">' +
@@ -1507,7 +1504,7 @@
             '<div class="listing-meta">' +
               (p.bedrooms ? '<span>' + bedIcon + p.bedrooms + ' Beds</span>' : '') +
               (p.bathrooms ? '<span>' + bathIcon + p.bathrooms + ' Baths</span>' : '') +
-              (p.construction_size ? '<span>' + p.construction_size + ' m²</span>' : '') +
+              (p.construction_size ? '<span>' + Math.round(Number(p.construction_size)) + ' m²</span>' : '') +
             '</div>' +
             '<a href="property.html?name=' + encodeURIComponent(p.name) + '" class="listing-cta">View Details</a>' +
           '</div>' +
@@ -1515,41 +1512,14 @@
       }).join('');
     }
 
-    // Column index map based on known sheet structure
-    // A=Name, B=Location, C=Category, D=LotSize, E=ConstructionSize, F=PriceSqm, G=Price, H=Beds, I=Baths, J=Parking, K=Amenities, L=Owner, M=Contact, N=DriveLink, O=Status
-    function parseGvizRow(row) {
-      const c = row.c || [];
-      const val = (i) => c[i] ? (c[i].f || String(c[i].v || '')) : '';
-      const num = (i) => c[i] && c[i].v ? c[i].v : 0;
-      return {
-        name: val(0).trim(),
-        location: val(1).trim(),
-        category: val(2).trim(),
-        construction_size: num(4) ? String(Math.round(num(4))) : '',
-        price: val(6),
-        bedrooms: num(7) ? String(Math.round(num(7))) : '',
-        bathrooms: num(8) ? String(num(8)) : '',
-        drive_folder_link: val(13),
-        status: val(14)
-      };
-    }
-
-    const gvizUrl = 'https://docs.google.com/spreadsheets/d/' + SHEETS_ID + '/gviz/tq?tqx=out:json&sheet=Sheet1';
-    fetch(gvizUrl)
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
-        var json = JSON.parse(text.replace(/^[^(]*\(/, '').replace(/\);?\s*$/, ''));
-        var properties = json.table.rows
-          .map(parseGvizRow)
-          .filter(function(p) { return p.name && p.status !== 'Sold'; });
+    // Pull real listings (matched + photos) from listings.json
+    fetch('listings.json', { cache: 'no-cache' })
+      .then(r => r.json())
+      .then(data => {
+        var properties = (data.properties || []).filter(p => p.images && p.images.length);
         if (properties.length > 0) renderCards(properties);
       })
-      .catch(function() {
-        fetch('/api/properties')
-          .then(function(r) { return r.json(); })
-          .then(function(data) { if (data.properties) renderCards(data.properties); })
-          .catch(function() {});
-      });
+      .catch(() => {});
   })();
   </script>
 
@@ -1699,9 +1669,9 @@
 
     <!-- Featured: Michael Rudasveski -->
     <div class="team-featured" id="teamFeatured">
-      <div class="team-featured-photo">
+      <a href="book.html" class="team-featured-photo" aria-label="Book a call with Michael" style="display:block;cursor:pointer;">
         <img src="images/michael.jpeg" alt="Michael Rudasveski, Founder and CEO of Circa Panama Real Estate" loading="lazy">
-      </div>
+      </a>
       <div class="team-featured-info">
         <div class="team-featured-title">Founder &amp; CEO</div>
         <div class="team-featured-name">Michael Rudasveski</div>
@@ -1738,14 +1708,6 @@
         <div class="team-name">Margarita</div>
         <div class="team-role">Legal Director</div>
         <div class="team-bio">Property law, residency visas, and corporate structuring for international buyers.</div>
-        <div class="team-contact">
-          <a href="https://wa.me/50760002222?text=Hi%20Margarita%2C%20I%20have%20a%20legal%20question%20about%20Panama%20property" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Margarita">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </a>
-          <a href="mailto:margarita@circapanama.com" class="tc-email" aria-label="Email Margarita">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-          </a>
-        </div>
       </div>
       <div class="team-card">
         <div class="team-photo-wrap">
@@ -1754,14 +1716,6 @@
         <div class="team-name">Sabriana</div>
         <div class="team-role">Team Member</div>
         <div class="team-bio">Dedicated to helping clients navigate their Panama real estate journey.</div>
-        <div class="team-contact">
-          <a href="https://wa.me/50760006666?text=Hi%20Sabriana%2C%20I'm%20interested%20in%20Circa%20Panama" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Sabriana">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </a>
-          <a href="mailto:sabriana@circapanama.com" class="tc-email" aria-label="Email Sabriana">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-          </a>
-        </div>
       </div>
       <div class="team-card">
         <div class="team-photo-wrap">
@@ -1770,14 +1724,6 @@
         <div class="team-name">Anna</div>
         <div class="team-role">Team Member</div>
         <div class="team-bio">Committed to delivering exceptional service throughout your Panama experience.</div>
-        <div class="team-contact">
-          <a href="https://wa.me/50760007777?text=Hi%20Anna%2C%20I'm%20interested%20in%20Circa%20Panama" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Anna">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </a>
-          <a href="mailto:anna@circapanama.com" class="tc-email" aria-label="Email Anna">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-          </a>
-        </div>
       </div>
       <div class="team-card">
         <div class="team-photo-wrap">
@@ -1786,14 +1732,6 @@
         <div class="team-name">Juackin</div>
         <div class="team-role">Property Specialist</div>
         <div class="team-bio">Born and raised in Panama City. Deep local knowledge of every neighborhood and market trend.</div>
-        <div class="team-contact">
-          <a href="https://wa.me/50760005555?text=Hi%20Juackin%2C%20I'm%20looking%20for%20property%20in%20Panama" target="_blank" rel="noopener" class="tc-whatsapp" aria-label="WhatsApp Juackin">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </a>
-          <a href="mailto:juackin@circapanama.com" class="tc-email" aria-label="Email Juackin">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-          </a>
-        </div>
       </div>
     </div>
   </section>
@@ -1907,8 +1845,8 @@
       <p>Let's build your Panama story together.</p>
       <a href="book.html" class="michael-speech-cta">Book a free call &rarr;</a>
     </div>
-    <div class="michael-canvas-wrap" id="michaelCanvasWrap">
-      <div class="michael-bubble-close" id="michaelClose">&times;</div>
+    <div class="michael-canvas-wrap" id="michaelCanvasWrap" onclick="if(!event.target.closest('#michaelClose'))window.location.href='book.html';" style="cursor:pointer;" role="link" aria-label="Book a call with Michael">
+      <div class="michael-bubble-close" id="michaelClose" onclick="event.stopPropagation();">&times;</div>
       <canvas id="michaelCanvas"></canvas>
     </div>
   </div>

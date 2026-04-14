@@ -9,6 +9,7 @@ property row to a Drive subfolder by name, collects image URLs, and writes
 Auth: reuses ~/.claude/credentials/gdrive_credentials.pickle (Drive + Sheets).
 Run: python3 scripts/sync_listings.py
 """
+import hashlib
 import io
 import json
 import pickle
@@ -245,6 +246,8 @@ def main():
             if not imgs:
                 empty_folders.append((row["name"], folder["name"]))
             slug = slugify(row["name"]) or folder["id"]
+            seen_hashes = set()
+            dup_count = 0
             for idx, f in enumerate(imgs):
                 ext = ext_for(f["mimeType"])
                 fname = f"{idx:02d}-{f['id']}.{ext}"
@@ -252,6 +255,15 @@ def main():
                 ok = download_image(drive, f["id"], local)
                 if not ok:
                     continue
+                try:
+                    h = hashlib.md5(local.read_bytes()).hexdigest()
+                except Exception:
+                    h = None
+                if h and h in seen_hashes:
+                    dup_count += 1
+                    continue
+                if h:
+                    seen_hashes.add(h)
                 rel = f"images/listings/{slug}/{fname}"
                 images.append({
                     "id": f["id"],
@@ -259,6 +271,8 @@ def main():
                     "url": rel,
                     "thumb": rel,
                 })
+            if dup_count:
+                print(f"  - {row['name']}: skipped {dup_count} duplicate image(s)")
             match_info = {"folder_name": folder["name"], "folder_id": folder["id"], "score": round(score, 2)}
             matched += 1
         else:
