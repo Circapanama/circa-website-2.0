@@ -4,483 +4,381 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Details | Circa Panama Real Estate</title>
-  <meta name="description" content="View property details in Playa Venao, Panama. Circa Panama Real Estate.">
+  <meta name="description" content="View property details in Panama. Circa Panama Real Estate.">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--accent:#2563EB;--accent-rgb:37,99,235;--dark:#0F172A;--gray:#64748B;--light:#F8FAFC;--border:#E2E8F0;--font-display:'DM Serif Display',Georgia,serif;--font-body:'DM Sans',system-ui,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);background:#fff;color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;line-height:1.15}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button{font-family:inherit;cursor:pointer;border:none;background:none}
 
-    :root {
-      --accent: #2563EB;
-      --accent-rgb: 37,99,235;
-      --dark: #1E293B;
-      --gray: #64748B;
-      --font-display: 'DM Serif Display', Georgia, serif;
-      --font-body: 'DM Sans', system-ui, sans-serif;
-    }
+    .nav{position:sticky;top:0;z-index:100;padding:1rem 5vw;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo img{height:34px}
+    .nav-back{font-size:.82rem;font-weight:600;color:var(--gray);display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
+    .nav-back:hover{color:var(--accent)}
 
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-body);
-      background: #FFFFFF;
-      color: var(--dark);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+    .page{max-width:1280px;margin:0 auto;padding:2rem 5vw 0}
+    .breadcrumb{font-size:.78rem;color:var(--gray);margin-bottom:1rem;letter-spacing:.02em}
+    .breadcrumb a:hover{color:var(--accent)}
+    .title-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem}
+    .title-row h1{font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.01em}
+    .title-row .meta{font-size:.9rem;color:var(--gray);margin-top:.35rem;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+    .meta .dot{width:3px;height:3px;border-radius:50%;background:var(--gray);display:inline-block}
+    .meta .pin{color:var(--accent);font-weight:600}
 
-    h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-
-    /* ===== NAV ===== */
-    .nav {
-      position: sticky; top: 0; z-index: 9999;
-      padding: 1.2rem 5vw;
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(37,99,235,0.1);
-    }
-    .nav-logo img { height: 36px; width: auto; }
-    .nav-back {
-      font-size: 0.8rem; font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase; color: var(--gray);
-      transition: color 0.3s;
-    }
-    .nav-back:hover { color: var(--accent); }
-
-    /* ===== HERO IMAGE ===== */
-    .property-hero {
-      width: 100%;
-      height: 50vh;
-      min-height: 360px;
-      overflow: hidden;
-      position: relative;
-    }
-    .property-hero img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .property-hero-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.5));
-      padding: 3rem 5vw 2rem;
-    }
-    .property-type-badge {
-      display: inline-block;
-      font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 6px 16px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 50px;
-      color: var(--dark);
-      margin-bottom: 1rem;
-    }
-    .property-hero-title {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      color: #fff;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-    }
-    .property-hero-location {
-      font-size: 0.85rem; color: rgba(255,255,255,0.8);
-      font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; margin-top: 0.5rem;
+    /* Hero photo collage — Airbnb style */
+    .hero-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;border-radius:20px;overflow:hidden;aspect-ratio:2.2/1;background:var(--light);position:relative}
+    .hero-grid .h-cell{cursor:pointer;overflow:hidden;position:relative;background:#eef2f7}
+    .hero-grid .h-cell img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+    .hero-grid .h-cell:hover img{transform:scale(1.04)}
+    .hero-grid .h-main{grid-row:1/3}
+    .hero-grid .h-cell::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .2s}
+    .hero-grid .h-cell:hover::after{background:rgba(0,0,0,.05)}
+    .show-all{position:absolute;bottom:16px;right:16px;background:#fff;color:var(--dark);padding:10px 18px;border-radius:10px;border:1px solid var(--dark);font-size:.82rem;font-weight:700;display:inline-flex;align-items:center;gap:.5rem;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+    .show-all:hover{background:var(--dark);color:#fff}
+    @media (max-width:768px){
+      .hero-grid{grid-template-columns:1fr;grid-template-rows:1fr;aspect-ratio:4/3}
+      .hero-grid .h-cell:not(.h-main){display:none}
+      .hero-grid .h-main{grid-row:auto}
     }
 
-    /* ===== CONTENT ===== */
-    .property-content {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 5vw 4rem;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 4rem;
-    }
+    /* Main content */
+    .content{display:grid;grid-template-columns:1.6fr 1fr;gap:4rem;padding:3rem 5vw 5rem;max-width:1280px;margin:0 auto}
+    .section{padding-bottom:2rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
+    .section:last-child{border:0;margin-bottom:0}
+    .section h2{font-size:1.45rem;margin-bottom:1rem;color:var(--dark)}
 
-    .property-price {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: var(--accent);
-      margin-bottom: 2rem;
-    }
+    .overview{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+    .stat{background:var(--light);border:1px solid var(--border);border-radius:14px;padding:1.1rem;text-align:left}
+    .stat-icon{width:26px;height:26px;color:var(--accent);margin-bottom:.5rem}
+    .stat-val{font-family:var(--font-display);font-size:1.35rem;color:var(--dark);line-height:1}
+    .stat-lbl{font-size:.7rem;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem}
+    @media (max-width:640px){.overview{grid-template-columns:repeat(2,1fr)}}
 
-    .property-stats {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1rem; margin-bottom: 2.5rem;
-    }
-    .property-stat {
-      background: #F8FAFC;
-      border: 1px solid rgba(37,99,235,0.08);
-      border-radius: 12px;
-      padding: 1.2rem 1rem;
-      text-align: center;
-    }
-    .property-stat-value {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--dark);
-      margin-bottom: 0.2rem;
-    }
-    .property-stat-label {
-      font-size: 0.7rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--gray);
-    }
+    .desc p{color:#334155;font-size:1rem;line-height:1.8;margin-bottom:1rem}
 
-    .property-description h2 {
-      font-size: 1.4rem; color: var(--dark); margin-bottom: 1rem;
-    }
-    .property-description p {
-      color: var(--gray); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem;
-    }
+    .features{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .features li{display:flex;align-items:center;gap:.6rem;font-size:.92rem;color:#334155;padding:.55rem 0}
+    .features li svg{width:20px;height:20px;color:var(--accent);flex-shrink:0}
+    @media (max-width:640px){.features{grid-template-columns:1fr}}
 
-    .property-features {
-      margin-top: 2rem;
-    }
-    .property-features h3 {
-      font-size: 1.1rem; color: var(--dark); margin-bottom: 1rem;
-    }
-    .property-features ul {
-      list-style: none; padding: 0;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
-    }
-    .property-features li {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.88rem; color: #374151;
-    }
-    .property-features li svg {
-      width: 18px; height: 18px; color: var(--accent); flex-shrink: 0;
-    }
+    /* Sidebar */
+    .sidebar{position:sticky;top:90px;align-self:start}
+    .book-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:1.75rem;box-shadow:0 4px 24px rgba(15,23,42,.06)}
+    .price{font-family:var(--font-display);font-size:2rem;color:var(--dark);line-height:1;letter-spacing:-.01em}
+    .price-sub{font-size:.82rem;color:var(--gray);margin-top:.35rem;margin-bottom:1.25rem}
+    .btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:14px;border-radius:12px;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-bottom:.6rem;transition:transform .2s ease,box-shadow .2s ease;cursor:pointer;text-decoration:none}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-primary:hover{box-shadow:0 8px 24px rgba(var(--accent-rgb),.3)}
+    .btn-wa{background:#25D366;color:#fff}
+    .btn-wa:hover{box-shadow:0 8px 24px rgba(37,211,102,.3)}
+    .btn-outline{background:#fff;color:var(--dark);border:1.5px solid var(--border)}
+    .btn-outline:hover{border-color:var(--dark)}
+    .agent-row{display:flex;align-items:center;gap:.8rem;padding-top:1.25rem;margin-top:1.25rem;border-top:1px solid var(--border)}
+    .agent-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;background:var(--light);flex-shrink:0}
+    .agent-avatar img{width:100%;height:100%;object-fit:cover}
+    .agent-info .n{font-weight:700;font-size:.92rem}
+    .agent-info .r{font-size:.75rem;color:var(--gray)}
 
-    /* ===== SIDEBAR ===== */
-    .property-sidebar {
-      position: sticky; top: 100px; align-self: start;
-    }
-    .contact-card {
-      background: #F8FAFC;
-      border: 1px solid rgba(37,99,235,0.1);
-      border-radius: 16px;
-      padding: 2rem;
-    }
-    .contact-card h3 {
-      font-size: 1.2rem; color: var(--dark); margin-bottom: 0.5rem;
-    }
-    .contact-card p {
-      color: var(--gray); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.6;
-    }
-    .contact-btn {
-      display: block; width: 100%; padding: 14px;
-      text-align: center; border-radius: 50px;
-      font-size: 0.85rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      cursor: pointer; border: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-bottom: 0.75rem;
-    }
-    .contact-btn:hover { transform: translateY(-2px); }
-    .contact-btn-primary {
-      background: var(--accent); color: #fff;
-    }
-    .contact-btn-primary:hover { box-shadow: 0 8px 30px rgba(var(--accent-rgb),0.3); }
-    .contact-btn-whatsapp {
-      background: #25D366; color: #fff;
-    }
-    .contact-btn-whatsapp:hover { box-shadow: 0 8px 30px rgba(37,211,102,0.3); }
+    .location-card{margin-top:1rem;background:var(--light);border:1px solid var(--border);border-radius:14px;padding:1.25rem}
+    .location-card h4{font-family:var(--font-body);font-weight:700;font-size:.88rem;margin-bottom:.35rem;color:var(--dark);display:flex;align-items:center;gap:.4rem}
+    .location-card p{font-size:.82rem;color:var(--gray);line-height:1.55}
 
-    .location-card {
-      margin-top: 1.5rem;
-      background: #F8FAFC;
-      border: 1px solid rgba(37,99,235,0.1);
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-    .location-card h4 {
-      font-size: 0.95rem; color: var(--dark); margin-bottom: 0.5rem;
-    }
-    .location-card p {
-      color: var(--gray); font-size: 0.82rem; line-height: 1.6;
-    }
+    @media (max-width:960px){.content{grid-template-columns:1fr;gap:2rem}.sidebar{position:static}}
 
-    /* ===== FOOTER ===== */
-    .footer-bar {
-      background: #FFFFFF;
-      border-top: 1px solid rgba(37,99,235,0.08);
-      padding: 2rem 5vw;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-bar .nav-logo { font-size: 1.2rem; }
-    .footer-links { display: flex; gap: 2rem; }
-    .footer-links a {
-      font-size: 0.75rem; color: var(--gray); letter-spacing: 0.05em;
-      text-transform: uppercase; transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-copy {
-      font-size: 0.7rem; color: rgba(0,0,0,0.3);
-      width: 100%; text-align: center; margin-top: 1rem;
-    }
+    /* Lightbox */
+    .lbx{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;display:none;flex-direction:column}
+    .lbx.open{display:flex}
+    .lbx-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;color:#fff;font-size:.9rem}
+    .lbx-close{color:#fff;font-size:2rem;line-height:1;padding:.25rem .6rem;border-radius:8px}
+    .lbx-close:hover{background:rgba(255,255,255,.1)}
+    .lbx-main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;padding:0 4rem;min-height:0}
+    .lbx-main img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
+    .lbx-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;transition:background .2s}
+    .lbx-nav:hover{background:rgba(255,255,255,.25)}
+    .lbx-prev{left:1rem}.lbx-next{right:1rem}
+    .lbx-thumbs{display:flex;gap:.5rem;padding:1rem;overflow-x:auto;justify-content:center;background:#000}
+    .lbx-thumb{width:70px;height:52px;border-radius:6px;overflow:hidden;flex-shrink:0;cursor:pointer;opacity:.5;transition:opacity .2s;border:2px solid transparent}
+    .lbx-thumb.active{opacity:1;border-color:#fff}
+    .lbx-thumb img{width:100%;height:100%;object-fit:cover}
 
-    @media (max-width: 768px) {
-      .property-content { grid-template-columns: 1fr; gap: 2rem; }
-      .property-sidebar { position: static; }
-      .property-stats { grid-template-columns: repeat(3, 1fr); }
-      .property-features ul { grid-template-columns: 1fr; }
-    }
+    /* Footer */
+    .footer{background:var(--dark);color:#cbd5e1;padding:2rem 5vw;margin-top:4rem}
+    .footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem}
+    .footer a:hover{color:#fff}
+    .footer-links{display:flex;gap:1.5rem}
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
 
-  <nav class="nav">
-    <a href="index.html" class="nav-logo"><img src="images/circa-logo-Photoroom.png" alt="Circa Panama Real Estate"></a>
-    <a href="javascript:history.back()" class="nav-back">&larr; Back to Listings</a>
-  </nav>
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><img src="images/circa-logo-Photoroom.png" alt="Circa Panama"></a>
+  <a href="listings.html" class="nav-back">&larr; All Listings</a>
+</nav>
 
-  <div class="property-hero" id="propertyHero">
-    <img id="heroImg" src="" alt="">
-    <div class="property-hero-overlay">
-      <span class="property-type-badge" id="heroType"></span>
-      <h1 class="property-hero-title" id="heroTitle"></h1>
-      <div class="property-hero-location" id="heroLocation"></div>
-    </div>
-  </div>
+<main class="page">
+  <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="listings.html">Listings</a> &nbsp;/&nbsp; <span id="bcName">Property</span></div>
 
-  <div class="property-content">
+  <div class="title-row">
     <div>
-      <div class="property-price" id="propertyPrice"></div>
-
-      <div class="property-stats" id="propertyStats"></div>
-
-      <div class="property-description">
-        <h2>About This Property</h2>
-        <p id="propertyDesc"></p>
-        <p id="propertyDesc2"></p>
-      </div>
-
-      <div class="property-features">
-        <h3>Property Features</h3>
-        <ul id="featuresList"></ul>
-      </div>
-    </div>
-
-    <div class="property-sidebar">
-      <div class="contact-card">
-        <h3>Interested in this property?</h3>
-        <p>Schedule a private viewing or get more details from our team. No obligations, just honest advice.</p>
-        <a href="book.html" class="contact-btn contact-btn-primary">Book a Consultation</a>
-        <a id="whatsappBtn" href="#" target="_blank" rel="noopener" class="contact-btn contact-btn-whatsapp">WhatsApp Michael</a>
-      </div>
-      <div class="location-card">
-        <h4>Playa Venao, Panama</h4>
-        <p>Tucked along Panama's Pacific coast on the Azuero Peninsula. World-class surf, growing expat community, and 15%+ annual appreciation. Zero capital gains tax.</p>
+      <h1 id="pTitle">&nbsp;</h1>
+      <div class="meta">
+        <span class="pin" id="pLocation">Panama</span>
+        <span class="dot"></span>
+        <span id="pCategory">Property</span>
+        <span class="dot"></span>
+        <span id="pCount">—</span>
       </div>
     </div>
   </div>
 
-  <footer class="footer-bar">
-    <span class="nav-logo"><img src="images/circa-logo-Photoroom.png" alt="Circa Panama Real Estate" style="height:28px;"></span>
-    <div class="footer-links">
-      <a href="index.html#coverage">Services</a>
-      <a href="index.html#locations">Locations</a>
-      <a href="index.html#team">Team</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="index.html#contact">Contact</a>
+  <div class="hero-grid" id="heroGrid"></div>
+</main>
+
+<div class="content">
+  <div class="main-col">
+    <section class="section">
+      <h2>Overview</h2>
+      <div class="overview" id="overview"></div>
+      <div class="desc" id="desc"></div>
+    </section>
+
+    <section class="section">
+      <h2>What this place offers</h2>
+      <ul class="features" id="features"></ul>
+    </section>
+
+    <section class="section">
+      <h2>Location</h2>
+      <p id="locationBlurb" style="color:#334155;font-size:.95rem;line-height:1.75"></p>
+    </section>
+  </div>
+
+  <aside class="sidebar">
+    <div class="book-card">
+      <div class="price" id="sPrice">Contact for price</div>
+      <div class="price-sub" id="sPriceSub"></div>
+      <a href="book.html" class="btn btn-primary">Book a Consultation</a>
+      <a id="waBtn" href="#" target="_blank" rel="noopener" class="btn btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+        WhatsApp Michael
+      </a>
+      <a href="listings.html" class="btn btn-outline">Browse more listings</a>
+      <div class="agent-row">
+        <div class="agent-avatar"><img src="images/michael.jpeg" alt="Michael"></div>
+        <div class="agent-info">
+          <div class="n">Michael Rudasveski</div>
+          <div class="r">Founder &amp; CEO, Circa Panama</div>
+        </div>
+      </div>
     </div>
-    <div class="footer-copy">&copy; 2026 Circa Panama Real Estate. All rights reserved. | Last updated: March 2026</div>
-  </footer>
 
-  <script>
-    var SHEETS_ID = '17nryG-WPTeSxC1n2XiPuRZ1h2CByXUQPlttul35P6Ck';
-    var checkSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>';
-    var defaultImages = [
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80',
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80',
-      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80'
-    ];
+    <div class="location-card">
+      <h4>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span id="lcTitle">Panama</span>
+      </h4>
+      <p id="lcBlurb">Tucked along Panama's Pacific coast. World-class surf, growing expat community, and strong annual appreciation.</p>
+    </div>
+  </aside>
+</div>
 
-    function formatPrice(raw) {
-      if (!raw) return '';
-      var str = String(raw).replace(/[^0-9.\-]/g, '');
-      var num = parseFloat(str);
-      if (isNaN(num) || num <= 0) return '';
-      if (num < 1000) return 'From $' + num + 'k';
-      return '$' + num.toLocaleString('en-US', {maximumFractionDigits: 0});
+<!-- Lightbox -->
+<div class="lbx" id="lbx" role="dialog" aria-modal="true">
+  <div class="lbx-head">
+    <span id="lbxCount">1 / 1</span>
+    <button class="lbx-close" id="lbxClose" aria-label="Close gallery">&times;</button>
+  </div>
+  <div class="lbx-main">
+    <button class="lbx-nav lbx-prev" id="lbxPrev" aria-label="Previous">&#10094;</button>
+    <img id="lbxImg" src="" alt="">
+    <button class="lbx-nav lbx-next" id="lbxNext" aria-label="Next">&#10095;</button>
+  </div>
+  <div class="lbx-thumbs" id="lbxThumbs"></div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>&copy; 2026 Circa Panama Real Estate</div>
+    <div class="footer-links">
+      <a href="index.html#about">About</a>
+      <a href="listings.html">Listings</a>
+      <a href="projects.html">Projects</a>
+      <a href="book.html">Book a Call</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var params = new URLSearchParams(location.search);
+  var propName = (params.get('name')||'').trim();
+  var checkSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>';
+
+  function formatPrice(raw){
+    if(!raw) return '';
+    var n = parseFloat(String(raw).replace(/[^0-9.\-]/g,''));
+    if(isNaN(n)||n<=0) return '';
+    return '$'+n.toLocaleString('en-US',{maximumFractionDigits:0});
+  }
+
+  function icon(name){
+    var m = {
+      bed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5M2 17h20M2 17v3M22 17v3M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg>',
+      bath:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 10h18v4a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-4zM5 19l-1 3M19 19l1 3"/></svg>',
+      area:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>',
+      lot:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>',
+      car:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14l-1.5-6H6.5L5 17zM5 17v3M19 17v3M8 11l1-5h6l1 5"/><circle cx="8" cy="17" r="1.5"/><circle cx="16" cy="17" r="1.5"/></svg>',
+      tag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12l-8 8-8-8V4h8z"/><circle cx="8" cy="8" r="1.5"/></svg>'
+    };
+    return '<svg class="stat-icon" viewBox="0 0 24 24">'+(m[name]||m.tag).replace(/^<svg[^>]*>|<\/svg>$/g,'')+'</svg>';
+  }
+
+  function showNotFound(){
+    document.querySelector('main.page').innerHTML =
+      '<div style="text-align:center;padding:5rem 1rem"><h1 style="font-size:2rem;margin-bottom:.8rem">Property Not Found</h1><p style="color:var(--gray);margin-bottom:1.5rem">This property may no longer be available.</p><a href="listings.html" style="color:var(--accent);font-weight:700">&larr; Browse all listings</a></div>';
+    document.querySelector('.content').style.display='none';
+  }
+
+  function dedupImages(imgs){
+    var seen = {}, out = [];
+    (imgs||[]).forEach(function(i){
+      var key = i.id || i.url;
+      if(!seen[key]){ seen[key]=1; out.push(i); }
+    });
+    return out;
+  }
+
+  // Lightbox
+  var lbx = document.getElementById('lbx'), lbxImg = document.getElementById('lbxImg');
+  var lbxCount = document.getElementById('lbxCount'), lbxThumbs = document.getElementById('lbxThumbs');
+  var gallery = [], gIdx = 0;
+
+  function openLbx(idx){
+    if(!gallery.length) return;
+    gIdx = idx||0;
+    renderLbx();
+    lbx.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeLbx(){ lbx.classList.remove('open'); document.body.style.overflow=''; }
+  function renderLbx(){
+    lbxImg.src = gallery[gIdx].url;
+    lbxCount.textContent = (gIdx+1)+' / '+gallery.length;
+    var thumbsHtml = gallery.map(function(g,i){
+      return '<div class="lbx-thumb'+(i===gIdx?' active':'')+'" data-i="'+i+'"><img src="'+(g.thumb||g.url)+'" alt=""></div>';
+    }).join('');
+    lbxThumbs.innerHTML = thumbsHtml;
+    lbxThumbs.querySelectorAll('.lbx-thumb').forEach(function(t){
+      t.addEventListener('click',function(){ gIdx = +t.dataset.i; renderLbx(); });
+    });
+    var active = lbxThumbs.querySelector('.lbx-thumb.active');
+    if(active) active.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  }
+  document.getElementById('lbxClose').addEventListener('click',closeLbx);
+  document.getElementById('lbxPrev').addEventListener('click',function(){ gIdx = (gIdx-1+gallery.length)%gallery.length; renderLbx(); });
+  document.getElementById('lbxNext').addEventListener('click',function(){ gIdx = (gIdx+1)%gallery.length; renderLbx(); });
+  document.addEventListener('keydown',function(e){
+    if(!lbx.classList.contains('open')) return;
+    if(e.key==='Escape') closeLbx();
+    if(e.key==='ArrowLeft'){ gIdx=(gIdx-1+gallery.length)%gallery.length; renderLbx(); }
+    if(e.key==='ArrowRight'){ gIdx=(gIdx+1)%gallery.length; renderLbx(); }
+  });
+  lbx.addEventListener('click',function(e){ if(e.target===lbx) closeLbx(); });
+
+  function renderHeroGrid(imgs){
+    var grid = document.getElementById('heroGrid');
+    if(!imgs.length){ grid.style.display='none'; return; }
+    var cells = [];
+    cells.push('<div class="h-cell h-main" data-i="0"><img src="'+(imgs[0].url)+'" alt="" loading="eager"></div>');
+    for(var i=1;i<=4;i++){
+      var src = imgs[i] ? imgs[i].url : (imgs[0]?imgs[0].url:'');
+      cells.push('<div class="h-cell" data-i="'+i+'"><img src="'+src+'" alt="" loading="lazy"></div>');
     }
+    grid.innerHTML = cells.join('') + '<button class="show-all" id="showAll"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Show all '+imgs.length+' photos</button>';
+    grid.querySelectorAll('.h-cell').forEach(function(c){
+      c.addEventListener('click',function(){ openLbx(+c.dataset.i); });
+    });
+    document.getElementById('showAll').addEventListener('click',function(e){ e.stopPropagation(); openLbx(0); });
+  }
 
-    function getDriveThumb(link, size) {
-      if (!link) return '';
-      var id = link.match(/\/d\/([^/]+)/);
-      if (!id) id = link.match(/folders\/([^?/]+)/);
-      if (!id) return '';
-      return 'https://drive.google.com/thumbnail?id=' + id[1] + '&sz=w' + (size || 1200);
-    }
+  function render(p){
+    var imgs = dedupImages(p.images||[]);
+    gallery = imgs;
+    document.title = p.name + ' | Circa Panama';
+    document.getElementById('bcName').textContent = p.name;
+    document.getElementById('pTitle').textContent = p.name;
+    document.getElementById('pLocation').textContent = p.location || 'Panama';
+    document.getElementById('pCategory').textContent = p.category || 'Property';
+    document.getElementById('pCount').textContent = imgs.length + ' photos';
+    document.getElementById('lcTitle').textContent = p.location || 'Panama';
 
-    function parseGvizRow(row) {
-      var c = row.c || [];
-      var val = function(i) { return c[i] ? (c[i].f || String(c[i].v || '')) : ''; };
-      var num = function(i) { return c[i] && c[i].v ? c[i].v : 0; };
-      return {
-        name: val(0).trim(),
-        location: val(1).trim(),
-        category: val(2).trim(),
-        lot_size: num(3) ? String(Math.round(num(3))) : '',
-        construction_size: num(4) ? String(Math.round(num(4))) : '',
-        price_sqm: val(5),
-        price: val(6),
-        bedrooms: num(7) ? String(Math.round(num(7))) : '',
-        bathrooms: num(8) ? String(num(8)) : '',
-        parking: num(9) ? String(Math.round(num(9))) : '',
-        amenities: val(10),
-        owner: val(11),
-        contact: val(12),
-        drive_folder_link: val(13),
-        status: val(14),
-        notes: val(16)
-      };
-    }
+    renderHeroGrid(imgs);
 
-    function showNotFound() {
-      document.querySelector('.property-content').innerHTML = '<div style="text-align:center;padding:4rem;grid-column:1/-1;"><h2>Property Not Found</h2><p style="color:var(--gray);margin-top:1rem;">This property may no longer be available. <a href="index.html#locations" style="color:var(--accent);font-weight:600;">Browse all properties</a></p></div>';
-    }
+    // Overview stats
+    var ov = document.getElementById('overview'), rows = [];
+    if(p.bedrooms) rows.push([icon('bed'), p.bedrooms, 'Bedrooms']);
+    if(p.bathrooms) rows.push([icon('bath'), p.bathrooms, 'Bathrooms']);
+    if(p.construction_size) rows.push([icon('area'), p.construction_size, 'm² Built']);
+    if(p.lot_size) rows.push([icon('lot'), p.lot_size, 'm² Lot']);
+    if(p.parking) rows.push([icon('car'), p.parking, 'Parking']);
+    if(p.price_per_sqm) rows.push([icon('tag'), p.price_per_sqm, 'Price / m²']);
+    ov.innerHTML = rows.slice(0,4).map(function(r){
+      return '<div class="stat">'+r[0]+'<div class="stat-val">'+r[1]+'</div><div class="stat-lbl">'+r[2]+'</div></div>';
+    }).join('');
+    if(!rows.length) ov.style.display='none';
 
-    function renderProperty(prop) {
-      var price = formatPrice(prop.price);
-      var img = prop._hero_image || getDriveThumb(prop.drive_folder_link, 1200) || defaultImages[0];
-      var fallback = defaultImages[Math.floor(Math.random() * defaultImages.length)];
+    // Description
+    var descParts = [];
+    if(p.category) descParts.push('A '+String(p.category).toLowerCase()+' in '+(p.location||'Panama')+'.');
+    if(p.construction_size) descParts.push(p.construction_size+' m² of construction'+(p.lot_size?' on a '+p.lot_size+' m² lot.':'.'));
+    if(p.bedrooms) descParts.push(p.bedrooms+' bedroom'+(p.bedrooms!=='1'?'s':'')+(p.bathrooms?' and '+p.bathrooms+' bathroom'+(p.bathrooms!=='1'?'s':'')+'.':'.'));
+    if(p.parking) descParts.push('Includes '+p.parking+' parking space'+(p.parking!=='1'?'s':'')+'.');
+    var desc = document.getElementById('desc');
+    desc.innerHTML = '<p>'+descParts.join(' ')+'</p>'+(p.notes?'<p>'+p.notes+'</p>':'');
 
-      document.title = prop.name + ' | Circa Panama Real Estate';
-      var heroImg = document.getElementById('heroImg');
-      heroImg.src = img;
-      heroImg.alt = prop.name + ' in ' + prop.location;
-      heroImg.onerror = function() { this.src = fallback; };
-      document.getElementById('heroType').textContent = prop.category || 'Property';
-      document.getElementById('heroTitle').textContent = prop.name;
-      document.getElementById('heroLocation').textContent = prop.location || 'Panama';
-      document.getElementById('propertyPrice').textContent = price;
-
-      // Description
-      var descParts = [];
-      if (prop.category) descParts.push(prop.category + ' in ' + (prop.location || 'Panama') + '.');
-      if (prop.construction_size) descParts.push('Construction area of ' + prop.construction_size + ' m².');
-      if (prop.lot_size) descParts.push('Lot size of ' + prop.lot_size + ' m².');
-      if (prop.bedrooms) descParts.push(prop.bedrooms + ' bedrooms and ' + (prop.bathrooms || '1') + ' bathrooms.');
-      if (prop.parking) descParts.push(prop.parking + ' parking space' + (prop.parking !== '1' ? 's' : '') + '.');
-      document.getElementById('propertyDesc').textContent = descParts.join(' ') || 'Contact us for full details about this property.';
-      document.getElementById('propertyDesc2').textContent = prop.notes || '';
-
-      // Stats
-      var statsEl = document.getElementById('propertyStats');
-      var stats = '';
-      if (prop.bedrooms) stats += '<div class="property-stat"><div class="property-stat-value">' + prop.bedrooms + '</div><div class="property-stat-label">Bedrooms</div></div>';
-      if (prop.bathrooms) stats += '<div class="property-stat"><div class="property-stat-value">' + prop.bathrooms + '</div><div class="property-stat-label">Bathrooms</div></div>';
-      if (prop.construction_size) stats += '<div class="property-stat"><div class="property-stat-value">' + prop.construction_size + '</div><div class="property-stat-label">m² Built</div></div>';
-      if (prop.lot_size) stats += '<div class="property-stat"><div class="property-stat-value">' + prop.lot_size + '</div><div class="property-stat-label">m² Lot</div></div>';
-      if (prop.parking) stats += '<div class="property-stat"><div class="property-stat-value">' + prop.parking + '</div><div class="property-stat-label">Parking</div></div>';
-      if (prop.price_sqm) stats += '<div class="property-stat"><div class="property-stat-value">' + prop.price_sqm + '</div><div class="property-stat-label">Price/m²</div></div>';
-      statsEl.innerHTML = stats || '<div class="property-stat"><div class="property-stat-value">' + (prop.category || 'Property') + '</div><div class="property-stat-label">Type</div></div>';
-
-      // Features from amenities
-      var featuresEl = document.getElementById('featuresList');
-      if (prop.amenities) {
-        var amenities = prop.amenities.split(/[,\n]+/).map(function(a) { return a.trim(); }).filter(function(a) { return a; });
-        featuresEl.innerHTML = amenities.map(function(f) { return '<li>' + checkSvg + '<span>' + f + '</span></li>'; }).join('');
-      } else {
-        featuresEl.innerHTML = '<li>' + checkSvg + '<span>Contact us for amenity details</span></li>';
-      }
-
-      // Location card
-      document.querySelector('.location-card h4').textContent = prop.location || 'Panama';
-
-      // WhatsApp
-      document.getElementById('whatsappBtn').href = 'https://wa.me/50762256363?text=' + encodeURIComponent('Hi Michael, I\'m interested in ' + prop.name + (price ? ' (' + price + ')' : '') + ' in ' + (prop.location || 'Panama'));
-    }
-
-    // Load property from listings.json (built by sync agent)
-    var params = new URLSearchParams(window.location.search);
-    var propName = params.get('name');
-
-    if (!propName) {
-      showNotFound();
+    // Features
+    var feats = document.getElementById('features');
+    var amenities = (p.amenities||'').split(/[,\n]+/).map(function(s){return s.trim();}).filter(Boolean);
+    if(amenities.length){
+      feats.innerHTML = amenities.map(function(a){ return '<li>'+checkSvg+'<span>'+a+'</span></li>'; }).join('');
     } else {
-      fetch('listings.json', { cache: 'no-cache' })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-          var searchName = propName.trim().toLowerCase();
-          var found = (data.properties || []).find(function(p) {
-            return (p.name || '').toLowerCase().trim() === searchName;
-          });
-          if (!found) return showNotFound();
-
-          // Build gallery of additional photos inside the body
-          var gallery = document.getElementById('propertyGallery');
-          if (!gallery) {
-            gallery = document.createElement('section');
-            gallery.id = 'propertyGallery';
-            gallery.style.cssText = 'padding:3rem 5vw;max-width:1200px;margin:0 auto;';
-            var heading = document.createElement('h2');
-            heading.textContent = 'Gallery';
-            heading.style.cssText = 'font-family:var(--font-display);font-size:1.8rem;margin-bottom:1.5rem;';
-            gallery.appendChild(heading);
-            var grid = document.createElement('div');
-            grid.id = 'galleryGrid';
-            grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;';
-            gallery.appendChild(grid);
-            var hero = document.querySelector('.property-hero');
-            if (hero && hero.parentNode) hero.parentNode.insertBefore(gallery, hero.nextSibling);
-          }
-          var grid = document.getElementById('galleryGrid');
-          grid.innerHTML = '';
-          (found.images || []).forEach(function(img) {
-            var a = document.createElement('a');
-            a.href = img.url;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.style.cssText = 'display:block;aspect-ratio:4/3;overflow:hidden;border-radius:10px;background:#f1f5f9;';
-            var el = document.createElement('img');
-            el.src = img.thumb || img.url;
-            el.alt = found.name;
-            el.loading = 'lazy';
-            el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
-            a.appendChild(el);
-            grid.appendChild(a);
-          });
-
-          // Adapt json shape to the renderer
-          var firstImg = found.images && found.images[0];
-          renderProperty({
-            name: found.name,
-            location: found.location,
-            category: found.category,
-            lot_size: found.lot_size ? String(Math.round(Number(found.lot_size))) : '',
-            construction_size: found.construction_size ? String(Math.round(Number(found.construction_size))) : '',
-            price_sqm: found.price_per_sqm || '',
-            price: found.price || '',
-            bedrooms: found.bedrooms ? String(found.bedrooms) : '',
-            bathrooms: found.bathrooms ? String(found.bathrooms) : '',
-            parking: found.parking ? String(found.parking) : '',
-            amenities: found.amenities || '',
-            owner: found.owner || '',
-            contact: found.contact || '',
-            drive_folder_link: firstImg ? firstImg.url : (found.drive_link || ''),
-            status: found.status || '',
-            notes: found.notes || '',
-            _hero_image: firstImg ? firstImg.url : ''
-          });
-        })
-        .catch(function() { showNotFound(); });
+      feats.parentElement.style.display='none';
     }
-  </script>
+
+    // Location blurb
+    document.getElementById('locationBlurb').textContent = 'Located in '+(p.location||'Panama')+'. Reach out to our team for neighborhood tours, market context, and comparable sales in the area.';
+
+    // Price / CTA
+    var fp = formatPrice(p.price);
+    document.getElementById('sPrice').textContent = fp || 'Contact for price';
+    document.getElementById('sPriceSub').textContent = fp ? (p.price_per_sqm ? p.price_per_sqm+' per m²' : '') : 'Schedule a call for pricing and details.';
+    document.getElementById('waBtn').href = 'https://wa.me/50762256363?text='+encodeURIComponent('Hi Michael, I\'m interested in '+p.name+(fp?' ('+fp+')':'')+' in '+(p.location||'Panama'));
+  }
+
+  if(!propName){ showNotFound(); return; }
+
+  fetch('listings.json',{cache:'no-cache'})
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var key = propName.toLowerCase();
+      var found = (data.properties||[]).find(function(p){ return (p.name||'').toLowerCase().trim()===key; });
+      if(!found) return showNotFound();
+      render(found);
+    })
+    .catch(showNotFound);
+})();
+</script>
 
 </body>
 </html>
