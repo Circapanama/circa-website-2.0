@@ -1,0 +1,123 @@
+/* Global mobile polish — loaded on all pages */
+
+/* Prevent horizontal scroll & keep iframes/images contained */
+html, body { overflow-x: hidden; max-width: 100%; }
+img, video, iframe { max-width: 100%; height: auto; }
+
+/* Better touch targets + smoother tap */
+a, button, input, textarea, select { -webkit-tap-highlight-color: rgba(37,99,235,.15); }
+button, a.btn, .btn, .nav-cta { min-height: 44px; }
+
+/* Disable iOS auto-zoom on form focus */
+input, textarea, select { font-size: 16px; }
+
+/* ===== Phones (<=640px) ===== */
+@media (max-width: 640px) {
+  /* Tighter side padding everywhere */
+  :root { --page-pad: 4vw; }
+
+  /* Headings scale nicely */
+  h1 { font-size: clamp(1.75rem, 7.2vw, 2.4rem) !important; line-height: 1.15 !important; }
+  h2 { font-size: clamp(1.35rem, 5.4vw, 1.9rem) !important; line-height: 1.2 !important; }
+  h3 { font-size: clamp(1.1rem, 4.6vw, 1.4rem) !important; }
+  p { font-size: .95rem; }
+
+  /* Nav logo a bit smaller */
+  .nav-logo img { height: 28px !important; }
+  .nav { padding: .8rem 4vw !important; }
+
+  /* Hero stats stacked 2-cols */
+  .stats-row { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem !important; }
+
+  /* Feature / team / card grids collapse */
+  .team-grid, .advantage-grid, .past-projects-grid,
+  .property-stats, .overview, .features {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .overview { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Property page: stack content + remove sticky */
+  .content { grid-template-columns: 1fr !important; gap: 1.5rem !important; padding: 1.5rem 4vw 3rem !important; }
+  .sidebar { position: static !important; }
+  .page { padding: 1rem 4vw 0 !important; }
+  .title-row h1 { font-size: clamp(1.5rem, 6.5vw, 2rem) !important; }
+  .hero-grid { border-radius: 12px !important; }
+
+  /* Listings cards full width, tighter gaps */
+  .listings-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+
+  /* Michael floating bubble — keep small on phones so it doesn't cover buttons */
+  .michael-bubble {
+    bottom: 14px !important; right: 14px !important;
+  }
+  .michael-canvas-wrap {
+    width: 74px !important; height: 74px !important;
+  }
+  .michael-speech {
+    display: none !important;
+  }
+  .michael-bubble.is-open .michael-speech {
+    display: block !important;
+    max-width: calc(100vw - 110px) !important;
+    font-size: .85rem !important;
+  }
+
+  /* Back-to-top smaller */
+  .back-to-top {
+    width: 40px !important; height: 40px !important;
+    bottom: 14px !important; left: 14px !important;
+    right: auto !important;
+  }
+
+  /* Footer legibility */
+  .footer-bar, .footer-inner { flex-direction: column; text-align: center; gap: .75rem !important; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: .75rem 1.25rem !important; }
+
+  /* Buttons: full width by default on phones */
+  .hero-cta, .contact-btn, .btn {
+    width: 100%;
+  }
+  .hero-buttons { flex-direction: column !important; gap: .75rem !important; }
+
+  /* Section vertical padding trimmed */
+  section { padding-left: 4vw !important; padding-right: 4vw !important; }
+  .past-projects-section { padding: 4rem 4vw !important; }
+
+  /* Testimonial / stats cards */
+  .testimonial-wrapper, .testimonial-section { padding: 2.5rem 4vw !important; }
+
+  /* Team featured card stacks cleanly */
+  .team-featured { grid-template-columns: 1fr !important; gap: 1.5rem !important; text-align: center; }
+  .team-featured-photo { max-width: 220px; margin: 0 auto; }
+  .team-featured-areas { justify-content: center; }
+  .team-featured-contact { justify-content: center; }
+
+  /* Book page */
+  .book-grid { grid-template-columns: 1fr !important; }
+
+  /* Property hero collage: just the main photo */
+  .hero-grid { aspect-ratio: 4/3 !important; grid-template-columns: 1fr !important; grid-template-rows: 1fr !important; }
+  .hero-grid .h-cell:not(.h-main) { display: none !important; }
+  .show-all { bottom: 10px !important; right: 10px !important; font-size: .75rem !important; padding: 8px 12px !important; }
+
+  /* Lightbox: stack nav arrows in-line bottom on tiny screens */
+  .lbx-main { padding: 0 .5rem !important; }
+  .lbx-nav { width: 40px !important; height: 40px !important; font-size: 1.15rem !important; }
+  .lbx-thumbs { padding: .5rem !important; }
+  .lbx-thumb { width: 52px !important; height: 40px !important; }
+}
+
+/* ===== Small phones (<=380px) ===== */
+@media (max-width: 380px) {
+  .overview { grid-template-columns: 1fr !important; }
+  .nav-logo img { height: 24px !important; }
+  h1 { font-size: clamp(1.5rem, 8vw, 2rem) !important; }
+}
+
+/* Respect safe-area insets on notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .michael-bubble { bottom: calc(14px + env(safe-area-inset-bottom)) !important; }
+  .back-to-top { bottom: calc(14px + env(safe-area-inset-bottom)) !important; }
+  footer, .footer, .footer-bar { padding-bottom: calc(2rem + env(safe-area-inset-bottom)) !important; }
+}

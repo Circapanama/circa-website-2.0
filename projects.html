@@ -21,7 +21,16 @@
   .nav-links a{font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);transition:color .3s}
   .nav-links a:hover{color:var(--accent)}
   .nav-links .nav-cta{padding:10px 28px;background:var(--accent);color:#fff!important;border-radius:50px;font-weight:700;font-size:.75rem!important}
-  @media (max-width:768px){.nav-links{display:none}}
+  .nav-hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:10px;background:transparent;border:0}
+  .nav-hamburger span{width:22px;height:2px;background:var(--dark);transition:.3s}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .mobile-overlay{position:fixed;inset:0;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);z-index:9998;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+  .mobile-overlay.open{opacity:1;pointer-events:all}
+  .mobile-overlay a{font-size:1.4rem;font-weight:500;color:var(--dark)}
+  .mobile-overlay .nav-cta{padding:14px 32px;background:var(--accent);color:#fff!important;border-radius:50px;font-size:1rem!important}
+  @media (max-width:768px){.nav-links{display:none}.nav-hamburger{display:flex}}
   .hero{padding:9rem 5vw 2rem;text-align:left;max-width:1200px;margin:0 auto}
   .hero .eyebrow{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700}
   .hero h1{font-size:2.6rem;margin:.5rem 0 .5rem}
@@ -38,6 +47,7 @@
   .loading{grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray)}
   footer{padding:2rem 5vw;text-align:center;color:var(--gray);font-size:.85rem;border-top:1px solid #eee}
 </style>
+  <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
 <nav class="nav">
@@ -49,7 +59,23 @@
     <a href="index.html#about">About</a>
     <a href="book.html" class="nav-cta">Book a Call</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-overlay" id="mobileOverlay">
+  <a href="index.html">Home</a>
+  <a href="listings.html">Listings</a>
+  <a href="projects.html">Projects</a>
+  <a href="index.html#about">About</a>
+  <a href="book.html" class="nav-cta">Book a Call</a>
+</div>
+<script>
+  (function(){
+    var h=document.getElementById('hamburger'),o=document.getElementById('mobileOverlay');
+    if(!h||!o) return;
+    h.addEventListener('click',function(){h.classList.toggle('open');o.classList.toggle('open');document.body.style.overflow=o.classList.contains('open')?'hidden':'';});
+    o.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){h.classList.remove('open');o.classList.remove('open');document.body.style.overflow='';});});
+  })();
+</script>
 
 <section class="hero">
   <span class="eyebrow">Projects</span>
